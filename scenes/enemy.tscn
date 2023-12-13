@@ -1,0 +1,181 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://duckie.png" type="Texture" id=1]
+[ext_resource path="res://scripts/enemy/giant.gd" type="Script" id=2]
+[ext_resource path="res://scenes/enemy.tres" type="Material" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7.5, 7.5 )
+
+[sub_resource type="Animation" id=17]
+resource_name = "FLY"
+length = 0.3
+loop = true
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 11, 12 ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=3]
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "open wings"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 9, 10, 11, 12 ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.2
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=19]
+extents = Vector2( 60, 60 )
+
+[sub_resource type="RectangleShape2D" id=20]
+extents = Vector2( 40, 60 )
+
+[sub_resource type="StyleBoxFlat" id=21]
+bg_color = Color( 1, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=22]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.407843, 0, 0, 1 )
+
+[node name="enemygiant" type="KinematicBody2D"]
+z_index = 1
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2( 9, 9 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = ExtResource( 3 )
+scale = Vector2( 9, 9 )
+texture = ExtResource( 1 )
+hframes = 4
+vframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 0.3
+anims/FLY = SubResource( 17 )
+anims/RESET = SubResource( 2 )
+anims/idle = SubResource( 3 )
+"anims/open wings" = SubResource( 18 )
+anims/walk = SubResource( 4 )
+
+[node name="damage" type="Area2D" parent="."]
+scale = Vector2( 9, 9 )
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="damage"]
+shape = SubResource( 11 )
+
+[node name="pathfind" type="Area2D" parent="."]
+rotation = -3.11957
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pathfind"]
+position = Vector2( 120, 0 )
+shape = SubResource( 19 )
+
+[node name="RayCast2D" type="RayCast2D" parent="pathfind"]
+cast_to = Vector2( 250, 0 )
+
+[node name="pathfind2" type="Area2D" parent="."]
+rotation = -0.00953364
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pathfind2"]
+position = Vector2( 100, 0 )
+shape = SubResource( 20 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 2.5, 0.499996 )
+scale = Vector2( 7.35, 7.15 )
+
+[node name="hpbar" type="ProgressBar" parent="."]
+margin_left = -63.0
+margin_top = -92.0
+margin_right = 64.0
+margin_bottom = -78.0
+custom_styles/fg = SubResource( 21 )
+custom_styles/bg = SubResource( 22 )
+max_value = 1.0
+value = 1.0
+percent_visible = false
+
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="screenenter"]

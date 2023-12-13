@@ -1,0 +1,125 @@
+[gd_scene load_steps=4 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Control
+var pos=0
+var quit=false
+func _ready():
+	pos=rect_position.y
+	rect_position.y+=600
+	pass
+func _process(delta):
+	rect_position.y+=(pos-rect_position.y)*delta*4
+	if Input.is_action_just_pressed(\"ui_cancel\"):
+		pos=600
+		quit=true
+	if quit and round(rect_position.y)==600:
+		queue_free()
+
+"
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 512, 300 )
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends TouchScreenButton
+
+
+func _ready():
+	connect(\"pressed\",self,\"press\")
+	pass
+
+func press():
+	get_parent().quit=true
+	get_parent().pos=600
+"
+
+[node name="credits" type="Control"]
+margin_right = 1024.0
+margin_bottom = 600.0
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = -150.0
+margin_right = 250.0
+margin_bottom = 150.0
+color = Color( 0.388235, 0.309804, 0, 1 )
+
+[node name="GridContainer" type="GridContainer" parent="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 15
+size_flags_vertical = 15
+columns = 2
+
+[node name="Label" type="Label" parent="ColorRect/GridContainer"]
+margin_right = 248.0
+margin_bottom = 98.0
+size_flags_horizontal = 15
+size_flags_vertical = 15
+text = "Skorpio_48
+(chicken art, main menu ui buttons, phone controls art)"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Label2" type="Label" parent="ColorRect/GridContainer"]
+margin_left = 252.0
+margin_right = 500.0
+margin_bottom = 98.0
+size_flags_horizontal = 15
+size_flags_vertical = 15
+text = "da cringe meme maker
+(shop art)"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Label3" type="Label" parent="ColorRect/GridContainer"]
+margin_top = 102.0
+margin_right = 248.0
+margin_bottom = 199.0
+size_flags_horizontal = 15
+size_flags_vertical = 15
+text = "MacroFaizo
+(joystick)"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Label4" type="Label" parent="ColorRect/GridContainer"]
+margin_left = 252.0
+margin_top = 102.0
+margin_right = 500.0
+margin_bottom = 199.0
+size_flags_horizontal = 15
+size_flags_vertical = 15
+text = "martinfuchs
+(onscreen keyboard)"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Label5" type="Label" parent="ColorRect/GridContainer"]
+margin_top = 203.0
+margin_right = 248.0
+margin_bottom = 300.0
+size_flags_horizontal = 15
+size_flags_vertical = 15
+text = "PixelHole
+(world tileset)"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+shape = SubResource( 2 )
+script = SubResource( 3 )

@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://duckie.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Sprite
+
+
+func _ready():
+	pass
+func _process(delta):
+	position.x+=delta*50
+"
+
+[node name="Sprite" type="Sprite"]
+scale = Vector2( 9, 9 )
+texture = ExtResource( 1 )
+hframes = 4
+vframes = 4
+script = SubResource( 1 )

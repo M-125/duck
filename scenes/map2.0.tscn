@@ -1,0 +1,115 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://tiles.tres" type="TileSet" id=1]
+[ext_resource path="res://scripts/map2.2.gd" type="Script" id=2]
+[ext_resource path="res://scripts/playerspawn.gd" type="Script" id=3]
+[ext_resource path="res://scenes/base.tscn" type="PackedScene" id=4]
+[ext_resource path="res://trees.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scripts/shops.gd" type="Script" id=7]
+[ext_resource path="res://scenes/water.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scripts/houses.gd" type="Script" id=9]
+[ext_resource path="res://scripts/map.gd" type="Script" id=10]
+[ext_resource path="res://house.png" type="Texture" id=11]
+[ext_resource path="res://scenes/chests.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scripts/maploader.gd" type="Script" id=13]
+[ext_resource path="res://scripts/spawns.gd" type="Script" id=14]
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+points = PoolVector2Array( 59, 58, 6, 58, 6, 38, 59, 38 )
+
+[sub_resource type="TileSet" id=1]
+0/name = "house.png 0"
+0/texture = ExtResource( 11 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 64, 64 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 2 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 2 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+
+[node name="map2" type="Node2D"]
+z_index = -2
+script = ExtResource( 10 )
+
+[node name="water" parent="." instance=ExtResource( 8 )]
+z_index = -2
+
+[node name="base" parent="." instance=ExtResource( 4 )]
+z_index = -1
+
+[node name="map" type="TileMap" parent="."]
+scale = Vector2( 3, 3 )
+z_index = -1
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+script = ExtResource( 2 )
+
+[node name="map2" type="TileMap" parent="."]
+scale = Vector2( 3, 3 )
+z_index = -1
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+script = ExtResource( 2 )
+myfloor = 2
+
+[node name="map3" type="TileMap" parent="."]
+scale = Vector2( 3, 3 )
+z_index = -1
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+script = ExtResource( 2 )
+myfloor = 3
+
+[node name="chests" parent="." instance=ExtResource( 12 )]
+z_index = 1
+cell_size = Vector2( 16, 16 )
+collision_layer = 7
+collision_mask = 7
+
+[node name="trees" parent="." instance=ExtResource( 6 )]
+scale = Vector2( 9, 9 )
+z_index = 2
+
+[node name="houses" type="TileMap" parent="."]
+scale = Vector2( 9, 9 )
+z_index = 2
+tile_set = SubResource( 1 )
+cell_quadrant_size = 8
+centered_textures = true
+collision_layer = 7
+collision_mask = 7
+format = 1
+script = ExtResource( 9 )
+
+[node name="spawns" type="Node2D" parent="."]
+scale = Vector2( 3, 3 )
+script = ExtResource( 14 )
+
+[node name="shop" type="Node2D" parent="."]
+script = ExtResource( 7 )
+
+[node name="playerspawn" type="Node2D" parent="."]
+position = Vector2( 1431, 634 )
+script = ExtResource( 3 )
+
+[node name="loader" type="Node" parent="."]
+script = ExtResource( 13 )
+
+[node name="Timer" type="Timer" parent="loader"]
+one_shot = true

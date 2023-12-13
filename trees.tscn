@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/trees.gd" type="Script" id=1]
+[ext_resource path="res://tiles.tres" type="TileSet" id=2]
+
+[node name="trees" type="TileMap"]
+scale = Vector2( 3, 3 )
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 8, 8 )
+cell_quadrant_size = 8
+centered_textures = true
+collision_layer = 7
+collision_mask = 7
+format = 1
+script = ExtResource( 1 )

@@ -1,0 +1,96 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scripts/moneylabel.gd" type="Script" id=2]
+[ext_resource path="res://coins and small stuff.png" type="Texture" id=3]
+[ext_resource path="res://scenes/phone gui.tscn" type="PackedScene" id=4]
+
+[sub_resource type="ViewportTexture" id=27]
+viewport_path = NodePath("ViewportContainer/UI")
+
+[sub_resource type="StyleBoxFlat" id=42]
+bg_color = Color( 0.403922, 0.282353, 0, 1 )
+expand_margin_left = 3.0
+expand_margin_right = 3.0
+expand_margin_top = 3.0
+expand_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxFlat" id=43]
+bg_color = Color( 0, 0.580392, 0.321569, 0.611765 )
+
+[sub_resource type="Theme" id=38]
+ProgressBar/styles/bg = SubResource( 42 )
+ProgressBar/styles/fg = SubResource( 43 )
+
+[sub_resource type="StyleBoxFlat" id=44]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=45]
+bg_color = Color( 0, 0.580392, 0.321569, 0.611765 )
+
+[sub_resource type="Theme" id=41]
+ProgressBar/styles/bg = SubResource( 44 )
+ProgressBar/styles/fg = SubResource( 45 )
+
+[node name="ui" type="CanvasLayer"]
+
+[node name="ViewportContainer" type="ViewportContainer" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 1024.0
+margin_bottom = 600.0
+
+[node name="UI" type="Viewport" parent="ViewportContainer"]
+size = Vector2( 1024, 600 )
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="phone gui" parent="ViewportContainer/UI" instance=ExtResource( 4 )]
+visible = false
+
+[node name="gui" type="Sprite" parent="."]
+position = Vector2( 512, 300 )
+texture = SubResource( 27 )
+flip_v = true
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+margin_left = 387.0
+margin_top = 563.0
+margin_right = 637.0
+margin_bottom = 583.0
+theme = SubResource( 38 )
+value = 50.0
+percent_visible = false
+
+[node name="ProgressBar2" type="ProgressBar" parent="."]
+margin_left = 387.0
+margin_top = 563.0
+margin_right = 637.0
+margin_bottom = 583.0
+theme = SubResource( 41 )
+value = 80.0
+percent_visible = false
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = 909.0
+margin_top = 12.0
+margin_right = 979.0
+margin_bottom = 52.0
+rect_scale = Vector2( 1.5, 1.5 )
+
+[node name="Label" type="Label" parent="Panel"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -7.0
+margin_right = 37.0
+margin_bottom = 7.0
+text = "100"
+align = 1
+valign = 1
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Panel"]
+position = Vector2( 49, 20 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 3 )
+hframes = 3
+vframes = 3

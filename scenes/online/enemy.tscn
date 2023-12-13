@@ -1,0 +1,249 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://duckie.png" type="Texture" id=1]
+[ext_resource path="res://scripts/enemy/online/giant.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7.5, 7.5 )
+
+[sub_resource type="VisualScriptConstructor" id=21]
+_default_input_values = [ 0.0, 0.0 ]
+type = 5
+constructor = {
+"args": [ {
+"class_name": "",
+"hint": 0,
+"hint_string": "",
+"name": "x",
+"type": 3,
+"usage": 7
+}, {
+"class_name": "",
+"hint": 0,
+"hint_string": "",
+"name": "y",
+"type": 3,
+"usage": 7
+} ],
+"default_args": [  ],
+"flags": 1,
+"id": 0,
+"name": "Vector2",
+"return": {
+"class_name": "",
+"hint": 0,
+"hint_string": "",
+"name": "",
+"type": 5,
+"usage": 7
+}
+}
+
+[sub_resource type="VisualScriptFunction" id=22]
+resource_name = "_process"
+argument_count = 1
+argument_1/type = 3
+argument_1/name = "delta"
+
+[sub_resource type="VisualScriptPropertySet" id=23]
+_default_input_values = [ Vector2( 0, 0 ) ]
+base_type = "Sprite"
+type_cache = {
+"class_name": "",
+"hint": 0,
+"hint_string": "",
+"name": "position",
+"type": 5,
+"usage": 7
+}
+property = "position"
+index = ""
+
+[sub_resource type="VisualScriptOperator" id=26]
+_default_input_values = [ 0.0, 5000.0 ]
+operator = 8
+type = 3
+
+[sub_resource type="VisualScriptFunction" id=24]
+resource_name = "new_function"
+
+[sub_resource type="VisualScript" id=25]
+data = {
+"base_type": "Sprite",
+"functions": [ {
+"data_connections": [ 4, 0, 0, 0, 0, 0, 3, 0, 2, 0, 4, 0, 4, 0, 0, 1 ],
+"function_id": 2,
+"name": "_process",
+"nodes": [ 0, Vector2( 293.333, -213.333 ), SubResource( 21 ), 2, Vector2( 26.6667, -80 ), SubResource( 22 ), 3, Vector2( 533.333, -80 ), SubResource( 23 ), 4, Vector2( 160, -213.333 ), SubResource( 26 ) ],
+"scroll": Vector2( -50, -100 ),
+"sequence_connections": [ 2, 0, 3 ]
+}, {
+"data_connections": [  ],
+"function_id": -1,
+"name": "f_312843592",
+"nodes": [  ],
+"scroll": Vector2( -290.353, -393.067 ),
+"sequence_connections": [  ]
+}, {
+"data_connections": [  ],
+"function_id": 1,
+"name": "new_function",
+"nodes": [ 1, Vector2( 186.667, 266.667 ), SubResource( 24 ) ],
+"scroll": Vector2( -50, -100 ),
+"sequence_connections": [  ]
+} ],
+"is_tool_script": false,
+"signals": [  ],
+"variables": [  ],
+"vs_unify": true
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "FLY"
+length = 0.3
+loop = true
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 11, 12 ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=3]
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "open wings"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 9, 10, 11, 12 ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.2
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=19]
+extents = Vector2( 60, 60 )
+
+[sub_resource type="RectangleShape2D" id=20]
+extents = Vector2( 40, 60 )
+
+[node name="enemygiant" type="KinematicBody2D"]
+z_index = 1
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2( 9, 9 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 9, 9 )
+texture = ExtResource( 1 )
+hframes = 4
+vframes = 4
+script = SubResource( 25 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 0.3
+anims/FLY = SubResource( 17 )
+anims/RESET = SubResource( 2 )
+anims/idle = SubResource( 3 )
+"anims/open wings" = SubResource( 18 )
+anims/walk = SubResource( 4 )
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2( 9, 9 )
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 11 )
+
+[node name="pathfind" type="Area2D" parent="."]
+rotation = -3.11957
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pathfind"]
+position = Vector2( 120, 0 )
+shape = SubResource( 19 )
+
+[node name="RayCast2D" type="RayCast2D" parent="pathfind"]
+cast_to = Vector2( 250, 0 )
+
+[node name="pathfind2" type="Area2D" parent="."]
+rotation = -0.00953364
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pathfind2"]
+position = Vector2( 100, 0 )
+shape = SubResource( 20 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 2.5, 0.499996 )
+scale = Vector2( 7.35, 7.15 )
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="Screenenter"]

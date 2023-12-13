@@ -1,0 +1,198 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://scenes/item.tscn" type="PackedScene" id=1]
+[ext_resource path="res://tiles.tres" type="TileSet" id=3]
+[ext_resource path="res://scripts/map2.3.gd" type="Script" id=4]
+[ext_resource path="res://scripts/map2.2.gd" type="Script" id=5]
+[ext_resource path="res://trees.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scripts/map.gd" type="Script" id=8]
+[ext_resource path="res://pizza.png" type="Texture" id=11]
+[ext_resource path="res://scenes/base.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scripts/spawns.gd" type="Script" id=15]
+[ext_resource path="res://chest.png" type="Texture" id=16]
+[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=17]
+[ext_resource path="res://scenes/chests.tscn" type="PackedScene" id=18]
+[ext_resource path="res://scenes/enemy.tscn" type="PackedScene" id=20]
+[ext_resource path="res://scenes/dummy.tscn" type="PackedScene" id=21]
+[ext_resource path="res://scenes/enemychicken.tscn" type="PackedScene" id=22]
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+
+[sub_resource type="TileSet" id=1]
+0/name = "chest.png 0"
+0/texture = ExtResource( 16 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 16, 16 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 2 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 2 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+
+[node name="map2" type="Node2D"]
+script = ExtResource( 8 )
+
+[node name="base" parent="." instance=ExtResource( 12 )]
+
+[node name="map" type="TileMap" parent="."]
+scale = Vector2( 3, 3 )
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 16, 16 )
+show_collision = true
+format = 1
+tile_data = PoolIntArray( 46, 17, 0 )
+script = ExtResource( 4 )
+
+[node name="map2" type="TileMap" parent="."]
+scale = Vector2( 3, 3 )
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 16, 16 )
+format = 1
+script = ExtResource( 5 )
+
+[node name="map3" type="TileMap" parent="."]
+scale = Vector2( 3, 3 )
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 16, 16 )
+format = 1
+script = ExtResource( 5 )
+
+[node name="playerduckie" parent="." instance=ExtResource( 17 )]
+position = Vector2( 1369.04, 768.153 )
+
+[node name="chests" parent="." instance=ExtResource( 18 )]
+tile_set = SubResource( 1 )
+cell_size = Vector2( 16, 16 )
+tile_data = PoolIntArray( 720914, 0, 0, 720916, 0, 0, 720918, 0, 0, 720920, 0, 0, 851986, 0, 0, 851988, 0, 0, 851990, 0, 0, 851992, 0, 0, 983058, 0, 0, 983060, 0, 0, 983062, 0, 0, 983064, 0, 0, 1114129, 0, 0, 1114130, 0, 0, 1114131, 0, 0, 1114132, 0, 0, 1114133, 0, 0, 1114134, 0, 0, 1114135, 0, 0, 1114136, 0, 0, 1179665, 0, 0, 1179666, 0, 0, 1179667, 0, 0, 1179668, 0, 0, 1376318, 0, 0 )
+
+[node name="trees" parent="." instance=ExtResource( 7 )]
+scale = Vector2( 9, 9 )
+
+[node name="item" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1360, 745 )
+item = "sword"
+
+[node name="item2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1272, 748 )
+
+[node name="item3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1326, 902 )
+item = "pizza"
+
+[node name="item4" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1634, 835 )
+item = "pan"
+
+[node name="Pizza" type="Sprite" parent="."]
+position = Vector2( 1325, 666 )
+texture = ExtResource( 11 )
+
+[node name="enemygiant" parent="." instance=ExtResource( 20 )]
+position = Vector2( 6121, 11868 )
+
+[node name="enemygiant6" parent="." instance=ExtResource( 20 )]
+position = Vector2( 153, 139 )
+
+[node name="enemygiant2" parent="." instance=ExtResource( 20 )]
+position = Vector2( 6755, 9560 )
+
+[node name="enemygiant3" parent="." instance=ExtResource( 20 )]
+position = Vector2( 10895, 4265 )
+
+[node name="enemygiant4" parent="." instance=ExtResource( 20 )]
+position = Vector2( 6574, 5758 )
+
+[node name="enemygiant5" parent="." instance=ExtResource( 20 )]
+position = Vector2( 1980, 7931 )
+
+[node name="enemydummy" parent="." instance=ExtResource( 21 )]
+position = Vector2( 4741, 2296 )
+
+[node name="enemychikcen" parent="." instance=ExtResource( 22 )]
+position = Vector2( 2316, 2365 )
+
+[node name="enemychikcen2" parent="." instance=ExtResource( 22 )]
+position = Vector2( 2316, 2365 )
+
+[node name="enemychikcen3" parent="." instance=ExtResource( 22 )]
+position = Vector2( 2316, 2365 )
+
+[node name="enemychikcen4" parent="." instance=ExtResource( 22 )]
+position = Vector2( 2316, 2365 )
+
+[node name="enemychikcen5" parent="." instance=ExtResource( 22 )]
+position = Vector2( 2316, 2365 )
+
+[node name="enemychikcen6" parent="." instance=ExtResource( 22 )]
+position = Vector2( 2316, 2365 )
+
+[node name="enemychikcen7" parent="." instance=ExtResource( 22 )]
+position = Vector2( 2316, 2365 )
+
+[node name="enemychikcen8" parent="." instance=ExtResource( 22 )]
+position = Vector2( 2316, 2365 )
+
+[node name="enemychikcen9" parent="." instance=ExtResource( 22 )]
+position = Vector2( 3023, 1892 )
+
+[node name="enemychikcen10" parent="." instance=ExtResource( 22 )]
+position = Vector2( 3023, 1892 )
+
+[node name="enemychikcen11" parent="." instance=ExtResource( 22 )]
+position = Vector2( 3023, 1892 )
+
+[node name="enemychikcen12" parent="." instance=ExtResource( 22 )]
+position = Vector2( 3023, 1892 )
+
+[node name="enemychikcen13" parent="." instance=ExtResource( 22 )]
+position = Vector2( 3023, 1892 )
+
+[node name="enemychikcen14" parent="." instance=ExtResource( 22 )]
+position = Vector2( 3023, 1892 )
+
+[node name="enemychikcen15" parent="." instance=ExtResource( 22 )]
+position = Vector2( 3023, 1892 )
+
+[node name="enemychikcen16" parent="." instance=ExtResource( 22 )]
+position = Vector2( 3023, 1892 )
+
+[node name="enemychikcen17" parent="." instance=ExtResource( 22 )]
+position = Vector2( 3779, 2778 )
+
+[node name="enemychikcen18" parent="." instance=ExtResource( 22 )]
+position = Vector2( 3779, 2778 )
+
+[node name="enemychikcen19" parent="." instance=ExtResource( 22 )]
+position = Vector2( 3779, 2778 )
+
+[node name="enemychikcen20" parent="." instance=ExtResource( 22 )]
+position = Vector2( 3779, 2778 )
+
+[node name="enemychikcen21" parent="." instance=ExtResource( 22 )]
+position = Vector2( 3779, 2778 )
+
+[node name="enemychikcen22" parent="." instance=ExtResource( 22 )]
+position = Vector2( 3779, 2778 )
+
+[node name="enemychikcen23" parent="." instance=ExtResource( 22 )]
+position = Vector2( 3779, 2778 )
+
+[node name="enemychikcen24" parent="." instance=ExtResource( 22 )]
+position = Vector2( 3779, 2778 )
+
+[node name="spawns" type="Node2D" parent="."]
+scale = Vector2( 3, 3 )
+script = ExtResource( 15 )

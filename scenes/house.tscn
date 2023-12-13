@@ -1,0 +1,210 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://floor.png" type="Texture" id=1]
+[ext_resource path="res://scenes/item.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/map.gd" type="Script" id=3]
+[ext_resource path="res://scripts/playerspawn.gd" type="Script" id=4]
+[ext_resource path="res://scenes/enemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/pot.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/press E.tscn" type="PackedScene" id=7]
+[ext_resource path="res://houseinside.png" type="Texture" id=8]
+
+[sub_resource type="GDScript" id=16]
+script/source = "extends Camera2D
+
+
+func _process(delta):
+	current=true
+"
+
+[sub_resource type="GDScript" id=14]
+script/source = "extends interact
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+func interact():
+	get_tree().change_scene(\"res://scenes/map2.0.tscn\")
+"
+
+[sub_resource type="RectangleShape2D" id=15]
+extents = Vector2( 50, 50 )
+
+[sub_resource type="RectangleShape2D" id=17]
+extents = Vector2( 157.5, 26.5 )
+
+[sub_resource type="RectangleShape2D" id=18]
+extents = Vector2( 117.5, 27.5 )
+
+[sub_resource type="RectangleShape2D" id=19]
+extents = Vector2( 79.5, 27.5 )
+
+[sub_resource type="RectangleShape2D" id=20]
+extents = Vector2( 468.75, 27.5 )
+
+[sub_resource type="RectangleShape2D" id=21]
+extents = Vector2( 658, 15.5 )
+
+[sub_resource type="RectangleShape2D" id=22]
+extents = Vector2( 16.5, 397.5 )
+
+[sub_resource type="RectangleShape2D" id=23]
+extents = Vector2( 16.5, 387 )
+
+[sub_resource type="RectangleShape2D" id=24]
+extents = Vector2( 658, 15.5 )
+
+[sub_resource type="RectangleShape2D" id=25]
+extents = Vector2( 16.5, 143.5 )
+
+[node name="map" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Jelmez4" type="Sprite" parent="."]
+scale = Vector2( 3.00469, 3.09677 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Jelmez5" type="Sprite" parent="."]
+scale = Vector2( 3.00469, 3.09677 )
+texture = ExtResource( 8 )
+centered = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+zoom = Vector2( 1.29, 1.29 )
+script = SubResource( 16 )
+
+[node name="interact" type="Area2D" parent="."]
+script = SubResource( 14 )
+press_e = NodePath("press_E")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interact"]
+position = Vector2( 85, 684 )
+shape = SubResource( 15 )
+
+[node name="press_E" parent="interact" instance=ExtResource( 7 )]
+position = Vector2( 56, 719 )
+scale = Vector2( 3, 3 )
+z_index = 4
+
+[node name="playerspawn" type="Node2D" parent="."]
+position = Vector2( 67, 676 )
+script = ExtResource( 4 )
+smallitems = true
+randomspawn = false
+
+[node name="walls" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls"]
+position = Vector2( 157.5, 26.5 )
+shape = SubResource( 17 )
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="walls"]
+position = Vector2( 1164, 26.5 )
+shape = SubResource( 17 )
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="walls"]
+position = Vector2( 117.5, 563.5 )
+shape = SubResource( 18 )
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="walls"]
+position = Vector2( 79.5, 291 )
+shape = SubResource( 19 )
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="walls"]
+position = Vector2( 827.25, 563.5 )
+shape = SubResource( 20 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="walls"]
+position = Vector2( 658, 15.5 )
+shape = SubResource( 21 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="walls"]
+position = Vector2( 16.5, 397.5 )
+shape = SubResource( 22 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="walls"]
+position = Vector2( 1299.5, 387 )
+shape = SubResource( 23 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="walls"]
+position = Vector2( 658, 780.5 )
+shape = SubResource( 24 )
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="walls"]
+position = Vector2( 298.5, 175.5 )
+shape = SubResource( 25 )
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="walls"]
+position = Vector2( 1236, 291 )
+shape = SubResource( 19 )
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="walls"]
+position = Vector2( 1018, 175.5 )
+shape = SubResource( 25 )
+
+[node name="pot" parent="." instance=ExtResource( 6 )]
+position = Vector2( 100, 92 )
+
+[node name="enemygiant" parent="pot" instance=ExtResource( 5 )]
+position = Vector2( 1477.48, 1000 )
+
+[node name="pot2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 158, 92 )
+
+[node name="pot3" parent="." instance=ExtResource( 6 )]
+position = Vector2( 221, 92 )
+
+[node name="pot4" parent="." instance=ExtResource( 6 )]
+position = Vector2( 221, 176 )
+
+[node name="pot5" parent="." instance=ExtResource( 6 )]
+position = Vector2( 158, 176 )
+
+[node name="pot6" parent="." instance=ExtResource( 6 )]
+position = Vector2( 100, 176 )
+
+[node name="pot7" parent="." instance=ExtResource( 6 )]
+position = Vector2( 527, 214 )
+
+[node name="pot8" parent="." instance=ExtResource( 6 )]
+position = Vector2( 765, 320 )
+
+[node name="pot9" parent="." instance=ExtResource( 6 )]
+position = Vector2( 475, 365 )
+
+[node name="pot10" parent="." instance=ExtResource( 6 )]
+position = Vector2( 780, 111 )
+
+[node name="pot11" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1247, 490 )
+
+[node name="pot12" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1247, 438 )
+
+[node name="pot13" parent="." instance=ExtResource( 6 )]
+position = Vector2( 73, 496 )
+
+[node name="pot14" parent="." instance=ExtResource( 6 )]
+position = Vector2( 73, 444 )
+
+[node name="pot15" parent="." instance=ExtResource( 6 )]
+position = Vector2( 73, 444 )
+
+[node name="item" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1145, 146 )
+item = "random"
+
+[node name="item3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 144, 458 )
+item = "pan"

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/075176_duck-quack-40345.mp3" type="AudioStream" id=1]
+[ext_resource path="res://sounds/sound.gd" type="Script" id=2]
+
+[node name="quack" type="AudioStreamPlayer"]
+stream = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[connection signal="finished" from="." to="." method="_on_quack_finished"]

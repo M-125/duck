@@ -1,0 +1,370 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://wall1.png" type="Texture" id=1]
+[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/raft.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/dummy.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/map.gd" type="Script" id=5]
+[ext_resource path="res://scenes/item.tscn" type="PackedScene" id=6]
+[ext_resource path="res://classes/music.gd" type="Script" id=7]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+points = PoolVector2Array( 16, 3, 0, 3, 0, 0, 16, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+points = PoolVector2Array( 16, 16, 13, 16, 13, 3, 16, 3 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+points = PoolVector2Array( 16, 16, 0, 16, 0, 13, 16, 13 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+points = PoolVector2Array( 3, 16, 0, 16, 0, 0, 3, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+points = PoolVector2Array( 3, 13, 16, 13, 16, 16, 3, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+points = PoolVector2Array( 16, 16, 13, 16, 13, 0, 16, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=7]
+points = PoolVector2Array( 13, 16, 0, 16, 0, 13, 13, 13 )
+
+[sub_resource type="ConvexPolygonShape2D" id=8]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 3, 0, 3 )
+
+[sub_resource type="ConvexPolygonShape2D" id=9]
+points = PoolVector2Array( 0, 3, 3, 3, 3, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=10]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 3, 0, 3 )
+
+[sub_resource type="ConvexPolygonShape2D" id=11]
+points = PoolVector2Array( 3, 16, 0, 16, 0, 0, 3, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=12]
+points = PoolVector2Array( 16, 16, 13, 16, 13, 0, 16, 0 )
+
+[sub_resource type="TileSet" id=13]
+8/name = "wall1.png 8"
+8/texture = ExtResource( 1 )
+8/tex_offset = Vector2( 0, 0 )
+8/modulate = Color( 1, 1, 1, 1 )
+8/region = Rect2( 0, 0, 16, 16 )
+8/tile_mode = 0
+8/occluder_offset = Vector2( 0, 0 )
+8/navigation_offset = Vector2( 0, 0 )
+8/shape_offset = Vector2( 0, 0 )
+8/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+8/shape = SubResource( 11 )
+8/shape_one_way = false
+8/shape_one_way_margin = 1.0
+8/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 11 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+8/z_index = 0
+9/name = "wall1.png 9"
+9/texture = ExtResource( 1 )
+9/tex_offset = Vector2( 0, 0 )
+9/modulate = Color( 1, 1, 1, 1 )
+9/region = Rect2( 16, 0, 16, 16 )
+9/tile_mode = 0
+9/occluder_offset = Vector2( 0, 0 )
+9/navigation_offset = Vector2( 0, 0 )
+9/shape_offset = Vector2( 0, 0 )
+9/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+9/shape = SubResource( 12 )
+9/shape_one_way = false
+9/shape_one_way_margin = 1.0
+9/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 12 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+9/z_index = 0
+10/name = "wall1.png 10"
+10/texture = ExtResource( 1 )
+10/tex_offset = Vector2( 0, 0 )
+10/modulate = Color( 1, 1, 1, 1 )
+10/region = Rect2( 32, 0, 16, 16 )
+10/tile_mode = 0
+10/occluder_offset = Vector2( 0, 0 )
+10/navigation_offset = Vector2( 0, 0 )
+10/shape_offset = Vector2( 0, 0 )
+10/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+10/shape = SubResource( 1 )
+10/shape_one_way = false
+10/shape_one_way_margin = 1.0
+10/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 1 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 2 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+10/z_index = 0
+11/name = "wall1.png 11"
+11/texture = ExtResource( 1 )
+11/tex_offset = Vector2( 0, 0 )
+11/modulate = Color( 1, 1, 1, 1 )
+11/region = Rect2( 48, 0, 16, 16 )
+11/tile_mode = 0
+11/occluder_offset = Vector2( 0, 0 )
+11/navigation_offset = Vector2( 0, 0 )
+11/shape_offset = Vector2( 0, 0 )
+11/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+11/shape = SubResource( 3 )
+11/shape_one_way = false
+11/shape_one_way_margin = 1.0
+11/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 3 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+11/z_index = 0
+12/name = "wall1.png 12"
+12/texture = ExtResource( 1 )
+12/tex_offset = Vector2( 0, 0 )
+12/modulate = Color( 1, 1, 1, 1 )
+12/region = Rect2( 0, 16, 16, 16 )
+12/tile_mode = 0
+12/occluder_offset = Vector2( 0, 0 )
+12/navigation_offset = Vector2( 0, 0 )
+12/shape_offset = Vector2( 0, 0 )
+12/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+12/shape = SubResource( 4 )
+12/shape_one_way = false
+12/shape_one_way_margin = 1.0
+12/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 4 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 5 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+12/z_index = 0
+13/name = "wall1.png 13"
+13/texture = ExtResource( 1 )
+13/tex_offset = Vector2( 0, 0 )
+13/modulate = Color( 1, 1, 1, 1 )
+13/region = Rect2( 16, 16, 16, 16 )
+13/tile_mode = 0
+13/occluder_offset = Vector2( 0, 0 )
+13/navigation_offset = Vector2( 0, 0 )
+13/shape_offset = Vector2( 0, 0 )
+13/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+13/shape = SubResource( 6 )
+13/shape_one_way = false
+13/shape_one_way_margin = 1.0
+13/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 6 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 7 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+13/z_index = 0
+14/name = "wall1.png 14"
+14/texture = ExtResource( 1 )
+14/tex_offset = Vector2( 0, 0 )
+14/modulate = Color( 1, 1, 1, 1 )
+14/region = Rect2( 32, 16, 16, 16 )
+14/tile_mode = 0
+14/occluder_offset = Vector2( 0, 0 )
+14/navigation_offset = Vector2( 0, 0 )
+14/shape_offset = Vector2( 0, 0 )
+14/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+14/shape = SubResource( 8 )
+14/shape_one_way = false
+14/shape_one_way_margin = 1.0
+14/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 8 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 9 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+14/z_index = 0
+15/name = "wall1.png 15"
+15/texture = ExtResource( 1 )
+15/tex_offset = Vector2( 0, 0 )
+15/modulate = Color( 1, 1, 1, 1 )
+15/region = Rect2( 48, 16, 16, 16 )
+15/tile_mode = 0
+15/occluder_offset = Vector2( 0, 0 )
+15/navigation_offset = Vector2( 0, 0 )
+15/shape_offset = Vector2( 0, 0 )
+15/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+15/shape = SubResource( 10 )
+15/shape_one_way = false
+15/shape_one_way_margin = 1.0
+15/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 10 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+15/z_index = 0
+
+[sub_resource type="GDScript" id=14]
+script/source = "extends TileMap
+
+
+func _ready():
+	Global.gamefinished=true
+	pass
+"
+
+[node name="map" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="TileMap" type="TileMap" parent="."]
+scale = Vector2( 4, 4 )
+tile_set = SubResource( 13 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 0, 14, 0, 1, 15, 0, 2, 15, 0, 3, 15, 0, 4, 15, 0, 5, 15, 0, 6, 15, 0, 7, 15, 0, 8, 15, 0, 9, 15, 0, 10, 15, 0, 11, 15, 0, 12, 15, 0, 13, 15, 0, 14, 15, 0, 15, 15, 0, 16, 15, 0, 17, 15, 0, 18, 15, 0, 19, 10, 0, 65536, 8, 0, 65555, 9, 0, 131072, 8, 0, 131091, 9, 0, 196608, 8, 0, 196627, 9, 0, 262144, 8, 0, 262163, 9, 0, 327680, 8, 0, 327699, 9, 0, 393216, 8, 0, 393235, 9, 0, 458752, 8, 0, 458771, 9, 0, 524288, 8, 0, 524307, 9, 0, 589824, 8, 0, 589843, 9, 0, 655360, 8, 0, 655379, 9, 0, 720896, 12, 0, 720897, 11, 0, 720898, 11, 0, 720899, 11, 0, 720900, 11, 0, 720901, 11, 0, 720902, 11, 0, 720903, 11, 0, 720904, 11, 0, 720905, 11, 0, 720906, 11, 0, 720907, 11, 0, 720908, 11, 0, 720909, 11, 0, 720910, 11, 0, 720911, 11, 0, 720912, 11, 0, 720913, 11, 0, 720914, 11, 0, 720915, 13, 0 )
+script = SubResource( 14 )
+
+[node name="item" parent="." instance=ExtResource( 6 )]
+position = Vector2( 794, 687 )
+
+[node name="item2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 989, 469 )
+item = "sword"
+
+[node name="item3" parent="." instance=ExtResource( 6 )]
+position = Vector2( 460, 435 )
+item = "sword"
+
+[node name="playerduckie" parent="." instance=ExtResource( 2 )]
+position = Vector2( 322, 262 )
+
+[node name="enemydummy" parent="." instance=ExtResource( 4 )]
+position = Vector2( 665, 340 )
+
+[node name="item4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 549, 292 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 105.0
+margin_top = 13.0
+margin_right = 518.0
+margin_bottom = 231.0
+text = "welcome to the tutorial
+i'll tell you all the controls in this game and so you will be
+able to protect yourself from chickens and big crazy ducks
+
+first:
+use WASD or left joystick to move(i think you already guessed it)
+
+and to jump:
+space
+/A(xbox  controller)
+/right side UP ARROW button(touchscreen only)
+
+jumping can speed you up and you can climb terrain with it"
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 333.0
+margin_top = 371.0
+margin_right = 551.0
+margin_bottom = 419.0
+text = "pick up this sword by pressing E(keyboard)
+or touchscreen E button(right side)
+or X(xbox controller)"
+
+[node name="Label3" type="Label" parent="."]
+margin_left = 639.0
+margin_top = 213.0
+margin_right = 860.0
+margin_bottom = 312.0
+text = "try hitting the dummy by pressing:
+left click(mouse)
+sword icon(mobile)
+or RT(xbox controller)
+
+OR by spinning near it"
+
+[node name="Label4" type="Label" parent="."]
+margin_left = 514.0
+margin_top = 545.0
+margin_right = 823.0
+margin_bottom = 678.0
+text = "pick this gun up
+to shoot you have to look at the
+enemy or into the opposite direction if you have
+reverse aim on
+to turn it on and off:
+    hold right click(mouse)
+    hold LT(xbox controlloer)
+    tap that duck on the right side(mobile)"
+
+[node name="Label5" type="Label" parent="."]
+margin_left = 772.0
+margin_top = 609.0
+margin_right = 1081.0
+margin_bottom = 742.0
+text = "to shoot with it use the attack button
+you used for the sword"
+
+[node name="Label6" type="Label" parent="."]
+margin_left = 889.0
+margin_top = 92.0
+margin_right = 1259.0
+margin_bottom = 157.0
+text = "you will have to gather material for that
+raft over there in order to escape the island of chicks
+as you kill chickens you will get materials
+that you can use to craft better weapons and the raft itself
+
+to open craft menu
+    press C(keyboard)
+    press Y(xbox contr)
+    or press that weird duck hammer on the left
+    side(mobile)"
+
+[node name="Label7" type="Label" parent="."]
+margin_left = 995.0
+margin_top = 381.0
+margin_right = 1035.0
+margin_bottom = 395.0
+text = "to swap items press
+    1, or 2(keyboard)
+    LB or RB (xbox contr)
+    tap the item slots ont the top of the screen(mobile)"
+
+[node name="music" type="Node2D" parent="."]
+script = ExtResource( 7 )

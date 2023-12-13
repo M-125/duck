@@ -1,0 +1,158 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scenes/craftbutton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/cursor.gd" type="Script" id=2]
+[ext_resource path="res://scenes/materialcount.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/craftmenu.gd" type="Script" id=4]
+[ext_resource path="res://scenes/raft.tscn" type="PackedScene" id=5]
+[ext_resource path="res://up.png" type="Texture" id=6]
+[ext_resource path="res://scenes/button.tscn" type="PackedScene" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1, 1 )
+
+[node name="craftmenu" type="Control" groups=["craft"]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+script = ExtResource( 4 )
+
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -368.0
+margin_top = -252.0
+margin_right = 384.0
+margin_bottom = 228.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="gridcontainer" type="GridContainer" parent="Panel/ScrollContainer"]
+margin_right = 1304.0
+margin_bottom = 468.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
+
+[node name="Control" parent="Panel/ScrollContainer/gridcontainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 432.0
+margin_bottom = 216.0
+item = "amethyst sword"
+amount1 = 144
+need2 = 4
+amount2 = 50
+need3 = 3
+amount3 = 15
+
+[node name="Control2" parent="Panel/ScrollContainer/gridcontainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 436.0
+margin_right = 868.0
+margin_bottom = 216.0
+need1 = 1
+amount1 = 50
+need2 = 3
+amount2 = 200
+
+[node name="Control3" parent="Panel/ScrollContainer/gridcontainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 872.0
+margin_right = 1304.0
+margin_bottom = 216.0
+isunique = true
+uniqueitem = ExtResource( 5 )
+need1 = 3
+amount1 = 1000
+
+[node name="Panel2" type="Panel" parent="."]
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 120.0
+margin_bottom = 264.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel2"]
+margin_right = 96.0
+margin_bottom = 240.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control" parent="Panel2/VBoxContainer" instance=ExtResource( 3 )]
+margin_bottom = 44.0
+
+[node name="Control2" parent="Panel2/VBoxContainer" instance=ExtResource( 3 )]
+margin_top = 48.0
+margin_bottom = 93.0
+type = 1
+
+[node name="Control3" parent="Panel2/VBoxContainer" instance=ExtResource( 3 )]
+margin_top = 97.0
+margin_bottom = 142.0
+type = 2
+
+[node name="Control4" parent="Panel2/VBoxContainer" instance=ExtResource( 3 )]
+margin_top = 146.0
+margin_bottom = 191.0
+type = 3
+
+[node name="Control5" parent="Panel2/VBoxContainer" instance=ExtResource( 3 )]
+margin_top = 195.0
+type = 4
+
+[node name="cursor" type="Area2D" parent="."]
+position = Vector2( 504, 312 )
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="cursor"]
+shape = SubResource( 1 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="cursor"]
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+position = Vector2( 936, 480 )
+rotation = 1.5708
+scale = Vector2( 6, 6 )
+normal = ExtResource( 6 )
+visibility_mode = 1
+
+[node name="TouchScreenButton3" type="TouchScreenButton" parent="."]
+position = Vector2( 96, 528 )
+rotation = -1.5708
+scale = Vector2( 6, 6 )
+normal = ExtResource( 6 )
+visibility_mode = 1
+
+[node name="button" parent="." instance=ExtResource( 7 )]
+position = Vector2( 360, 561 )
+text = "exit"
+color = Color( 1, 1, 1, 1 )
+white = false
+invisible = false
+
+[node name="button2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 96, 504 )
+scale = Vector2( 0.260001, 1.5 )
+text = "exit"
+color = Color( 1, 1, 1, 1 )
+white = false
+
+[node name="button3" parent="." instance=ExtResource( 7 )]
+position = Vector2( 888, 504 )
+scale = Vector2( 0.26, 1.5 )
+text = "exit"
+color = Color( 1, 1, 1, 1 )
+white = false
+
+[connection signal="crafted" from="Panel/ScrollContainer/gridcontainer/Control3" to="." method="_on_Control3_crafted"]
+[connection signal="pressed" from="button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="button2" to="." method="moveback"]
+[connection signal="pressed" from="button3" to="." method="moveon"]
