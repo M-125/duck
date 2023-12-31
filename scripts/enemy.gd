@@ -22,10 +22,12 @@ var attackedplayer=null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$pathfind.collision_layer=4
-	$pathfind.collision_mask=4
-	$pathfind2.collision_layer=4
-	$pathfind2.collision_mask=4
+	if get_node_or_null('pathfind')!=null:
+		$pathfind.collision_layer=4
+		$pathfind.collision_mask=4
+	if get_node_or_null('pathfind2')!=null:
+		$pathfind2.collision_layer=4
+		$pathfind2.collision_mask=4
 	
 	
 	ready()

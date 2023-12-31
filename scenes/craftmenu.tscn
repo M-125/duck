@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/craftbutton.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/cursor.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/raft.tscn" type="PackedScene" id=5]
 [ext_resource path="res://up.png" type="Texture" id=6]
 [ext_resource path="res://scenes/button.tscn" type="PackedScene" id=7]
+[ext_resource path="res://items/amsword.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1, 1 )
@@ -45,6 +46,8 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 432.0
 margin_bottom = 216.0
+isunique = true
+uniqueitem = ExtResource( 8 )
 item = "amethyst sword"
 amount1 = 144
 need2 = 4

@@ -110,6 +110,3 @@ script = ExtResource( 3 )
 
 [node name="loader" type="Node" parent="."]
 script = ExtResource( 13 )
-
-[node name="Timer" type="Timer" parent="loader"]
-one_shot = true

@@ -15,7 +15,7 @@ func reload():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	$Sprite2.visible=selected
+	$press_E.visible=selected
 	
 	if prevparent!=get_parent():
 		visible=false

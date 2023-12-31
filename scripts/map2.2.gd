@@ -32,6 +32,7 @@ var terrain={
 }
 
 func _process(delta):
+	
 	if Global.playerfloor>=myfloor:
 		set_collision_layer_bit(0,false)
 		set_collision_mask_bit(0,false)
@@ -80,8 +81,8 @@ func loadmap(matrix:Array):
 				else:
 					set_cellv(blockpos,-1)
 				if i%32==0:yield(get_tree(), "idle_frame")
-			
-		eraselist.append(pos)
+		if not pos in eraselist:
+			eraselist.append(pos)
 		erasemap()
 #func _process(delta):
 ##	pass
@@ -104,3 +105,4 @@ func erasemap():
 						set_cell(e,i,-1)
 						if i%16==0:yield(get_tree(), "idle_frame")
 				eraselist.erase(a)
+				Global.debug.text=str(eraselist)

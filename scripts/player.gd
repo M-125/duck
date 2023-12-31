@@ -327,6 +327,7 @@ func item_manager():
 
 
 func _ready():
+	Global.connect("zoomout",self,"zoomout")
 	if onmapposition!=Vector2(0,0) and get_parent().name=="map2":
 		position=onmapposition
 	if smallitems:
@@ -510,7 +511,7 @@ func openchest():
 				var tilepos=playerpos+Vector2(e,i)
 				if chestmap.get_cellv(tilepos)==0:
 					
-					var item=[load("res://scenes/item.tscn"),load("res://scenes/pizza.tscn")][round(rand_range(0,1))].instance()
+					var item=Global.itemloot[floor(rand_range(0,len(Global.itemloot)))].instance()
 					item.item="random"
 					chestmap.set_cellv(tilepos,-1)
 					chestmap.openchests.append(tilepos)
@@ -544,3 +545,5 @@ func exit_tree():
 	Global.playerpack.pack(self)
 	
 	
+func zoomout(num):
+	$Camera2D.zoom=Vector2(num,num)

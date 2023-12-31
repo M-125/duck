@@ -20,7 +20,7 @@ var chargetime=3
 var charged=false
 var rotatable=true
 
-var itemname=["pan","AR","sword","amethyst sword"]
+var itemname=["pan","AR","sword"]
 
 var itemtype={
 	"pan":"pan.png",

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://pot.png" type="Texture" id=1]
 [ext_resource path="res://scripts/enemy/pot.gd" type="Script" id=2]
@@ -85,9 +85,6 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 8, 8 )
-
 [sub_resource type="RectangleShape2D" id=19]
 extents = Vector2( 60, 60 )
 
@@ -119,14 +116,6 @@ anims/walk = SubResource( 4 )
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 position = Vector2( 2.5, 0.499996 )
 scale = Vector2( 7.35, 7.15 )
-
-[node name="damage" type="Area2D" parent="."]
-scale = Vector2( 9, 9 )
-collision_layer = 3
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="damage"]
-shape = SubResource( 11 )
 
 [node name="pathfind" type="Area2D" parent="."]
 rotation = -3.11957

@@ -98,6 +98,11 @@ _global_script_classes=[ {
 "class": "sound2d",
 "language": "GDScript",
 "path": "res://sounds/sound2d.gd"
+}, {
+"base": "Area2D",
+"class": "staticdmgarea",
+"language": "GDScript",
+"path": "res://scripts/staticdmgarea.gd"
 } ]
 _global_script_class_icons={
 "Item": "",
@@ -117,7 +122,8 @@ _global_script_class_icons={
 "projectile": "",
 "small_thing": "",
 "sound": "",
-"sound2d": ""
+"sound2d": "",
+"staticdmgarea": ""
 }
 
 [application]
@@ -268,6 +274,11 @@ craft={
 recallcursor={
 "deadzone": 0.5,
 "events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":14,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+debug={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777248,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 

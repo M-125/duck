@@ -17,7 +17,7 @@ var playerontilemap=-1
 var playerjump=true
 var mapsize=2000
 var chunksize=16
-var small_stuff=[0,0,0,0,0]
+var small_stuff=[200,2000,200,200,200]
 var scene
 signal valuechange
 var nochick =false
@@ -32,6 +32,8 @@ var alertfeed:CanvasLayer
 var music:AudioStreamPlayer
 var debug:Label
 var Debug=true
+var itemloot=[load("res://scenes/item.tscn"),item("pizza")]
+signal zoomout
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -50,16 +52,16 @@ func _ready():
 		music=AudioStreamPlayer.new()
 		add_child(music)
 		debug=Label.new()
-		alertfeed.add_child(debug)
+		if Debug:alertfeed.add_child(debug)
 	
 	
 	
 	
-		
+func item(itemname:String):
+	return load("res://items/"+itemname+".tscn")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if not Debug:debug.text=""
 	if guistate<0:
 		guistate=0
 	if player!=null and is_instance_valid(player):
@@ -160,6 +162,8 @@ func _process(delta):
 	speedmod=clamp(speedmod,speedmodmin,speedmodmax)
 	wait-=delta
 	if Input.is_action_just_pressed("ui_cancel"):guistate-=1
+	if Input.is_action_just_pressed("debug"):
+		alertfeed.add_child(load("res://scenes/debug.tscn").instance())
 
 
 func valuechange(value):

@@ -16,7 +16,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	scale+=Vector2(1,1)*delta*2
+	
+	scale+=Vector2(1,1)*delta*speed
 	if scale>Vector2(maxx,maxx):
 		queue_free()
 	for e in get_overlapping_bodies():
