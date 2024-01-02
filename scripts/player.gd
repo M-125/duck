@@ -48,12 +48,13 @@ func move(delta):
 	
 	if helditem!=null and not helditem.isgun:
 		helditem.charged=chargetime>helditem.chargetime
-		
+	#true if weapon charged
 	
 	if Input.is_action_pressed("attack") and helditem !=null:
 		if not helditem.isgun:chargetime+=delta
 		if helditem.isgun:helditem.shot()
-		
+#	charging weapon/shooting
+	
 	if Input.is_action_just_released("attack") and clickattack<0:
 		clickend=false
 		clickattack=0.3
@@ -61,10 +62,11 @@ func move(delta):
 			$hrot.rotation_degrees+=60
 			$rot.rotation_degrees-=60
 			
-			if helditem.chargetime<chargetime:
+			if helditem.charged:
 				helditem.ability()
+			
 			chargetime=0
-	
+	#click--> attack
 	clickattack-=delta
 	
 	
@@ -81,12 +83,13 @@ func move(delta):
 	if Input.is_action_pressed("ui_left"):
 		velocity.x-=1
 		pressedbuttons[2]=releasetime
-	velocity+=$"ui/ViewportContainer/UI/phone gui/Virtual joystick".get_output().normalized()
 	
+	velocity+=$"ui/ViewportContainer/UI/phone gui/Virtual joystick".get_output().normalized()
+
 	if Input.is_joy_known(0)and Vector2(0,0).distance_to(Vector2(Input.get_joy_axis(0,0),Input.get_joy_axis(0,1)))>=0.5:
 		velocity+=Vector2(Input.get_joy_axis(0,0),Input.get_joy_axis(0,1))
 	
-	
+	#	movement input
 	velocity=velocity.normalized()
 	
 	
@@ -109,12 +112,12 @@ func move(delta):
 		velocit.x-=1
 	if pressedbuttons[3]>0:
 		velocit.x+=1
-	
+	#release delay for easier stop and aim at direction ???
 	if ($"ui/ViewportContainer/UI/phone gui/Virtual joystick".get_output().normalized()!=Vector2(0,0)
 	or Input.is_joy_known(0)and Vector2(0,0).distance_to(Vector2(Input.get_joy_axis(0,0),Input.get_joy_axis(0,1)))>=0.5
 	):
 		velocit=velocity
-		
+	
 	
 	
 	
@@ -133,6 +136,8 @@ func move(delta):
 			
 	else:
 		state_machine.travel("FLY")
+	#animation
+	
 	if velocity!=Vector2.ZERO and clickend:
 		lastveloc=((velocit*16)
 			)
@@ -142,10 +147,8 @@ func move(delta):
 		$rot.look_at(to_global(-lastveloc+
 			(Vector2(0,-16)*Global.playerfloor)))
 	else:
-		$rot.look_at(to_global(
-				lastveloc+
-				(Vector2(0,-16)*Global.playerfloor)
-				))
+		$rot.look_at(to_global(lastveloc + (Vector2(0,-16)*Global.playerfloor)))
+#	look where you move (or reverse)
 	erot()
 	if lowestdifference<35 and helditem!=null:
 		if helditem.isgun:
@@ -159,23 +162,25 @@ func move(delta):
 			canshoot=false
 	else:
 		canshoot=false
-			
-#	if canshoot:
-#		helditem.shot()
+	#TODO:canshoot should be deleted
+#	aim at sumthing
+	
 	var rotspeed=($rot.rotation_degrees-$hrot.rotation_degrees)/7.5
 	
-	if abs(rotspeed)<0.0001:
+	if abs(rotspeed)<0.001:
 		$rot.rotation_degrees=fmod($rot.rotation_degrees,360)
 		$hrot.rotation=$rot.rotation
 	
+	
+	
 	if $hrot/helditem.get_child_count()==1:if $hrot/helditem.get_child(0).rotatable:
 		$hrot.rotation+=rotspeed*delta
-	
+#	rotate item if rotatable
 	if $hrot/helditem.get_child_count()==1:
 		if clickattack>0:
 			rotspeed=15
 		weapon(rotspeed)
-	
+#	if clickattacking do damage of 15 rotspeed
 	
 	if velocity!=Vector2.ZERO:
 		nomove=false
@@ -186,7 +191,6 @@ func move(delta):
 	move_and_slide(velocity*(speed+Global.speedmod))
 	
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 
 
 
@@ -203,7 +207,13 @@ func interact():
 			
 			if select[0].interact(self):
 				return
-	
+#	interact with item on floor
+	if Input.is_action_just_pressed("interact"):
+		if openchest():
+			return
+		if houses():
+			return
+#			interact with chests houses
 	if $hrot/helditem.get_child_count()==1:
 		var helditem=$hrot/helditem.get_child(0)
 		
@@ -212,15 +222,11 @@ func interact():
 			nomove=true
 			if helditem.Use():
 				return
+#interact with helditems like pizza
 	
-	if Input.is_action_just_pressed("interact"):
-		if openchest():
-			return
-		if houses():
-			return
 		emit_signal("interactshop")
 		emit_signal("interact")
-		
+#shop and interactarea
 	
 	
 	
@@ -237,14 +243,11 @@ func weapon(rotspeed):
 		nohitbox=[]
 		if not weapon.isgun:$rot.rotation_degrees+=60
 		clickend=true
-	
+#	end of clickattack
 	
 	
 	
 	if clickattack>0:
-			
-			
-			
 			
 			if weapon.rotatable:for enemy in weapon.hitbox:
 				if abs(rotspeed)>=10 and is_instance_valid(enemy) and (not enemy in nohitbox):
@@ -254,6 +257,8 @@ func weapon(rotspeed):
 					knock
 					)
 					nohitbox.append(enemy)
+#	attack enemy in weapon hitbox clickattack
+	
 	if weapon.rotatable:for enemy in weapon.in_hitbox:
 		
 				
@@ -267,6 +272,7 @@ func weapon(rotspeed):
 			enemy.damage(weapon.damage*rotspeed/10,
 			knock
 			)
+#	damage depending on rotspeed
 	if weapon.rotatable and not weapon.isgun:
 		if abs(rotspeed)>=10:
 			weapon.get_node("particles").emitting=true
@@ -329,6 +335,7 @@ func item_manager():
 func _ready():
 	Global.connect("zoomout",self,"zoomout")
 	Global.connect("item",self,"spawnitem")
+	Global.connect("enemy",self,"spawnenemy")
 	if onmapposition!=Vector2(0,0) and get_parent().name=="map2":
 		position=onmapposition
 	if smallitems:
@@ -553,5 +560,12 @@ func spawnitem(Item):
 	if item!=null:
 		item=item.instance()
 		print("res://items/"+Item+".tscn")
+		Global.scene.add_child(item)
+		item.global_position=global_position
+func spawnenemy(enemy):
+	var item=load("res://enemies/"+enemy+".tscn")
+	if item!=null:
+		item=item.instance()
+		print("res://items/"+enemy+".tscn")
 		Global.scene.add_child(item)
 		item.global_position=global_position

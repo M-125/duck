@@ -11,8 +11,7 @@ func drop():
 		placedrop(random)
 
 func movement():
-	
-	pass
+	return Vector2()
 
 func damage(_e=1,_t=1,_r=1,_w=1):
 	drop()

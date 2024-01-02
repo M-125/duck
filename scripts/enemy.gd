@@ -54,11 +54,14 @@ func _process(delta):
 	if resetdirdelay<0:
 		dir=0
 	if stun<=0:
-		movement()
+		move_and_slide(movement()*(delta*90)*(int(mustattack>0)*2+1))
 	else:
 		stun-=delta
 		move_and_slide(veloc/10)
+	process(delta)
 
+func process(delta):
+	pass
 
 func placedrop(type):
 	var coin=drop.instance()
@@ -98,6 +101,33 @@ func flash():
 	modulate=Color("ffa382")
 	yield(get_tree().create_timer(0.1),"timeout")
 	modulate=Color("ffffff")
+func pathfind_velocity(velocity):
+	var realvel=velocity
+	$pathfind.look_at(to_global(velocity))
+	for collision in get_parent().get_children():
+		if not collision==null and not "player" in collision.name:
+			if $pathfind.overlaps_body(collision):
+				if dir==0:
+					dir=round(rand_range(-1,1))
+				velocity=velocity.rotated(dir*deg2rad(90))
+				$pathfind2.look_at(to_global(velocity))
+				if $pathfind2.overlaps_body(collision)and dircd<0:
+					dir*=-1
+					dircd=2
+				
+				resetdirdelay=1
+		if $pathfind/RayCast2D.get_collider()!=null:
+			if "player" in $pathfind/RayCast2D.get_collider().name:
+				dir=0
+		
+	if Global.gamefinished:
+		velocity=-velocity
+	if velocity.x>0:
+		$Sprite.flip_h=false
+	elif velocity.x<0:
+		$Sprite.flip_h=true
+	return velocity
+
 func movement():
 	$AnimationPlayer.play("walk")
 	
@@ -131,32 +161,9 @@ func movement():
 	
 		#*delta+veloc2*9
 		
-	var realvel=velocity
-	$pathfind.look_at(to_global(velocity))
-	for collision in get_parent().get_children():
-		if not collision==null and not "player" in collision.name:
-			if $pathfind.overlaps_body(collision):
-				if dir==0:
-					dir=round(rand_range(-1,1))
-				velocity=velocity.rotated(dir*deg2rad(90))
-				$pathfind2.look_at(to_global(velocity))
-				if $pathfind2.overlaps_body(collision)and dircd<0:
-					dir*=-1
-					dircd=2
-				
-				resetdirdelay=1
-		if $pathfind/RayCast2D.get_collider()!=null:
-			if "player" in $pathfind/RayCast2D.get_collider().name:
-				dir=0
-		
-	if Global.gamefinished:
-		velocity=-velocity
-	if velocity.x>0:
-		$Sprite.flip_h=false
-	elif velocity.x<0:
-		$Sprite.flip_h=true
+	velocity=pathfind_velocity(velocity)
 	
-	move_and_slide(velocity*(int(mustattack>0)*2+1))
+	return velocity
 		
 
 
@@ -178,6 +185,8 @@ func findplayer():
 		if position.distance_to(collision.position)<minn:
 			minn=position.distance_to(collision.position)
 			player=collision
+	if player==null:
+		player=self
 	return player
 func velTo(player):
 	return (player.position-position).normalized()

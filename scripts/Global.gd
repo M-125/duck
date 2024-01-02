@@ -36,6 +36,7 @@ var itemloot=[load("res://scenes/item.tscn"),item("pizza")]
 signal zoomout
 signal item
 signal givemoney
+signal enemy
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
