@@ -3,7 +3,7 @@ class_name projectile
 var velocity
 var damage=3
 var decay=1
-
+var speed=100
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -30,8 +30,8 @@ func setvalues():
 	pass
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	position+=velocity*delta*100
-	$CollisionShape2D.shape.extents.x=delta*1000
+	position+=velocity*delta*speed
+	$CollisionShape2D.shape.extents.x=delta*speed*10
 	
 	pass
 

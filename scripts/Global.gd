@@ -34,12 +34,15 @@ var debug:Label
 var Debug=true
 var itemloot=[load("res://scenes/item.tscn"),item("pizza")]
 signal zoomout
+signal item
+signal givemoney
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 
 func _ready():
 	connect("valuechange",self,"valuechange")
+	connect("givemoney",self,"money")
 	if !ingame:
 		ingame=get_parent().get_node_or_null("map2")!=null
 		if ingame:
@@ -225,3 +228,5 @@ func music(Music):
 		music.play()
 	else:
 		music.stop()
+func money(num):
+	small_stuff[0]+=int(num)

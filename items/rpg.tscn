@@ -1,0 +1,123 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://scenes/press E.tscn" type="PackedScene" id=1]
+[ext_resource path="res://rifle.png" type="Texture" id=2]
+[ext_resource path="res://items/rpg.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 16 )
+
+[sub_resource type="Gradient" id=3]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+emission_shape = 1
+emission_sphere_radius = 8.0
+flag_disable_z = true
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 3.0
+color_ramp = SubResource( 4 )
+
+[sub_resource type="Curve" id=6]
+min_value = -200.0
+max_value = 200.0
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=7]
+curve = SubResource( 6 )
+
+[sub_resource type="Curve" id=15]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.345098, 0.395455 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=16]
+curve = SubResource( 15 )
+
+[sub_resource type="Gradient" id=8]
+offsets = PoolRealArray( 0.00862069, 1 )
+colors = PoolColorArray( 0, 0.305664, 1, 1, 0, 0.866667, 1, 0 )
+
+[sub_resource type="GradientTexture" id=17]
+gradient = SubResource( 8 )
+
+[sub_resource type="ParticlesMaterial" id=12]
+trail_divisor = 10
+trail_color_modifier = SubResource( 17 )
+emission_shape = 1
+emission_sphere_radius = 5.0
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 10.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel_curve = SubResource( 7 )
+scale = 3.0
+scale_curve = SubResource( 16 )
+
+[sub_resource type="Curve" id=18]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.941177, 0.530682 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=19]
+curve = SubResource( 18 )
+
+[sub_resource type="Gradient" id=20]
+offsets = PoolRealArray( 0.00862069, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0, 0.866667, 1, 0 )
+
+[sub_resource type="GradientTexture" id=13]
+gradient = SubResource( 20 )
+
+[sub_resource type="ParticlesMaterial" id=14]
+trail_divisor = 38
+trail_color_modifier = SubResource( 13 )
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 30.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel_curve = SubResource( 7 )
+scale = 6.0
+scale_curve = SubResource( 19 )
+
+[node name="Item" type="Area2D"]
+rotation = 6.28318
+scale = Vector2( 2, 2 )
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="particles" type="Particles2D" parent="."]
+position = Vector2( 8, 0 )
+emitting = false
+amount = 500
+lifetime = 0.3
+local_coords = false
+process_material = SubResource( 5 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+emitting = false
+amount = 200
+local_coords = false
+draw_order = 1
+process_material = SubResource( 12 )
+
+[node name="charged" type="Particles2D" parent="."]
+emitting = false
+amount = 800
+lifetime = 0.5
+local_coords = false
+draw_order = 1
+process_material = SubResource( 14 )
+
+[node name="press_E" parent="." instance=ExtResource( 1 )]

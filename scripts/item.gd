@@ -138,7 +138,7 @@ func shot():
 	if cldn<=0:
 		var player=get_parent().get_parent().get_parent()
 		var shot=bullet.instance()
-		shot.damage=damagedir[item]
+		shot.damage=damage
 		shot.velocity=Vector2(10,0).rotated(global_rotation)
 		player.get_parent().add_child(shot)
 		shot.global_position=global_position

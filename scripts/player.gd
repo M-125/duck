@@ -328,6 +328,7 @@ func item_manager():
 
 func _ready():
 	Global.connect("zoomout",self,"zoomout")
+	Global.connect("item",self,"spawnitem")
 	if onmapposition!=Vector2(0,0) and get_parent().name=="map2":
 		position=onmapposition
 	if smallitems:
@@ -547,3 +548,10 @@ func exit_tree():
 	
 func zoomout(num):
 	$Camera2D.zoom=Vector2(num,num)
+func spawnitem(Item):
+	var item=load("res://items/"+Item+".tscn")
+	if item!=null:
+		item=item.instance()
+		print("res://items/"+Item+".tscn")
+		Global.scene.add_child(item)
+		item.global_position=global_position
