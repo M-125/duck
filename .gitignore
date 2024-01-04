@@ -16,7 +16,7 @@ mono_crash.*.json
 
 upload.bat
 upload_debug.bat
-
+*gitscript*
 my_scene.tscn
 
 *export/
