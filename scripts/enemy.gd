@@ -4,6 +4,7 @@ var stun=0
 export var hp=100
 var veloc=Vector2.ZERO
 var cooldown=0
+var Cooldown=1
 var dir=0
 var resetdirdelay=0
 var dircd=0.5
@@ -15,6 +16,8 @@ var dropped=false
 var attack=0
 var attacking=false
 var attackedplayer=null
+var Attackdelay=0.3
+const DEFAULT_SPEED=300
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -138,7 +141,7 @@ func movement():
 	
 	var velocity=Vector2.ZERO
 	if player!=null:
-		velocity=velTo(player)*275
+		velocity=velTo(player)*DEFAULT_SPEED
 		dlc=false
 	else:
 		if not dlc:
@@ -196,13 +199,13 @@ func attacking():
 	for body in $damage.get_overlapping_bodies():
 		if "duckie" in body.name and cooldown<=0 and not attacking:
 			attacking=true
-			attack=0.3
+			attack=Attackdelay
 			attackedplayer=body
 	if not attackedplayer in $damage.get_overlapping_bodies():
 		attacking=false
 	
 	if attack<=0 and attacking:
 		attackedplayer.dmg(5)
-		cooldown=1
+		cooldown=Cooldown
 		attacking=false
 	

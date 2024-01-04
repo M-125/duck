@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/enemy.tres" type="Material" id=1]
 [ext_resource path="res://duckie.png" type="Texture" id=2]
@@ -109,6 +109,9 @@ border_width_right = 3
 border_width_bottom = 3
 border_color = Color( 0.407843, 0, 0, 1 )
 
+[sub_resource type="CircleShape2D" id=23]
+radius = 75.0
+
 [node name="enemygiant" type="KinematicBody2D"]
 z_index = 1
 collision_layer = 2
@@ -177,5 +180,10 @@ custom_styles/bg = SubResource( 22 )
 max_value = 1.0
 value = 1.0
 percent_visible = false
+
+[node name="attackarea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attackarea"]
+shape = SubResource( 23 )
 
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="screenenter"]

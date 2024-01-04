@@ -26,6 +26,7 @@ var guistate=guistates.game
 var itemcount=1
 var endgame=false
 var playerpack:PackedScene=null
+var savemap:PackedScene=null
 var Seed=0
 var gamefinished=false
 var alertfeed:CanvasLayer
@@ -215,7 +216,7 @@ func reset():
 	playerpack=null
 	Seed=0
 	gamefinished=false
-	
+	savemap=null
 	_ready()
 
 func alert(string):

@@ -1,7 +1,7 @@
 	
 extends Node2D
 class_name map
-
+export var firstload=true
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -9,6 +9,7 @@ class_name map
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 	Server.map=self
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	Global.ingame=true
@@ -22,6 +23,15 @@ func _ready():
 #		pl.get_node("Camera2D").current=false
 #		pl.position=pos
 #		add_child(pl)
+	if firstload and name=="map2":
+		firstload=false
+		$animation/AnimationPlayer.play("swim")
+		$animation/Camera2D.current=true
+		yield($animation/AnimationPlayer,"animation_finished")
+		$playerspawn.spawn()
+		$animation/Camera2D.current=false
+		$animation.visible=false
+		
 	if name=="map2":
 		
 		$map._init()
@@ -60,3 +70,6 @@ func _process(delta):
 #	pass
 func sorting(a,b):
 	return a.global_position.distance_to(Global.player.global_position)<b.global_position.distance_to(Global.player.global_position)
+func _exit_tree():
+	Global.savemap=PackedScene.new()
+	Global.savemap.pack(self)

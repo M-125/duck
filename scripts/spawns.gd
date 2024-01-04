@@ -7,7 +7,7 @@ var rng=RandomNumberGenerator.new()
 var rng2=RandomNumberGenerator.new()
 var random
 var spawned=[]
-var spawnwait=0.5
+var spawnwait=10
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -34,7 +34,7 @@ func _process(delta):
 		spawnwait=0.5
 	spawnwait-=delta
 func loadmap():
-	if Global.nochick:
+	if Global.nochick or spawnwait>=0:
 		return
 			
 			
@@ -71,11 +71,12 @@ func place(chick,x,y,gridsnap=true):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func _ready():
-	
+	print(spawnwait)
 	rng2.randomize()
 	random=(rng2.randi()+rng2.randi()/rng2.randi()*rng2.randi()-rng2.randi())*rng2.state
 
 func spawn(x,y):
+	print(spawnwait)
 	var spwn=false
 	var random=round(rand_range(0,2))
 	while !spwn:

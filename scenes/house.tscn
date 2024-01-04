@@ -97,7 +97,7 @@ scale = Vector2( 3, 3 )
 z_index = 4
 
 [node name="playerspawn" type="Node2D" parent="."]
-position = Vector2( 67, 676 )
+position = Vector2( 303, 687 )
 script = ExtResource( 4 )
 smallitems = true
 randomspawn = false

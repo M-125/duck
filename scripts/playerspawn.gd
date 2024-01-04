@@ -2,6 +2,7 @@ extends Node2D
 class_name playerspawn
 export var smallitems=false
 export var randomspawn=true
+export var autospawn=true
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -9,6 +10,10 @@ export var randomspawn=true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if autospawn:spawn()
+	pass # Replace with function body.
+
+func spawn():
 	if "player" in name:
 		name="spawn"
 	yield(get_tree().create_timer(0),"timeout")
@@ -23,5 +28,3 @@ func _ready():
 	plr.smallitems=smallitems
 	plr.randomspawn=randomspawn
 	get_parent().add_child(plr)
-	pass # Replace with function body.
-

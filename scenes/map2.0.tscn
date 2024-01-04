@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://tiles.tres" type="TileSet" id=1]
 [ext_resource path="res://scripts/map2.2.gd" type="Script" id=2]
 [ext_resource path="res://scripts/playerspawn.gd" type="Script" id=3]
 [ext_resource path="res://scenes/base.tscn" type="PackedScene" id=4]
+[ext_resource path="res://duck_swimming.png" type="Texture" id=5]
 [ext_resource path="res://trees.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scripts/shops.gd" type="Script" id=7]
 [ext_resource path="res://scenes/water.tscn" type="PackedScene" id=8]
@@ -39,6 +40,128 @@ points = PoolVector2Array( 59, 58, 6, 58, 6, 38, 59, 38 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 0/z_index = 0
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprite:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -375, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Sprite:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( -344, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -375, -344 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Camera2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -357, -680 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "swim"
+length = 5.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 3.2, 3.4, 3.6, 3.8, 4, 4.2, 4.4, 4.6, 4.8, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 5.2 ),
+"transitions": PoolRealArray( 0.594604, 0.129408 ),
+"update": 0,
+"values": [ Vector2( -375, -344 ), Vector2( -375, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Camera2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 5.2 ),
+"transitions": PoolRealArray( -1.68179, 1 ),
+"update": 0,
+"values": [ Vector2( -357, -640 ), Vector2( -357, 0 ) ]
+}
+
+[sub_resource type="GDScript" id=5]
+script/source = "extends Sprite
+var time=0
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	if time <=0:
+		flip_h=!flip_h
+		time+=0.4
+	time-=delta
+#	pass
+"
 
 [node name="map2" type="Node2D"]
 z_index = -2
@@ -105,8 +228,28 @@ script = ExtResource( 14 )
 script = ExtResource( 7 )
 
 [node name="playerspawn" type="Node2D" parent="."]
-position = Vector2( 1431, 634 )
+position = Vector2( 183, 52 )
 script = ExtResource( 3 )
+randomspawn = false
+autospawn = false
 
 [node name="loader" type="Node" parent="."]
 script = ExtResource( 13 )
+
+[node name="animation" type="Node2D" parent="."]
+position = Vector2( 547, -19 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="animation"]
+anims/RESET = SubResource( 3 )
+anims/swim = SubResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="animation"]
+position = Vector2( -375, -344 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 5 )
+hframes = 2
+script = SubResource( 5 )
+
+[node name="Camera2D" type="Camera2D" parent="animation"]
+position = Vector2( -357, -680 )
+current = true
