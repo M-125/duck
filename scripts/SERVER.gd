@@ -19,6 +19,7 @@ var chests=[0,0,0]
 var tree=null
 var chest=null
 var counter=0
+var outsideTreeList=[]
 func _ready():
 	
 	for iip in IP.get_local_addresses():
@@ -147,70 +148,9 @@ func isconnect():
 
 	pass
 
-
-puppet func newitem(name,item,pos):
-	var ITEM=preload("res://scenes/onlineitem.tscn").instance()
-	ITEM.item=item
-	ITEM.name=name
-	Global.scene.add_child(ITEM)
-	ITEM.global_position=pos
-	print(name,item,pos)
-
-puppet func uniqueitem(name,item,pos):
-	var ITEM=load(item).instance()
-	
-	ITEM.name=name
-	Global.scene.add_child(ITEM)
-	ITEM.global_position=pos
-	print(name,item,pos)
-
-puppet func SeeD(sed,s1,rnd,s2,s3,rnd2):
-	Seed=sed
-	trees[0]=s1
-	trees[1]=rnd
-	chests[0]=s2
-	chests[2]=rnd2
-	chests[1]=s3
-
-
-func _process(delta):
-	if wait > 10 and isserver:
-		rpc("SeeD",Seed,trees[0],trees[1],chests[0],chests[1],chests[2])
-		wait=0
-	wait +=delta
-
-
-puppet func trees(s1,rnd):
-	trees[0]=s1
-	trees[1]=rnd
-
-puppet func chests(s1,s2,rnd):
-	
-	chests[0]=s1
-	chests[2]=rnd
-	chests[1]=s2
-
-puppet func addenemies(name,type):
-	var Enemy=load(type).instance()
-	Enemy.name=name
-	Global.scene.add_child(Enemy)
-
-
-
-
-remotesync func addcoin(pos,type=0):
-	var coin=load("res://scenes/coin.tscn").instance()
-	coin.name=str(counter)
-	coin.type=type
-	Global.scene.add_child(coin)
-	
-	coin.global_position=pos
-	counter+=1
-
-
-remote func pizzaslice(vel,pos):
-	var p=preload("res://scenes/pizzaslice.tscn").instance()
-	p.velocity=vel
-	p.global_position=pos
-	p.collision_layer=0
-	p.collision_mask=0
+remote func entered(name:String,path:String):
+	for e in outsideTreeList:
+		if name==e.name:
+			path=path.trim_suffix(name)
+			get_node(path).add_child(e)
+			outsideTreeList.remove(e)
