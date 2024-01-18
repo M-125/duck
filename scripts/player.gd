@@ -17,6 +17,7 @@ var canshoot=false
 var nomove=false
 var interacttime=0
 var clickattack=0
+var localplayer=true
 var nohitbox=[]
 var clickend=false
 var chargetime=0
@@ -333,9 +334,27 @@ func item_manager():
 
 
 func _ready():
+	if Server.isconnect() and name=="playerduckie":
+		name=str(Server.ID)+"player"
+	print(int(name)==Server.ID,"   ",int(name)," ",Server.ID)
+	
+	
+	var canbecamera=true
+	for e in get_parent().get_children():
+		if e is Camera2D:
+			canbecamera=false
+	localplayer=int(name)==Server.ID
+	
+	if canbecamera:
+		$Camera2D.current=int(name)==Server.ID
+		yield(get_tree(),"idle_frame")
+		print($Camera2D.current)
+	
 	Global.connect("zoomout",self,"zoomout")
 	Global.connect("item",self,"spawnitem")
 	Global.connect("enemy",self,"spawnenemy")
+	if get_parent().get_node_or_null("MultiPlayerSpawner") != null:
+		get_parent().get_node_or_null("MultiPlayerSpawner").add_node(self)
 	if onmapposition!=Vector2(0,0) and get_parent().name=="map2":
 		position=onmapposition
 	if smallitems:
@@ -371,11 +390,8 @@ func _ready():
 	Global.playerfalling=true
 	if randomspawn:
 		position+=Vector2(rand_range(-100,100),rand_range(100,-100))
-	var canbecamera=true
-	for e in get_parent().get_children():
-		if e is Camera2D:
-			canbecamera=false
-	$Camera2D.current=canbecamera
+	
+	
 	state_machine.start("idle")
 	yield(get_tree().create_timer(2),"timeout")
 	Global.nochick=false
@@ -383,33 +399,34 @@ func _ready():
 
 
 func _process(delta):
-	interacttime-=delta
-	
-	Global.playerfloor=clamp(Global.playerfloor,0,4)
-	releasebuttons(delta)
-	
-	if Input.is_action_just_released("craft"):
-		var canadd=true
-		for e in $ui.get_children():   if e.is_in_group("craft"):   canadd=false
-		if canadd:$ui.add_child(preload("res://scenes/craftmenu.tscn").instance())
-	
-	
-	progressbar(delta)
-	$ui/ProgressBar.value=hp
-	quack()
-	var zoom=(Global.speedmod/1000)
-	var zoom1=(guicam.scale.x+1-zoom+1+1)/4
-	guicam.scale=Vector2(zoom1,zoom1)
-#	Vector2(1,1)-
-	if Global.guistate == Global.guistates.game:
-		move(delta)
-	interact()
-	item_manager()
-	Global.playerposition=global_position
-	jump()
-	
-	wait +=delta
-	pass
+	if localplayer:
+		interacttime-=delta
+		
+		Global.playerfloor=clamp(Global.playerfloor,0,4)
+		releasebuttons(delta)
+		
+		if Input.is_action_just_released("craft"):
+			var canadd=true
+			for e in $ui.get_children():   if e.is_in_group("craft"):   canadd=false
+			if canadd:$ui.add_child(preload("res://scenes/craftmenu.tscn").instance())
+		
+		
+		progressbar(delta)
+		$ui/ProgressBar.value=hp
+		quack()
+		var zoom=(Global.speedmod/1000)
+		var zoom1=(guicam.scale.x+1-zoom+1+1)/4
+		guicam.scale=Vector2(zoom1,zoom1)
+	#	Vector2(1,1)-
+		if Global.guistate == Global.guistates.game:
+			move(delta)
+		interact()
+		item_manager()
+		Global.playerposition=global_position
+		jump()
+		
+		wait +=delta
+
 
 
 func _on_Area2D_area_entered(area):

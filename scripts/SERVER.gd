@@ -20,6 +20,9 @@ var tree=null
 var chest=null
 var counter=0
 var outsideTreeList=[]
+var connected=false
+signal ID_received
+signal connected
 func _ready():
 	
 	for iip in IP.get_local_addresses():
@@ -50,7 +53,9 @@ func reset():
 
 func disconnected():
 	playercount=0
+	print("disconnected")
 	servershutdown()
+	connected=false
 	pass
 
 
@@ -60,30 +65,22 @@ func createserver():
 	get_tree().set_network_peer(server)
 	isserver=true
 	Seed=randi()
+	ID=0
+	print("server started")
 
-func join():
+func join(IP=ip):
 	client=NetworkedMultiplayerENet.new()
-	client.create_client(ip,10281)
+	client.create_client(IP,10281)
 	get_tree().set_network_peer(client)
+	print(IP)
 
 func playerconnect(id):
 	if isserver:
 		playercount+=1
 		print("+++++++++++"+str(id))
-		rpc_id(id,"loadplayers",clients)
 		clients.append(id)
 		
 		rpc_id(id,"yourid",id)
-		rpc("addplayer",id)
-		rpc("SeeD",Seed,trees[0],trees[1],chests[0],chests[1],chests[2])
-		if not null in [tree,chest]:
-			tree.update()
-			chest.update()
-		for e in clients+[0]:
-			rpc_id(id,"addplayer",e)
-		for e in Global.scene.get_children():
-			if "enemy" in e.name:
-				rpc_id(id,"addenemies",e.name,e.filename)
 		
 
 
@@ -92,25 +89,17 @@ func playerdisconnect(id):
 		print("--"+str(id))
 		playercount-=1
 		clients.erase(id)
-		rpc("removeplayer",id)
 
-remotesync func removeplayer(id):
-	for e in Global.scene.get_children():
-		if e.name==str(id)+"player":
-			e.queue_free()
-			break
 		
-remotesync func addplayer(id):
-	if ID!=id:
-		var player=preload("res://scenes/onlineplayer.tscn").instance()
-		player.name=str(id)+"player"
-		player.get_node("ui").queue_free()
-		Global.scene.add_child(player)
-		player.position=Vector2(1,1)*-9000
-	
 
+	
+func _process(delta):
+	if isserver():
+		ID=0
 
 func connected():
+	emit_signal("connected")
+	connected=true
 	print("connected")
 
 
@@ -133,14 +122,15 @@ remote func servershutdown():
 
 
 
-remote func yourid(id):
+puppet func yourid(id):
 	ID=id
-	Global.player.name=str(id)+"player"
+	emit_signal("ID_received")
 
-
+func isserver():
+	return server!=null
 
 func isconnect():
-	if server!=null or client!=null:
+	if server!=null or connected:
 		return true
 	else:
 		return false
@@ -149,8 +139,17 @@ func isconnect():
 	pass
 
 remote func entered(name:String,path:String):
+	print(name,path)
 	for e in outsideTreeList:
-		if name==e.name:
-			path=path.trim_suffix(name)
+		if name==e.name and get_node_or_null(path)!=null:
 			get_node(path).add_child(e)
-			outsideTreeList.remove(e)
+			outsideTreeList.erase(e)
+
+
+remote func leavetree(path):
+	print("leaving")
+	var node=get_node_or_null(path)
+	if node!=null:
+		Server.outsideTreeList.append(node)
+		
+		node.get_parent().remove_child(node)

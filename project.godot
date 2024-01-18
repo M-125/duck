@@ -147,7 +147,7 @@ _global_script_class_icons={
 [application]
 
 config/name="duck"
-run/main_scene="res://scenes/loadingscreen.tscn"
+run/main_scene="res://scenes/mainmenu.tscn"
 boot_splash/show_image=false
 boot_splash/image="res://zsCwbf.png"
 boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )

@@ -1,6 +1,6 @@
 extends Node
 class_name MultiPlayerSpawner, "res://classes/spawner.png"
-
+var nodes=[]
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -8,9 +8,40 @@ class_name MultiPlayerSpawner, "res://classes/spawner.png"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
+	while not Server.isconnect():yield(get_tree().create_timer(1),"timeout")
+	rpc("get_spawned",Server.ID)
 	pass # Replace with function body.
 
 
+master func get_spawned(id):
+	print(str(id)+" wants stuff")
+	print(nodes)
+	for e in nodes:
+		var node =e.filename
+		rpc_id(id,"spawn",node,e.get_parent().get_path(),e.name)
+
+remote func spawn(node,path,name):
+	print(path,node,name)
+	node=load(node)
+	for e in nodes:
+		if str(path)+"/"+name ==e.get_path():
+			return
+	if get_node_or_null(path)!=null:
+		var instance=node.instance()
+		instance.name=name
+		get_node(path).add_child(instance)
+		nodes.append(instance)
+
+func add_node(node):
+	while not Server.isconnect():yield(get_tree(),"idle_frame")
+	for e in nodes:
+		if node.get_path()==e.get_path():
+			return
+	if node in nodes:
+		return
+	nodes.append(node)
+	rpc("spawn",node.filename,node.get_parent().get_path(),node.name)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

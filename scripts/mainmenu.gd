@@ -34,15 +34,18 @@ func _on_button_pressed():
 
 
 func _on_button2_pressed():
-	get_tree().change_scene("res://scenes/onlinemap.tscn")
+	get_tree().change_scene("res://scenes/map.tscn")
 	Server.createserver()
 	pass # Replace with function body.
 
 
 func _on_button3_pressed():
-	get_tree().change_scene("res://scenes/onlinemap.tscn")
 	Server.ip=$TextEdit.text
 	Server.join()
+	yield(Server,"ID_received")
+	get_tree().change_scene("res://scenes/map.tscn")
+	
+	
 
 func _on_button4_pressed():
 	get_tree().change_scene("res://scenes/map2.0.tscn")

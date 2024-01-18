@@ -17,6 +17,7 @@ func _ready():
 #func _process(delta):
 #	pass
 func exit():
-	rpc("leavetree")
+	Server.rpc("leavetree",get_parent().get_path())
 func enter():
-	Server.rpc("entered",get_parent().name,get_parent().get_path())
+	Server.rpc("entered",get_parent().name,get_parent().get_parent().get_path())
+
