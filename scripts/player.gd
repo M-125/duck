@@ -84,8 +84,8 @@ func move(delta):
 	if Input.is_action_pressed("ui_left"):
 		velocity.x-=1
 		pressedbuttons[2]=releasetime
-	
-	velocity+=$"ui/ViewportContainer/UI/phone gui/Virtual joystick".get_output().normalized()
+	if get_node_or_null("ui/ViewportContainer/UI/phone gui/Virtual joystick") !=null:
+		velocity+=$"ui/ViewportContainer/UI/phone gui/Virtual joystick".get_output().normalized()
 
 	if Input.is_joy_known(0)and Vector2(0,0).distance_to(Vector2(Input.get_joy_axis(0,0),Input.get_joy_axis(0,1)))>=0.5:
 		velocity+=Vector2(Input.get_joy_axis(0,0),Input.get_joy_axis(0,1))
@@ -114,7 +114,10 @@ func move(delta):
 	if pressedbuttons[3]>0:
 		velocit.x+=1
 	#release delay for easier stop and aim at direction ???
-	if ($"ui/ViewportContainer/UI/phone gui/Virtual joystick".get_output().normalized()!=Vector2(0,0)
+	var joystick=get_node_or_null("ui/ViewportContainer/UI/phone gui/Virtual joystick")
+	if joystick==null:
+		joystick=VirtualJoystick.new()
+	if (joystick.get_output().normalized()!=Vector2(0,0)
 	or Input.is_joy_known(0)and Vector2(0,0).distance_to(Vector2(Input.get_joy_axis(0,0),Input.get_joy_axis(0,1)))>=0.5
 	):
 		velocit=velocity
@@ -224,7 +227,7 @@ func interact():
 			if helditem.Use():
 				return
 #interact with helditems like pizza
-	
+	if Input.is_action_just_pressed("interact"):
 		emit_signal("interactshop")
 		emit_signal("interact")
 #shop and interactarea
@@ -334,9 +337,12 @@ func item_manager():
 
 
 func _ready():
-	if Server.isconnect() and name=="playerduckie":
-		name=str(Server.ID)+"player"
-	print(int(name)==Server.ID,"   ",int(name)," ",Server.ID)
+	if Server.isconnect():
+		if name=="playerduckie":
+			name=str(Server.ID)+"player"
+		else:
+			$ui/ViewportContainer.free()
+			$ui.visible=false
 	
 	
 	var canbecamera=true

@@ -1,4 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://egg.png" type="Texture" id=1]
 
 [sub_resource type="GDScript" id=2]
 script/source = "extends projectile
@@ -19,7 +21,7 @@ func setvalues():
 #func _process(delta):
 #	pass
 func _exit_tree():
-	var explosion=load(\"res://scenes/staticdmgarea.tscn\").instance()
+	var explosion=load(\"res://scenes/eggbomb.tscn\").instance()
 	Global.scene.add_child(explosion)
 	explosion.global_position=global_position
 "
@@ -27,12 +29,12 @@ func _exit_tree():
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 5 )
 
-[sub_resource type="Gradient" id=3]
-offsets = PoolRealArray( 0, 0.570175, 1 )
-colors = PoolColorArray( 1, 0.521484, 0, 1, 1, 0.968627, 0, 1, 1, 1, 0.937255, 0 )
+[sub_resource type="Gradient" id=6]
+offsets = PoolRealArray( 0, 0.675182, 1 )
+colors = PoolColorArray( 0.209961, 0.209961, 0.209961, 1, 1, 1, 1, 0.603922, 1, 1, 1, 0 )
 
 [sub_resource type="GradientTexture" id=4]
-gradient = SubResource( 3 )
+gradient = SubResource( 6 )
 
 [sub_resource type="ParticlesMaterial" id=5]
 emission_shape = 2
@@ -46,6 +48,7 @@ scale_random = 1.0
 color_ramp = SubResource( 4 )
 
 [node name="gunshot" type="Area2D"]
+scale = Vector2( 2, 2 )
 collision_layer = 3
 collision_mask = 3
 script = SubResource( 2 )
@@ -54,16 +57,13 @@ script = SubResource( 2 )
 shape = SubResource( 1 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
-amount = 50
+amount = 200
 lifetime = 0.6
 local_coords = false
 process_material = SubResource( 5 )
 
-[node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -10.0
-margin_top = -5.0
-margin_right = 10.0
-margin_bottom = 5.0
-color = Color( 1, 0.866667, 0, 1 )
+[node name="Sprite" type="Sprite" parent="."]
+rotation = 1.57079
+texture = ExtResource( 1 )
 
 [connection signal="body_entered" from="." to="." method="_on_item_body_entered"]

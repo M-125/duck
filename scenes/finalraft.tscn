@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://raft.png" type="Texture" id=1]
 [ext_resource path="res://press e.png" type="Texture" id=2]
+[ext_resource path="res://classes/multiplayersyncer.gd" type="Script" id=3]
 
 [sub_resource type="GDScript" id=3]
 script/source = "extends interact
@@ -99,3 +100,6 @@ margin_top = -7.0
 margin_right = 30.0
 margin_bottom = 7.0
 text = "YOU WIN"
+
+[node name="MultiPlayerSyncer" type="Node" parent="."]
+script = ExtResource( 3 )

@@ -57,7 +57,7 @@ func _process(delta):
 	if resetdirdelay<0:
 		dir=0
 	if stun<=0:
-		move_and_slide(movement()*(delta*90)*(int(mustattack>0)*2+1))
+		move_and_slide(movement()*((int(mustattack>0)*2)+1))
 	else:
 		stun-=delta
 		move_and_slide(veloc/10)

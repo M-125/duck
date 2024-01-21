@@ -5,8 +5,8 @@ var items=[]
 var isserver=false
 var players=[]
 var ip
-var server=null
-var client=null
+var server:NetworkedMultiplayerENet=null
+var client:NetworkedMultiplayerENet=null
 var playercount=0
 var playerload=load("res://scenes/onlineplayer.tscn")
 var clients=[]
@@ -66,9 +66,12 @@ func createserver():
 	isserver=true
 	Seed=randi()
 	ID=0
+	client=null
 	print("server started")
 
 func join(IP=ip):
+	if isserver:
+		server.close_connection(1000)
 	client=NetworkedMultiplayerENet.new()
 	client.create_client(IP,10281)
 	get_tree().set_network_peer(client)
@@ -105,7 +108,7 @@ func connected():
 
 func stop():
 	rpc_id(0,"servershutdown")
-	server.disconnect_peer(1)
+	server.close_connection(1000)
 	get_tree().set_network_peer(null)
 
 
@@ -124,6 +127,7 @@ remote func servershutdown():
 
 puppet func yourid(id):
 	ID=id
+	clients.append(id)
 	emit_signal("ID_received")
 
 func isserver():

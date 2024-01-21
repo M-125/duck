@@ -50,6 +50,7 @@ static func get_img(item):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if get_parent().get_node_or_null("MultiPlayerSpawner")!=null:get_parent().get_node("MultiPlayerSpawner").add_node(self)
 	rng.randomize()
 	if item=="random":
 		item=itemname[round(rng.randf_range(0,1))]

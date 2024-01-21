@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://items/amsword.gd" type="Script" id=1]
 [ext_resource path="res://amsword.png" type="Texture" id=2]
 [ext_resource path="res://scenes/press E.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/item.tres" type="Material" id=4]
+[ext_resource path="res://classes/multiplayersyncer.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 16 )
@@ -108,6 +109,9 @@ process_material = SubResource( 14 )
 
 [node name="press_E" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, -17 )
+
+[node name="MultiPlayerSyncer" type="Node" parent="."]
+script = ExtResource( 5 )
 
 [connection signal="body_entered" from="." to="." method="_on_item_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_item_body_exited"]

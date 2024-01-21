@@ -17,6 +17,8 @@ func loadmap():
 			shops.erase(e)
 			
 	var pos=(to_local(Global.playerposition)/16/3/16).round()
+	pos.x=clamp(pos.x,0,INF)
+	pos.y=clamp(pos.y,0,INF)
 	if pos !=positionn:
 		positionn=pos
 		for x in range(-1,2):

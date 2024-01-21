@@ -3,12 +3,9 @@ var list=[]
 var map=[]
 var badlist=[-1,47,17,20,18,48,50,49]
 var finalmap=[]
-var eraselist=[]
 var noise=Noise.new()
 export var myfloor=1
 var detectlist=[]
-var positionn=Vector2(0,0)
-var positionnn=Vector2(0,0)
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -54,12 +51,12 @@ func _ready():
 func loadmap(matrix:Array):
 	var pos=(world_to_map(to_local(Global.playerposition))/Global.chunksize).round()
 	
-	for e in range(matrix.size()):
+	for e in range(1,matrix.size()-1):
 		
 		if not matrix[e] is Vector2:
 			
-			for i in range(matrix[e].size()):
-				var blockpos=matrix[matrix.size()-1]+Vector2(e,i)
+			for i in range(1,matrix[e].size()-1):
+				var blockpos=matrix[matrix.size()-1]+Vector2(e,i)+Vector2(-1,-1)
 				var noiser=matrix[e][i]
 				
 				if noiser>myfloor :
@@ -81,28 +78,15 @@ func loadmap(matrix:Array):
 				else:
 					set_cellv(blockpos,-1)
 				if i%32==0:yield(get_tree(), "idle_frame")
-		if not pos in eraselist:
-			eraselist.append(pos)
-		erasemap()
 #func _process(delta):
 ##	pass
 #func erasemap():
 #	for e in range(finalmap.size()):
-func erasemap():
-	var pos=(world_to_map(to_local(Global.playerposition))/Global.chunksize).round()
+func erasemap(pos):
 	
-	if pos !=positionnn:
-		positionnn=pos
-		for a in eraselist:
-			var list=[]
-			pos=(world_to_map(to_local(Global.playerposition))/Global.chunksize).round()
-			for e in detectlist:
-				list.append(e+pos)
-				
-			if not a in list:
-				for e in range(clamp((a.x-Global.viewdistance)*Global.chunksize,0,Global.mapsize),clamp((a.x+Global.viewdistance)*Global.chunksize,0,Global.mapsize)):
-					for i in range(clamp((a.y-Global.viewdistance)*Global.chunksize,0,Global.mapsize),clamp((a.y+Global.viewdistance)*Global.chunksize,0,Global.mapsize)):
-						set_cell(e,i,-1)
-						if i%16==0:yield(get_tree(), "idle_frame")
-				eraselist.erase(a)
-				Global.debug.text=str(eraselist)
+	
+	
+	for e in range(clamp((pos.x)*Global.chunksize,0,Global.mapsize),clamp((pos.x+1)*Global.chunksize,0,Global.mapsize)):
+		for i in range(clamp((pos.y)*Global.chunksize,0,Global.mapsize),clamp((pos.y+1)*Global.chunksize,0,Global.mapsize)):
+			set_cell(e,i,-1)
+			if i%16==0:yield(get_tree(), "idle_frame")

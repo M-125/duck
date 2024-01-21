@@ -12,10 +12,10 @@ var maps=[]
 var speedmod=0
 var speedmodmin=0
 var speedmodmax=150
-var viewdistance=2
+var viewdistance=5
 var playerontilemap=-1
 var playerjump=true
-var mapsize=2000
+var mapsize=200
 var chunksize=16
 var small_stuff=[200,2000,200,200,200]
 var scene

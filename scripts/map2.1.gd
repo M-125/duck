@@ -2,9 +2,8 @@ extends TileMap
 var list=[]
 var movex=0
 var movey=0
-var eraselist=[]
+var loadedchunks=[]
 var wait=0
-var detectlist=[]
 var terrain={
 	"left":6,
 	"leftup":0,
@@ -29,24 +28,42 @@ var positionnn
 # var b = "text"
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	for e in range(-3,4):
-		for i in range(-3,4):
-			detectlist.append(Vector2(e,i))
 func _process(delta):
-	erasemap()
 	loadmap()
+	erasemap()
+	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func loadmap():
 	var pos=(world_to_map(to_local(Global.playerposition))/Global.chunksize).round()
 #	var viewdistance=Global.viewdistance*Global.chunksize
-	if pos !=positionn:
-		positionn=pos
-		for e in range(clamp((pos.x-Global.viewdistance)*Global.chunksize,0,Global.mapsize),clamp((pos.x+Global.viewdistance)*Global.chunksize,0,Global.mapsize)):
+	for e in range(pos.x-Global.viewdistance/2,pos.x+Global.viewdistance/2):
+		for i in range(pos.y-Global.viewdistance/2,pos.y+Global.viewdistance/2):
+			var poss=Vector2(clamp(e,0,INF),clamp(i,0,INF))
+			loadchunk(Vector2(e,i))
 			yield(get_tree(),"idle_frame")
-			for i in range(clamp((pos.y-Global.viewdistance)*Global.chunksize,0,Global.mapsize),clamp((pos.y+Global.viewdistance)*Global.chunksize,0,Global.mapsize)):
+		
+			
+func erasemap():
+	var pos=(world_to_map(to_local(Global.playerposition))/Global.chunksize).round()
+	
+	for a in loadedchunks:
+		if abs(pos.x-a.x)>5 or abs(pos.y-a.y)>5:
+			erasechunk(a)
+			yield(get_tree(),"idle_frame")
+
+func erasechunk(pos):
+	for e in range(clamp((pos.x)*Global.chunksize,0,Global.mapsize),clamp((pos.x+1)*Global.chunksize,0,Global.mapsize)):
+		for i in range(clamp((pos.y)*Global.chunksize,0,Global.mapsize),clamp((pos.y+1)*Global.chunksize,0,Global.mapsize)):
+			set_cell(e,i,-1)
+			loadedchunks.erase(pos)
+			if i%16==0:yield(get_tree(), "idle_frame")
+func loadchunk(pos):
+	if not pos in loadedchunks:
+	
+		for e in range(clamp((pos.x)*Global.chunksize,0,Global.mapsize),clamp((pos.x+1)*Global.chunksize,0,Global.mapsize)):
+			yield(get_tree(), "idle_frame")
+			for i in range(clamp((pos.y)*Global.chunksize,0,Global.mapsize),clamp((pos.y+1)*Global.chunksize,0,Global.mapsize)):
 				if e==0:
 					set_cell(e,i,terrain["left"])
 				if i==0:
@@ -65,19 +82,4 @@ func loadmap():
 					set_cell(e,i,terrain["rightdown"])
 				if get_cell(e,i)==-1:
 					set_cell(e,i,7)
-		eraselist.append(pos)
-			
-func erasemap():
-	var pos=(world_to_map(to_local(Global.playerposition))/Global.chunksize).round()
-	if pos !=positionnn:
-		positionnn=pos
-		for a in eraselist:
-			var list=[]
-			for e in detectlist: 
-				list.append(e+pos)
-			if not a in list:
-				for e in range(clamp((a.x-Global.viewdistance)*Global.chunksize,0,Global.mapsize),clamp((a.x+Global.viewdistance)*Global.chunksize,0,Global.mapsize)):
-					for i in range(clamp((a.y-Global.viewdistance)*Global.chunksize,0,Global.mapsize),clamp((a.y+Global.viewdistance)*Global.chunksize,0,Global.mapsize)):
-						set_cell(e,i,-1)
-					yield(get_tree(),"idle_frame")
-				eraselist.erase(a)
+		loadedchunks.append(pos)
