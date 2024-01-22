@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://tiles.tres" type="TileSet" id=1]
 [ext_resource path="res://scripts/map2.2.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://scripts/maploader.gd" type="Script" id=13]
 [ext_resource path="res://scripts/spawns.gd" type="Script" id=14]
 [ext_resource path="res://classes/multiplayerspawner.gd" type="Script" id=15]
+[ext_resource path="res://classes/merger.gd" type="Script" id=16]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 59, 58, 6, 58, 6, 38, 59, 38 )
@@ -257,3 +258,6 @@ current = true
 
 [node name="MultiPlayerSpawner" type="Node" parent="."]
 script = ExtResource( 15 )
+
+[node name="merger" type="Node" parent="."]
+script = ExtResource( 16 )

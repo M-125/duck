@@ -32,7 +32,8 @@ func setvalues():
 func _process(delta):
 	position+=velocity*delta*speed
 	$CollisionShape2D.shape.extents.x=delta*speed*10
-	
+	process(delta)
+func process(delta):
 	pass
 
 func _on_item_body_entered(body):

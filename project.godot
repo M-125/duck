@@ -59,6 +59,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Node2D.gd"
 }, {
+"base": "Node2D",
+"class": "damagemeter",
+"language": "GDScript",
+"path": "res://scripts/Label.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "enemy",
 "language": "GDScript",
@@ -73,6 +78,11 @@ _global_script_classes=[ {
 "class": "map",
 "language": "GDScript",
 "path": "res://scripts/map.gd"
+}, {
+"base": "Node",
+"class": "merger",
+"language": "GDScript",
+"path": "res://classes/merger.gd"
 }, {
 "base": "Node",
 "class": "music",
@@ -130,9 +140,11 @@ _global_script_class_icons={
 "button": "",
 "craftbutton": "",
 "cursor": "",
+"damagemeter": "",
 "enemy": "",
 "interact": "",
 "map": "",
+"merger": "",
 "music": "",
 "onlineItem": "",
 "onlineenemy": "",

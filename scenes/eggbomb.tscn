@@ -62,7 +62,7 @@ color_ramp = SubResource( 7 )
 [sub_resource type="Curve" id=12]
 min_value = -360.0
 max_value = 360.0
-_data = [ Vector2( 0.00257732, -167.853 ), 0.0, 0.0, 0, 0, Vector2( 0.500859, -8.83435 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0.00257732, -167.853 ), 0.0, 0.0, 0, 0, Vector2( 0.339347, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=13]
 curve = SubResource( 12 )
@@ -83,7 +83,7 @@ initial_velocity = 194.52
 initial_velocity_random = 0.55
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-linear_accel = -100.0
+linear_accel = -200.0
 angle = 720.0
 angle_random = 1.0
 angle_curve = SubResource( 13 )
