@@ -20,8 +20,6 @@ func damage(dmg,velocity=Vector2(0,0),nothing=0):
 	label.global_position=global_position
 	hp-=abs(dmg)
 	Global.addsound("hit")
-	if hp<=0:
-		queue_free()
 	
 func _process(e):
 	e

@@ -14,7 +14,7 @@ script/source = "extends projectile
 # Called when the node enters the scene tree for the first time.
 func setvalues():
 	decay=2
-	speed=30
+	speed=60
 
 func process(delta):
 	$Sprite.rotation+=delta*9
