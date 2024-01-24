@@ -292,7 +292,7 @@ z_index = 1
 
 [node name="MultiPlayerSyncer" type="Node" parent="."]
 script = ExtResource( 4 )
-variables = [ "..:position", "../hrot:rotation" ]
+variables = [ "..:position", "../hrot:rotation", "..:hp", "../Sprite:flip_h" ]
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_Area2D_area_exited"]

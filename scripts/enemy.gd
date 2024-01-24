@@ -31,7 +31,7 @@ func _ready():
 	if get_node_or_null('pathfind2')!=null:
 		$pathfind2.collision_layer=4
 		$pathfind2.collision_mask=4
-	
+	owner=get_parent()
 	
 	ready()
 	pass # Replace with function body.

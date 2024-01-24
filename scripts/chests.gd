@@ -61,3 +61,8 @@ func _ready():
 		Seed=rng.seed
 	if random==0:
 		random=(rng2.randi()+rng2.randi()/rng2.randi()*rng2.randi()-rng2.randi())*rng2.state
+
+
+func _on_Timer_timeout():
+	rng.seed=Seed
+	pass # Replace with function body.

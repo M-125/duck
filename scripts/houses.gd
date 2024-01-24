@@ -4,7 +4,7 @@ var positionn
 var positionnn
 var eraselist=[]
 var rng=RandomNumberGenerator.new()
-var random=randi()+randi()/randi()*randi()
+export var random=0
 var wait=0
 export var rngseed=0
 var dontspawn=[]
@@ -79,3 +79,12 @@ puppet func randoms(s1,rnd):
 func update():
 	if Server.isserver:
 		rpc("randoms",rng.seed,random)
+
+func _ready():
+	if random==0:
+		random=randi()+randi()/randi()*randi()
+
+
+func _on_Timer_timeout():
+	rng.seed=rngseed
+	pass # Replace with function body.

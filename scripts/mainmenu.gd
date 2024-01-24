@@ -1,5 +1,5 @@
 extends Node2D
-
+var wait=0
 var duck=PackedScene.new()
 # Declare member variables here. Examples:
 # var a = 2
@@ -18,23 +18,28 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if round(rand_range(1,50))==25:
-		var ducky=duck.instance()
-		ducky.position.y=rand_range(30,570)
-		ducky.position.x=-40
-		ducky.scale=Vector2(4,4)
-		ducky.z_index=-1
-		add_child(ducky)
+	wait+=delta
+	if wait>1/60:
+		if round(rand_range(1,50))==25:
+			var ducky=duck.instance()
+			ducky.position.y=rand_range(30,570)
+			ducky.position.x=-40
+			ducky.scale=Vector2(4,4)
+			ducky.z_index=-1
+			add_child(ducky)
+			wait-=1/60
 #	pass
 
 
 func _on_button_pressed():
 	get_tree().change_scene("res://scenes/map.tscn")
+	
 	pass # Replace with function body.
 
 
 func _on_button2_pressed():
-	get_tree().change_scene("res://scenes/map.tscn")
+	
+	get_tree().change_scene("res://scenes/map2.0.tscn")
 	Server.createserver()
 	pass # Replace with function body.
 
@@ -43,12 +48,16 @@ func _on_button3_pressed():
 	Server.ip=$TextEdit.text
 	Server.join()
 	yield(Server,"ID_received")
-	get_tree().change_scene("res://scenes/map.tscn")
+	get_tree().change_scene("res://scenes/map2.0.tscn")
 	
 	
 
 func _on_button4_pressed():
-	get_tree().change_scene("res://scenes/map2.0.tscn")
+	if Global.savemap==null:
+		get_tree().change_scene("res://scenes/map2.0.tscn")
+	else:
+		get_tree().change_scene_to(Global.savemap)
+	
 	pass # Replace with function body.
 
 

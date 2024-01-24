@@ -5,9 +5,15 @@ var noise=Noise.new()
 var thread=Thread.new()
 var loadedchunks=[]
 var canrun=true
+export var Seed=0
+export var noisereplace=[]
 onready var map=$"../map"
 signal loaded
 func _ready():
+	noise.replace=noisereplace
+	if Seed==0:
+		Seed=randi()
+	noise.seed=Seed
 	Global.map1=$"../map"
 	Global.map2=$"../map2"
 	Global.map3=$"../map3"
@@ -81,5 +87,11 @@ func loading():
 
 
 
-
+func _exit_tree():
+	noisereplace=noise.replace
 				
+
+
+func _on_Timer_timeout():
+	noise.seed=Seed
+	pass # Replace with function body.

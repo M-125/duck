@@ -75,7 +75,7 @@ margin_bottom = 216.0
 isunique = true
 uniqueitem = ExtResource( 5 )
 need1 = 3
-amount1 = 1000
+amount1 = 500
 
 [node name="Panel2" type="Panel" parent="."]
 margin_left = 24.0

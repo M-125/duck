@@ -72,3 +72,8 @@ puppet func random(s1,rnd):
 func update():
 	if Server.isserver:
 		rpc("randoms",rng.seed,random)
+
+
+func _on_Timer_timeout():
+	rng.seed=Seed
+	pass # Replace with function body.

@@ -31,7 +31,7 @@ script/source = "extends interact
 #func _process(delta):
 #	pass
 func interact():
-	get_tree().change_scene(\"res://scenes/map2.0.tscn\")
+	get_tree().change_scene_to(Global.savemap)
 "
 
 [sub_resource type="RectangleShape2D" id=15]

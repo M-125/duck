@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://duckie.png" type="Texture" id=1]
 [ext_resource path="res://scripts/enemy/giant.gd" type="Script" id=2]
 [ext_resource path="res://scenes/enemy.tres" type="Material" id=3]
+[ext_resource path="res://classes/multiplayersyncer.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.5, 7.5 )
@@ -177,5 +178,9 @@ custom_styles/bg = SubResource( 22 )
 max_value = 1.0
 value = 1.0
 percent_visible = false
+
+[node name="MultiPlayerSyncer" type="Node" parent="."]
+script = ExtResource( 4 )
+variables = [ "..:position", "..:hp" ]
 
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="screenenter"]

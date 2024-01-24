@@ -71,6 +71,7 @@ func place(chick,x,y,gridsnap=true):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func _ready():
+	if Server.client!=null:queue_free()
 	print(spawnwait)
 	rng2.randomize()
 	random=(rng2.randi()+rng2.randi()/rng2.randi()*rng2.randi()-rng2.randi())*rng2.state

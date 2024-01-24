@@ -5,7 +5,7 @@ var positionnn
 var shops=[]
 var rng=RandomNumberGenerator.new()
 var rng2=RandomNumberGenerator.new()
-var random
+export var random:float=0
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -49,8 +49,9 @@ func loadmap():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func _ready():
-	
-	rng2.randomize()
-	random=(rng2.randi()+rng2.randi()/rng2.randi()*rng2.randi()-rng2.randi())*rng2.state
+	if Server.client!=null:queue_free()
+	if random==0:
+		rng2.randomize()
+		random=(rng2.randi()+rng2.randi()/rng2.randi()*rng2.randi()-rng2.randi())*rng2.state
 
 

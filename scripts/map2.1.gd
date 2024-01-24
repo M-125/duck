@@ -4,6 +4,7 @@ var movex=0
 var movey=0
 var loadedchunks=[]
 var wait=0
+var wait2=0
 var terrain={
 	"left":6,
 	"leftup":0,
@@ -29,20 +30,34 @@ var positionnn
 
 
 func _process(delta):
-	loadmap()
-	erasemap()
-	
+	if wait2>0.5:
+		loadmap()
+		erasemap()
+		wait2=0
+	wait2+=delta
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func loadmap():
 	var pos=(world_to_map(to_local(Global.playerposition))/Global.chunksize).round()
 #	var viewdistance=Global.viewdistance*Global.chunksize
+	var loaded=0
 	for e in range(pos.x-Global.viewdistance/2,pos.x+Global.viewdistance/2):
 		for i in range(pos.y-Global.viewdistance/2,pos.y+Global.viewdistance/2):
 			var poss=Vector2(clamp(e,0,INF),clamp(i,0,INF))
-			loadchunk(Vector2(e,i))
-			yield(get_tree(),"idle_frame")
+			loaded+=loadchunk(Vector2(e,i))
+	if loaded<=0:
+		var list=[]
+		for e in range(pos.x-Global.viewdistance,pos.x+Global.viewdistance):
+			for i in range(pos.y-Global.viewdistance,pos.y+Global.viewdistance):
+				list.append(Vector2(e,i))
+		var counter=0
+		for e in list:
+			if loadchunk(e)==1:
+				counter+=1
+				print("loading outside",e)
+				if counter>=4:break
 		
+
 			
 func erasemap():
 	var pos=(world_to_map(to_local(Global.playerposition))/Global.chunksize).round()
@@ -62,7 +77,7 @@ func loadchunk(pos):
 	if not pos in loadedchunks:
 	
 		for e in range(clamp((pos.x)*Global.chunksize,0,Global.mapsize),clamp((pos.x+1)*Global.chunksize,0,Global.mapsize)):
-			yield(get_tree(), "idle_frame")
+			
 			for i in range(clamp((pos.y)*Global.chunksize,0,Global.mapsize),clamp((pos.y+1)*Global.chunksize,0,Global.mapsize)):
 				if e==0:
 					set_cell(e,i,terrain["left"])
@@ -83,3 +98,5 @@ func loadchunk(pos):
 				if get_cell(e,i)==-1:
 					set_cell(e,i,7)
 		loadedchunks.append(pos)
+		return 1
+	return 0

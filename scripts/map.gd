@@ -28,9 +28,11 @@ func _ready():
 		$animation/AnimationPlayer.play("swim")
 		$animation/Camera2D.current=true
 		yield($animation/AnimationPlayer,"animation_finished")
-		$playerspawn.spawn()
+		$spawn.spawn()
 		$animation/Camera2D.current=false
 		$animation.visible=false
+	elif name=="map2":
+		$spawn.spawn()
 		
 	if name=="map2":
 		

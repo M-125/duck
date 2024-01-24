@@ -58,7 +58,7 @@ func _ready():
 	if Server.isserver:
 		id=rand_range(0,2000)
 		Server.items.append(self)
-	
+	owner=get_parent()
 	reload()
 	
 			
