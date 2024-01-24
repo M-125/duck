@@ -54,7 +54,6 @@ func loadmap():
 		for e in list:
 			if loadchunk(e)==1:
 				counter+=1
-				print("loading outside",e)
 				if counter>=4:break
 		
 
