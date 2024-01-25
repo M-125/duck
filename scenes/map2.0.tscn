@@ -209,6 +209,9 @@ cell_size = Vector2( 16, 16 )
 collision_layer = 7
 collision_mask = 7
 
+[node name="Timer" type="Timer" parent="chests"]
+autostart = true
+
 [node name="trees" parent="." instance=ExtResource( 6 )]
 scale = Vector2( 9, 9 )
 z_index = 2
@@ -273,6 +276,7 @@ script = ExtResource( 17 )
 variables = [ "../loader:Seed" ]
 refresh_rate = 1
 
+[connection signal="timeout" from="chests/Timer" to="chests" method="loadstuff"]
 [connection signal="timeout" from="loader/Timer" to="chests" method="_on_Timer_timeout"]
 [connection signal="timeout" from="loader/Timer" to="trees" method="_on_Timer_timeout"]
 [connection signal="timeout" from="loader/Timer" to="houses" method="_on_Timer_timeout"]

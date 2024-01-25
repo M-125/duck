@@ -12,7 +12,7 @@ var fallspeed=100
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
-	random=rand_range(-20,20)*2
+	random=rand_range(-30,30)*2
 	name="damagemeter"+str(random)
 	
 	pass # Replace with function body.

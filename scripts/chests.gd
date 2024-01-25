@@ -8,12 +8,11 @@ var rng2=RandomNumberGenerator.new()
 export var random=0
 var openchests=[]
 export var Seed=0
+
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-func _process(delta):
-	erasemap()
-	loadmap()
+
 func loadmap():
 	
 			
@@ -66,3 +65,8 @@ func _ready():
 func _on_Timer_timeout():
 	rng.seed=Seed
 	pass # Replace with function body.
+
+
+func loadstuff():
+	erasemap()
+	loadmap()

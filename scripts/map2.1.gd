@@ -30,7 +30,7 @@ var positionnn
 
 
 func _process(delta):
-	if wait2>0.5:
+	if wait2>0.1:
 		loadmap()
 		erasemap()
 		wait2=0
@@ -54,7 +54,8 @@ func loadmap():
 		for e in list:
 			if loadchunk(e)==1:
 				counter+=1
-				if counter>=4:break
+#				if counter>=1:
+				break
 		
 
 			
@@ -62,9 +63,9 @@ func erasemap():
 	var pos=(world_to_map(to_local(Global.playerposition))/Global.chunksize).round()
 	
 	for a in loadedchunks:
-		if abs(pos.x-a.x)>5 or abs(pos.y-a.y)>5:
+		if abs(pos.x-a.x)>6 or abs(pos.y-a.y)>6:
 			erasechunk(a)
-			yield(get_tree(),"idle_frame")
+			break
 
 func erasechunk(pos):
 	for e in range(clamp((pos.x)*Global.chunksize,0,Global.mapsize),clamp((pos.x+1)*Global.chunksize,0,Global.mapsize)):

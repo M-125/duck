@@ -41,10 +41,7 @@ func _process(delta):
 	
 
 	
-func _ready():
-	for e in range(-8,9):
-		for i in range(-8,9):
-			detectlist.append(Vector2(e,i))
+func _ready():pass
 
 
 
