@@ -9,7 +9,7 @@ export var firstload=true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
+	Global.scene=self
 	Server.map=self
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	Global.ingame=true
