@@ -24,6 +24,7 @@ var chargetime=0
 signal interactshop
 signal interact
 var lastveloc:Vector2
+var invincible=false
 export var onmapposition=Vector2(0,0)
 onready var ITEM1=$ui/item1
 onready var ITEM2=$ui/item2
@@ -337,6 +338,7 @@ func item_manager():
 
 
 func _ready():
+	Global.connect("inv",self,"inv")
 	if Server.isconnect():
 		if name=="playerduckie":
 			name=str(Server.ID)+"player"
@@ -475,6 +477,7 @@ func quack():
 
 
 func dmg(dmg):
+	if invincible:return
 	Global.addsound("hit")
 	state_machine.travel("damage")
 	var label=load("res://scenes/damagemeter.tscn").instance()
@@ -592,3 +595,7 @@ func spawnenemy(enemy):
 		print("res://items/"+enemy+".tscn")
 		Global.scene.add_child(item)
 		item.global_position=global_position
+
+
+func inv():
+	invincible=!invincible

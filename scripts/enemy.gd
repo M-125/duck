@@ -25,6 +25,7 @@ const DEFAULT_SPEED=300
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Global.connect("kill",self,"kill")
 	if get_node_or_null('pathfind')!=null:
 		$pathfind.collision_layer=4
 		$pathfind.collision_mask=4
@@ -209,3 +210,7 @@ func attacking():
 		cooldown=Cooldown
 		attacking=false
 	
+func kill():
+	while hp>0:
+		yield(get_tree(),"idle_frame")
+		damage(1)

@@ -3,7 +3,7 @@ extends TileMap
 var positionn
 var positionnn
 var eraselist=[]
-var rng=Rng.new()
+var rng=RandomNumberGenerator.new()
 export var random=0
 var wait=0
 export var rngseed=0
@@ -16,12 +16,12 @@ var dontspawn=[]
 
 func _process(delta):
 	
-	if rngseed==0:rngseed=rng.Seed
-	else:rng.Seed=rngseed
+	if rngseed==0:rngseed=rng.seed
+	else:rng.seed=rngseed
 	if Server.isserver:
 		wait-=delta
 		if wait<=0:
-			rpc("randoms",rng.Seed,random)
+			rpc("randoms",rng.seed,random)
 			wait=20
 	erasemap()
 	loadmap()
@@ -36,7 +36,6 @@ func loadmap():
 			for i in range(clamp((pos.y-Global.viewdistance)*(Global.chunksize/1.5),0,Global.mapsize-2),clamp((pos.y+Global.viewdistance)*(Global.chunksize/1.5),0,Global.mapsize-2)):
 				rng.state=int(str(e)+str(i))*random*(e%8)
 				var rnd=rng.randi_range(0,20)
-#				Global.debug.text=str(int(str(e)+str(i))*random*(e%8))+"---"+str(rng.state)+"++++"+str(rng.Seed)
 				
 				
 				if round(rnd)==5 :
@@ -74,12 +73,12 @@ func erasemap():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 puppet func randoms(s1,rnd):
-	rng.Seed=s1
+	rng.seed=s1
 	random=rnd
 	
 func update():
 	if Server.isserver:
-		rpc("randoms",rng.Seed,random)
+		rpc("randoms",rng.seed,random)
 
 func _ready():
 	if random==0:
@@ -87,5 +86,5 @@ func _ready():
 
 
 func _on_Timer_timeout():
-	rng.Seed=rngseed
+	rng.seed=rngseed
 	pass # Replace with function body.

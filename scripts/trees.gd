@@ -14,10 +14,10 @@ var wait=0
 func _ready():
 	if random==0:random=randi()+randi()/randi()*randi()
 	if Seed!=0:
-		rng.seed=Seed
+		rng.Seed=Seed
 	else:
 		rng.randomize()
-		Seed=rng.seed
+		Seed=rng.Seed
 		
 
 
@@ -85,14 +85,14 @@ func erasechunk(pos):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 puppet func random(s1,rnd):
-	rng.seed=s1
+	rng.Seed=s1
 	random=rnd
 	
 func update():
 	if Server.isserver:
-		rpc("randoms",rng.seed,random)
+		rpc("randoms",rng.Seed,random)
 
 
 func _on_Timer_timeout():
-	rng.seed=Seed
+	rng.Seed=Seed
 	pass # Replace with function body.

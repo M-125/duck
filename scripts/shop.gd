@@ -20,9 +20,9 @@ func _process(delta):
 	
 	if Global.player !=null and is_instance_valid(Global.player):
 		var distance = global_position.distance_to(Global.player.global_position)
-		var deletedist=16*3*Global.viewdistance*Global.chunksize
-		if distance>16*3*Global.viewdistance*Global.chunksize:
-			queue_free()
+		var deletedist=39*3*40
+		if distance>deletedist:
+			queue_free() 
 		
 		
 		$e.visible=Global.player in $shoparea.get_overlapping_bodies()

@@ -47,7 +47,7 @@ func loading():
 	
 	
 	var pos=(map.world_to_map(map.to_local(Global.playerposition))/Global.chunksize).round()
-	Global.debug.text=str(pos)
+	
 	
 	
 	for e in range(-2,3):for i in range(-2,3):
@@ -64,20 +64,23 @@ func loading():
 				yield(get_tree(),"idle_frame")
 				yield(get_tree(),"idle_frame")
 		
-	for e in range(-Global.viewdistance,Global.viewdistance+1):for i in range(-Global.viewdistance,Global.viewdistance+1):
-		var chunk=pos+Vector2(e,i)
-		chunk.x=clamp(chunk.x,0,Global.mapsize/Global.chunksize)
-		chunk.y=clamp(chunk.y,0,Global.mapsize/Global.chunksize)
-		thread.start(self,"loadmap",chunk,0)
-		
-		while thread.is_active():
-			yield(get_tree(),"idle_frame")
-			if not thread.is_alive():
-				var matrix=thread.wait_to_finish()
-				if matrix!=null:for m in [Global.map1,Global.map2,Global.map3]:
-					m.loadmap(matrix)
+	for e in range(-Global.viewdistance,Global.viewdistance+1):
+		var canbreak=false
+		for i in range(-Global.viewdistance,Global.viewdistance+1):
+			var chunk=pos+Vector2(e,i)
+			chunk.x=clamp(chunk.x,0,Global.mapsize/Global.chunksize)
+			chunk.y=clamp(chunk.y,0,Global.mapsize/Global.chunksize)
+			thread.start(self,"loadmap",chunk,0)
+			
+			while thread.is_active():
 				yield(get_tree(),"idle_frame")
-				yield(get_tree(),"idle_frame")
+				if not thread.is_alive():
+					var matrix=thread.wait_to_finish()
+					if matrix!=null:for m in [Global.map1,Global.map2,Global.map3]:
+						m.loadmap(matrix)
+						canbreak=true
+			if canbreak:break
+		if canbreak:break
 	for chunk in loadedchunks:
 		if abs(pos.x-chunk.x) > 5 or  abs(pos.y-chunk.y) > 5:
 			for m in [Global.map1,Global.map2,Global.map3]:
