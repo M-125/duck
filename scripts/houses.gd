@@ -35,7 +35,7 @@ func loadmap():
 		for e in range(clamp((pos.x-Global.viewdistance)*(Global.chunksize/1.5),0,Global.mapsize-2),clamp((pos.x+Global.viewdistance)*(Global.chunksize/1.5),0,Global.mapsize-2)):
 			for i in range(clamp((pos.y-Global.viewdistance)*(Global.chunksize/1.5),0,Global.mapsize-2),clamp((pos.y+Global.viewdistance)*(Global.chunksize/1.5),0,Global.mapsize-2)):
 				rng.state=int(str(e)+str(i))*random*(e%8)
-				var rnd=rng.randi_range(0,20)
+				var rnd=rng.randi_range(0,18)
 #				Global.debug.text=str(int(str(e)+str(i))*random*(e%8))+"---"+str(rng.state)+"++++"+str(rng.Seed)
 				
 				

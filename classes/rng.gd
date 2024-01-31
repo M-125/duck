@@ -22,7 +22,7 @@ func randi_range(r1:int,r2:int):
 	var modulo=r2-r1
 #	print(int(Seed*state))
 #	print(r1+abs(int(Seed*state)%modulo),"   ",int(Seed)," ",state," ",modulo," ",int(Seed*state))
-	return r1+abs(int(round(Seed*state+(Seed+(7*int(round(state/3)))%modulo/2) ))%modulo)
+	return r1+abs((int(round(Seed*state+(Seed+(7*int(round(state/3)))%modulo/2) ))>>1)%modulo)
 func randomize():
 	Seed=rand_range(0,65535)
 	var string=""
