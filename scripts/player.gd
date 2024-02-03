@@ -31,6 +31,7 @@ onready var ITEM1=$ui/item1
 onready var ITEM2=$ui/item2
 export var smallitems=false
 var stun=0
+var velocpredict=Vector2(0,0)
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -194,7 +195,7 @@ func move(delta):
 	
 	if $hrot/helditem.get_child_count()==1:if not $hrot/helditem.get_child(0).rotatable:
 		$hrot.rotation=0
-	move_and_slide(velocity*(speed+Global.speedmod))
+	velocpredict=move_and_slide(velocity*(speed+Global.speedmod))
 	
 	
 
