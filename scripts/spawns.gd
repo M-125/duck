@@ -18,19 +18,30 @@ func _process(delta):
 		while !spwn:
 			var rnd=round(rand_range(0,3))
 			var vector=Vector2(rand_range(-1,1),rand_range(-1,1)).normalized()*1500
-			if rnd==0 or rnd==2:
-				spwn=true
-				var chicken=preload("res://scenes/enemychicken.tscn")
+			match rnd:
+				0,2:
+					print("rnd",rnd)
+					spwn=true
+					var chicken=preload("res://scenes/enemychicken.tscn")
+					
+					place(chicken.instance(),
+					Global.player.global_position.x+vector.x,
+					Global.player.global_position.y+vector.y,false)
+			
 				
-				place(chicken.instance(),
-				Global.player.global_position.x+vector.x,
-				Global.player.global_position.y+vector.y,false)
-			elif rnd==1:
-				spwn=true
-				var chicken=preload("res://scenes/enemy.tscn")
-				place(chicken.instance(),
-				Global.player.global_position.x+vector.x,
-				Global.player.global_position.y+vector.y,false)
+				1:
+					spwn=true
+					var chicken=preload("res://scenes/enemy.tscn")
+					place(chicken.instance(),
+					Global.player.global_position.x+vector.x,
+					Global.player.global_position.y+vector.y,false)
+				3:
+					spwn=true
+					var chicken=preload("res://enemies/cat.tscn")
+					place(chicken.instance(),
+					Global.player.global_position.x+vector.x,
+					Global.player.global_position.y+vector.y,false)
+				
 		spawnwait=0.5
 	spawnwait-=delta
 func loadmap():
@@ -79,14 +90,20 @@ func _ready():
 func spawn(x,y):
 	print(spawnwait)
 	var spwn=false
-	var random=round(rand_range(0,2))
+	var random=int(round(rand_range(0,2)))
 	while !spwn:
-		if random==0 or random==2:
-			spwn=true
-			var chicken=preload("res://scenes/enemychicken.tscn")
-			for i in range(rand_range(2,5)):
-				place(chicken.instance(),x,y)
+		match random:
+			0:
+				spwn=true
+				var chicken=preload("res://scenes/enemychicken.tscn")
+				print("rnd",random)
+				for i in range(rand_range(2,5)):
+					place(chicken.instance(),x,y)
 #				place(preload("res://scenes/enemy.tscn").instance(),x,y)
-		elif random==1:
+			1:
 				spwn=true
 				place(preload("res://scenes/enemy.tscn").instance(),x,y)
+			2:
+				spwn=true
+				place(preload("res://enemies/cat.tscn").instance(),x,y)
+		random=round(rand_range(0,2))

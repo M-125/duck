@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name Player
 var wait=0
 var wait2=5
 var select=[]
@@ -29,6 +30,7 @@ export var onmapposition=Vector2(0,0)
 onready var ITEM1=$ui/item1
 onready var ITEM2=$ui/item2
 export var smallitems=false
+var stun=0
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -61,8 +63,7 @@ func move(delta):
 		clickend=false
 		clickattack=0.3
 		if helditem!=null and not helditem.isgun:
-			$hrot.rotation_degrees+=60
-			$rot.rotation_degrees-=60
+			$hrot.rotation_degrees+=360
 			
 			if helditem.charged:
 				helditem.ability()
@@ -246,7 +247,7 @@ func weapon(rotspeed):
 	var weapon=$hrot/helditem.get_child(0)
 	if clickattack<0 and !clickend:
 		nohitbox=[]
-		if not weapon.isgun:$rot.rotation_degrees+=60
+		
 		clickend=true
 #	end of clickattack
 	
@@ -409,7 +410,7 @@ func _ready():
 func _process(delta):
 	if localplayer:
 		interacttime-=delta
-		
+		stun-=delta
 		Global.playerfloor=clamp(Global.playerfloor,0,4)
 		releasebuttons(delta)
 		
@@ -426,7 +427,7 @@ func _process(delta):
 		var zoom1=(guicam.scale.x+1-zoom+1+1)/4
 		guicam.scale=Vector2(zoom1,zoom1)
 	#	Vector2(1,1)-
-		if Global.guistate == Global.guistates.game:
+		if Global.guistate == Global.guistates.game and stun <0:
 			move(delta)
 		interact()
 		item_manager()
@@ -476,7 +477,7 @@ func quack():
 		add_child(qck)
 
 
-func dmg(dmg):
+func dmg(dmg,veloc=Vector2(),stun=0):
 	if invincible:return
 	Global.addsound("hit")
 	state_machine.travel("damage")
@@ -485,6 +486,7 @@ func dmg(dmg):
 	get_parent().add_child(label)
 	label.global_position=global_position
 	hp-=dmg
+	self.stun=stun
 	$Camera2D.position+=Vector2(rand_range(-50,50),rand_range(-50,50))
 	if  !gameover and hp<=0:
 		

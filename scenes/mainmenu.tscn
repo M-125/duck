@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://scripts/Particles2D.gd" type="Script" id=1]
 [ext_resource path="res://scenes/button.tscn" type="PackedScene" id=2]
@@ -362,6 +362,16 @@ tracks/6/keys = {
 [sub_resource type="RectangleShape2D" id=18]
 extents = Vector2( 192.214, 20 )
 
+[sub_resource type="StyleBoxLine" id=22]
+color = Color( 0.372549, 0.223529, 0, 1 )
+thickness = 10
+
+[sub_resource type="StyleBoxFlat" id=24]
+bg_color = Color( 0, 0.701961, 0.0901961, 1 )
+
+[sub_resource type="StyleBoxFlat" id=23]
+bg_color = Color( 0.00392157, 0.454902, 0, 1 )
+
 [sub_resource type="RectangleShape2D" id=19]
 extents = Vector2( 128, 12.5 )
 
@@ -497,8 +507,12 @@ margin_left = 386.0
 margin_top = 572.0
 margin_right = 638.0
 margin_bottom = 588.0
+custom_styles/slider = SubResource( 22 )
+custom_styles/grabber_area_highlight = SubResource( 24 )
+custom_styles/grabber_area = SubResource( 23 )
 max_value = 1.0
 step = 0.01
+value = 0.5
 
 [node name="Area2D" type="Area2D" parent="HSlider"]
 position = Vector2( 127, 8 )
