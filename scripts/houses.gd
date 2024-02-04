@@ -28,14 +28,14 @@ func _process(delta):
 func loadmap():
 	
 			
-			
+	var mapedge=world_to_map(get_parent().get_node("map").map_to_world(Vector2(Global.mapsize,Global.mapsize))).x
 	var pos=(world_to_map(to_local(Global.playerposition))/(Global.chunksize/1.5)).round()
 	if pos !=positionn:
 		positionn=pos
-		for e in range(clamp((pos.x-Global.viewdistance)*(Global.chunksize/1.5),0,Global.mapsize-2),clamp((pos.x+Global.viewdistance)*(Global.chunksize/1.5),0,Global.mapsize-2)):
-			for i in range(clamp((pos.y-Global.viewdistance)*(Global.chunksize/1.5),0,Global.mapsize-2),clamp((pos.y+Global.viewdistance)*(Global.chunksize/1.5),0,Global.mapsize-2)):
+		for e in range(clamp((pos.x-Global.viewdistance)*(Global.chunksize/1.5),0,mapedge),clamp((pos.x+Global.viewdistance)*(Global.chunksize/1.5),0,mapedge)):
+			for i in range(clamp((pos.y-Global.viewdistance)*(Global.chunksize/1.5),0,mapedge),clamp((pos.y+Global.viewdistance)*(Global.chunksize/1.5),0,mapedge)):
 				rng.state=int(str(e)+str(i))*random*(e%8)
-				var rnd=rng.randi_range(0,18)
+				var rnd=rng.randi_range(0,19)
 #				Global.debug.text=str(int(str(e)+str(i))*random*(e%8))+"---"+str(rng.state)+"++++"+str(rng.Seed)
 				
 				

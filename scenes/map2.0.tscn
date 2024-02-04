@@ -232,7 +232,7 @@ scale = Vector2( 3, 3 )
 script = ExtResource( 14 )
 
 [node name="shops" type="Node2D" parent="."]
-scale = Vector2( 117, 117 )
+scale = Vector2( 468, 468 )
 script = ExtResource( 7 )
 
 [node name="spawn" type="Node2D" parent="."]

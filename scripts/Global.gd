@@ -15,7 +15,7 @@ var speedmodmax=150
 var viewdistance=5
 var playerontilemap=-1
 var playerjump=true
-var mapsize=200
+var mapsize=400
 var chunksize=16
 var small_stuff=[200,2000,200,200,200]
 var scene
@@ -228,9 +228,10 @@ func reset():
 	_ready()
 
 func alert(string):
-	var alert=load("res://scenes/alert.tscn").instance()
-	alert.text=str(string)
-	alertfeed.add_child(alert)
+	if alertfeed.get_child_count()==1:
+		var alert=load("res://scenes/alert.tscn").instance()
+		alert.text=str(string)
+		alertfeed.add_child(alert)
 
 func music(Music):
 	if Music!="":

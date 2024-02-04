@@ -49,12 +49,14 @@ func loadmap():
 				break
 
 func loadchunk(pos):
+	var mapedge=world_to_map(get_parent().get_node("map").map_to_world(Vector2(Global.mapsize,Global.mapsize))).x-1
 	if not pos in loadedchunks:
 		loadedchunks.append(pos)
-		for e in range(clamp((pos.x)*(Global.chunksize/1.5),0,Global.mapsize-2),clamp((pos.x+1)*(Global.chunksize/1.5),0,Global.mapsize-2)):
-			for i in range(clamp((pos.y)*(Global.chunksize/1.5),0,Global.mapsize-2),clamp((pos.y+1)*(Global.chunksize/1.5),0,Global.mapsize-2)):
-				rng.state=int(str(e)+str(i))*random*(e%8)
-				var rnd=rng.Randi_range(e,i,0,38)
+		for e in range(clamp((pos.x)*(Global.chunksize/1.5),0,mapedge),clamp((pos.x+1)*(Global.chunksize/1.5),0,mapedge)):
+			for i in range(clamp((pos.y)*(Global.chunksize/1.5),0,mapedge),clamp((pos.y+1)*(Global.chunksize/1.5),0,mapedge)):
+				rng.state=int(str(e)+str(i))*random*(e%7)
+				var rnd=rng.Randi_range(e,i,0,37)
+				print(rnd)
 				if round(rnd)==5 and not (
 				get_cell(e,i+1)==45 or
 				get_cell(e+1,i)==45 or

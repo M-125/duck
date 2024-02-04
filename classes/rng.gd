@@ -1,6 +1,6 @@
 extends Resource
 class_name Rng
-var replace=[Rect2(0,0,30,30)]
+var replace=[]
 var Seed:int=0
 var state:float=0
 func Randi_range(x,y,r1,r2):
@@ -20,9 +20,9 @@ func addzone(rect:Rect2):
 		replace.append(rect)
 func randi_range(r1:int,r2:int):
 	var modulo=r2-r1
-#	print(int(Seed*state))
-#	print(r1+abs(int(Seed*state)%modulo),"   ",int(Seed)," ",state," ",modulo," ",int(Seed*state))
-	return r1+abs((int(round(Seed*state+(Seed+(7*int(round(state/3)))%modulo/2) ))>>1)%modulo)
+	var _Seed=int(str(Seed).rstrip("02468"))
+	var _state=int(str(state).rstrip("02468"))
+	return r1+int(round(fmod((r2*_Seed*_state*217)+_state/7,modulo)))
 func randomize():
 	Seed=rand_range(0,65535)
 	var string=""
