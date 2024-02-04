@@ -29,10 +29,11 @@ extents = Vector2( 80, 65 )
 script = ExtResource( 4 )
 
 [node name="Virtual joystick" parent="." instance=ExtResource( 2 )]
-margin_left = 37.0
-margin_top = 362.0
-margin_right = 237.0
-margin_bottom = 562.0
+margin_left = 0.0
+margin_top = 337.0
+margin_right = 423.0
+margin_bottom = 599.0
+joystick_mode = 1
 visibility_mode = 1
 use_input_actions = false
 

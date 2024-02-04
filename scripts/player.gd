@@ -480,7 +480,7 @@ func quack():
 
 func dmg(dmg,veloc=Vector2(),stun=0):
 	if invincible:return
-	Global.addsound("hit")
+	Global.addsound("playerdamage")
 	state_machine.travel("damage")
 	var label=load("res://scenes/damagemeter.tscn").instance()
 	label.get_node("Label").text=str(round(abs(dmg)))

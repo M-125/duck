@@ -25,10 +25,11 @@ func _exit_tree():
 	var explosion=load(\"res://scenes/eggbomb.tscn\").instance()
 	Global.scene.add_child(explosion)
 	explosion.global_position=global_position
+	Global.addsound(\"boom\")
 "
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 10, 5 )
+extents = Vector2( 10, 7.25 )
 
 [sub_resource type="Gradient" id=6]
 offsets = PoolRealArray( 0, 0.675182, 1 )
@@ -55,6 +56,7 @@ collision_mask = 3
 script = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -0.75 )
 shape = SubResource( 1 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
