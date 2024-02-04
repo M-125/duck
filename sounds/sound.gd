@@ -9,7 +9,7 @@ export(bool) var randompitch=false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	playing=true
+	play()
 	connect("finished",self,"finished")
 	if randompitch:
 		pitch_scale=rand_range(1,1.2)
