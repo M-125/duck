@@ -5,7 +5,7 @@ export(int,"coin","red dye","white dye","wood","amethyst") var type
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-var velocity=Vector2(rand_range(-40,40),rand_range(-40,40))
+var velocity=Vector2(rand_range(-30,30),rand_range(-30,30))
 
 static func name2int(name):
 	var names=["coin","red dye","white dye","wood","amethyst"]
@@ -33,6 +33,8 @@ func _process(delta):
 					player=e
 			else:
 				player=e
+	if global_position.distance_to(player.global_position)>200:
+		player=null
 				
 	if velocity<Vector2.ZERO:
 		velocity-=velocity.normalized()*delta*60
@@ -51,12 +53,8 @@ func _process(delta):
 		if position.distance_to(player.position)<5:
 			
 			
-			if not Server.isconnect():
-				Global.small_stuff[type]+=1
-				player.add_child(load(sound).instance())
-			elif Server.isserver:
-				player.rpc("small_stuff_add",type,1)
-				player.rpc("playsound",sound)
+			Global.small_stuff[type]+=1
+			Global.addsound("coin")
 			queue_free()
 
 	pass

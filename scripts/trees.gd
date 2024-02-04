@@ -54,7 +54,7 @@ func loadchunk(pos):
 		for e in range(clamp((pos.x)*(Global.chunksize/1.5),0,Global.mapsize-2),clamp((pos.x+1)*(Global.chunksize/1.5),0,Global.mapsize-2)):
 			for i in range(clamp((pos.y)*(Global.chunksize/1.5),0,Global.mapsize-2),clamp((pos.y+1)*(Global.chunksize/1.5),0,Global.mapsize-2)):
 				rng.state=int(str(e)+str(i))*random*(e%8)
-				var rnd=rng.Randi_range(e,i,0,20)
+				var rnd=rng.Randi_range(e,i,0,38)
 				if round(rnd)==5 and not (
 				get_cell(e,i+1)==45 or
 				get_cell(e+1,i)==45 or

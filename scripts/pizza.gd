@@ -29,15 +29,14 @@ func ability():
 	var slices=round(rand_range(8,30))
 	var rot=0
 	var rounds=round(rand_range(1,3))
+	var damage=500/slices
 	for e in range(slices):
 		var pizzaslice=preload("res://scenes/pizzaslice.tscn").instance()
 		pizzaslice.velocity=Vector2(50,0).rotated(deg2rad(rot))
 		Global.scene.add_child(pizzaslice)
 		pizzaslice.global_position=global_position+Vector2(50,0).rotated(rot)
-		
+		pizzaslice.damage=damage
 		rot+=360*rounds/slices
-		if Server.isserver:
-			Server.rpc("pizzaslice",pizzaslice.velocity,pizzaslice.global_position)
 	
 	queue_free()
 

@@ -157,7 +157,8 @@ func ability():
 			
 	
 func calc_knockback(damage,enemy):
-	var pos=enemy.global_position-global_position
+	var player=get_parent().get_parent().get_parent()
+	var pos=enemy.global_position-player.global_position
 	pos=pos.normalized()
 	return pos*400*damage
 

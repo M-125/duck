@@ -23,4 +23,4 @@ func ready():
 #	pass
 func drop():
 	for e in range(20):
-		placedrop(small_thing.name2int("amethyst"))
+		placedrop(small_thing.name2int("wood"))

@@ -16,8 +16,9 @@ var dropped=false
 var attack=0
 var attacking=false
 var attackedplayer=null
-var Attackdelay=0.3
+var Attackdelay=0.2
 const DEFAULT_SPEED=300
+signal attacked
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -61,7 +62,7 @@ func _process(delta):
 		move_and_slide(movement()*((int(mustattack>0)*2)+1))
 	else:
 		stun-=delta
-		move_and_slide(veloc/10)
+		position+=(veloc/10)*delta
 	process(delta)
 
 func process(delta):
@@ -207,6 +208,7 @@ func attacking():
 	
 	if attack<=0 and attacking:
 		attackedplayer.dmg(5)
+		emit_signal("attacked")
 		cooldown=Cooldown
 		attacking=false
 	

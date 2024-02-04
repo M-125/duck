@@ -16,7 +16,9 @@ var playercoll=0
 func _ready():
 	chargetime=1.5
 	damage=20
-	yield(get_tree(),"idle_frame")
+	while not is_instance_valid(Global.player):
+		yield(get_tree(),"idle_frame")
+	
 	playersprite=Global.player.get_node("Sprite")
 	pass # Replace with function body.
 

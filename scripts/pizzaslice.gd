@@ -8,7 +8,6 @@ extends projectile
 
 # Called when the node e
 func setvalues():
-	damage=15
 	decay=2
 	velocity=velocity.normalized()*6
 func _process(delta):

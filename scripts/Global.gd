@@ -181,16 +181,16 @@ func valuechange(value):
 
 func addsound(sound,pos=Vector2(0,0),volume=0):
 	var snd=load("res://sounds/"+sound+".tscn").instance()
-	for e in get_children():
-		if e.name==sound:
-			remove_child(e)
-			e.queue_free()
+#	for e in get_children():
+#		if e.name==sound:
+#			e.name=str(rand_range(0,200))
+#			e.bus="half"
 	
 	if snd is AudioStreamPlayer2D:
 		if pos==Vector2(0,0):
 			pos=player.global_position
 		snd.position=pos
-		snd.name=sound
+	snd.name=sound
 	add_child(snd)
 	snd.volume_db+=volume
 

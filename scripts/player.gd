@@ -258,7 +258,7 @@ func weapon(rotspeed):
 			
 			if weapon.rotatable:for enemy in weapon.hitbox:
 				if abs(rotspeed)>=10 and is_instance_valid(enemy) and (not enemy in nohitbox):
-					var knock=weapon.calc_knockback(weapon.damage*rotspeed/10,enemy)
+					var knock=weapon.calc_knockback(abs(weapon.damage*rotspeed/10),enemy)
 			
 					enemy.damage(weapon.damage*rotspeed/10,
 					knock
@@ -274,7 +274,7 @@ func weapon(rotspeed):
 				
 		weapon.in_hitbox.erase(enemy)
 		if abs(rotspeed)>=10 and is_instance_valid(enemy):
-			var knock=weapon.calc_knockback(weapon.damage*rotspeed/10,enemy)
+			var knock=weapon.calc_knockback(abs(weapon.damage*rotspeed/10),enemy)
 			
 			enemy.damage(weapon.damage*rotspeed/10,
 			knock
