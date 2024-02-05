@@ -32,9 +32,9 @@ func loadmap():
 	var pos=(world_to_map(to_local(Global.playerposition))/Global.chunksize).round()
 #	var viewdistance=Global.viewdistance*Global.chunksize
 	var loaded=0
-	for e in range(pos.x-Global.viewdistance/2,pos.x+Global.viewdistance/2):
-		for i in range(pos.y-Global.viewdistance/2,pos.y+Global.viewdistance/2):
-			var poss=Vector2(clamp(e,0,INF),clamp(i,0,INF))
+	for e in range(-Global.viewdistance,Global.viewdistance):
+		for i in range(-Global.viewdistance,Global.viewdistance):
+			var poss=Vector2(pos.x+e,pos.y+i)
 			loaded+=loadchunk(Vector2(e,i))
 	if loaded<=0:
 		var list=[]

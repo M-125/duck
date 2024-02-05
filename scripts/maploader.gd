@@ -92,6 +92,7 @@ func loading():
 
 func _exit_tree():
 	noisereplace=noise.replace
+	thread.wait_to_finish()
 				
 
 

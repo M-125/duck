@@ -214,11 +214,11 @@ autostart = true
 
 [node name="trees" parent="." instance=ExtResource( 6 )]
 scale = Vector2( 9, 9 )
-z_index = 2
+z_index = 3
 
 [node name="houses" type="TileMap" parent="."]
 scale = Vector2( 9, 9 )
-z_index = 2
+z_index = 3
 tile_set = SubResource( 1 )
 cell_quadrant_size = 8
 centered_textures = true
