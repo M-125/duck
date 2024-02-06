@@ -466,6 +466,7 @@ script = ExtResource( 7 )
 position = Vector2( -494, -274 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 11 )
+frame = 1
 playing = true
 script = ExtResource( 8 )
 
@@ -530,5 +531,6 @@ anchor_mode = 0
 [connection signal="pressed" from="button7" to="." method="_on_button7_pressed"]
 [connection signal="pressed" from="button5" to="." method="_on_button5_pressed"]
 [connection signal="pressed" from="button6" to="." method="_on_button6_pressed"]
+[connection signal="focus_entered" from="TextEdit" to="." method="_on_TextEdit_focus_entered"]
 [connection signal="released" from="TouchScreenButton" to="." method="_on_TouchScreenButton_released"]
 [connection signal="value_changed" from="HSlider" to="." method="_on_HSlider_value_changed"]

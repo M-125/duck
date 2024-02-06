@@ -98,10 +98,16 @@ func _on_button7_pressed():
 
 func _on_TouchScreenButton_released():
 	$TextEdit.grab_focus()
+	
 	$OnscreenKeyboard.show()
 	pass # Replace with function body.
 
 
 func _on_HSlider_value_changed(value):
 	AudioServer.set_bus_volume_db(0,linear2db(value))
+	pass # Replace with function body.
+
+
+func _on_TextEdit_focus_entered():
+	$TextEdit.text=""
 	pass # Replace with function body.

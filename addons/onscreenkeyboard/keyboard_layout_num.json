@@ -68,10 +68,6 @@
               "type": "char",
               "output": "3",
               "display": "3"
-            },{
-              "type": "char",
-              "output": ".",
-              "display": "."
             },
             {
               "type": "special",
@@ -93,7 +89,11 @@
               "type": "char",
               "output": "0",
               "display": "0",
-              "stretch-ratio": 3
+              "stretch-ratio": 2
+            },{
+              "type": "char",
+              "output": ".",
+              "display": "."
             },
             {
               "type": "special-hide-keyboard",
