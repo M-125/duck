@@ -1,5 +1,5 @@
 extends Node2D
-
+onready var mainmap=get_parent().get_node("map")
 var positionn
 var positionnn
 var shops=[]
@@ -19,9 +19,9 @@ func loadmap():
 			shops.erase(e)
 			
 	var pos=(to_local(Global.playerposition)).round()
-	var mapedge=get_parent().get_node("map").map_to_world(Vector2(Global.mapsize,Global.mapsize))
-	pos.x=clamp(pos.x,0,to_local(mapedge).x)
-	pos.y=clamp(pos.y,0,to_local(mapedge).y)
+	var mapedge=to_local(mainmap.to_global(mainmap.map_to_world(Vector2(Global.mapsize,Global.mapsize))))
+	pos.x=clamp(pos.x,0,floor(mapedge.x))
+	pos.y=clamp(pos.y,0,floor(mapedge.y))
 	for x in range(-5,6):
 		for y in range(-5,6):
 			loadpos(pos+Vector2(x,y))

@@ -31,6 +31,5 @@ func randomize():
 			e=str(round(rand_range(1,9)))
 		string+=e
 	Seed=int(string)
-	print("seed",Seed)
 func _init():
 	self.randomize()

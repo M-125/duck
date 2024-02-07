@@ -48,7 +48,7 @@ func _ready():pass
 func loadmap(matrix:Array):
 	var pos=(world_to_map(to_local(Global.playerposition))/Global.chunksize).round()
 	
-	for e in range(1,matrix.size()-1):
+	for e in range(1,matrix.size()-2):
 		
 		if not matrix[e] is Vector2:
 			

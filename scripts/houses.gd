@@ -1,5 +1,5 @@
 extends TileMap
-
+onready var mainmap=get_parent().get_node("map")
 var positionn
 var positionnn
 var eraselist=[]
@@ -28,7 +28,7 @@ func _process(delta):
 func loadmap():
 	
 			
-	var mapedge=world_to_map(get_parent().get_node("map").map_to_world(Vector2(Global.mapsize,Global.mapsize))).x
+	var mapedge=to_local(mainmap.to_global(mainmap.map_to_world(Vector2(Global.mapsize,Global.mapsize)))).x
 	var pos=(world_to_map(to_local(Global.playerposition))/(Global.chunksize/1.5)).round()
 	if pos !=positionn:
 		positionn=pos

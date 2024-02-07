@@ -7,6 +7,7 @@ export var Seed=0
 var rng=Rng.new()
 export var random=0
 var wait=0
+onready var mainmap=get_parent().get_node("map")
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -22,20 +23,20 @@ func _ready():
 
 
 func _process(delta):
-	if wait>0.1:
+	if wait>0.1 and Global.player!=null and is_instance_valid(Global.player):
 		loadmap()
 		erasemap()
 		wait=0
 	wait+=delta
 
 func loadmap():
-	var pos=(world_to_map(to_local(Global.playerposition))/Global.chunksize).round()
+	var pos=(world_to_map(to_local(Global.player.global_position))/Global.chunksize).round()
 #	var viewdistance=Global.viewdistance*Global.chunksize
 	var loaded=0
 	for e in range(-Global.viewdistance,Global.viewdistance):
 		for i in range(-Global.viewdistance,Global.viewdistance):
 			var poss=Vector2(pos.x+e,pos.y+i)
-			loaded+=loadchunk(Vector2(e,i))
+			loaded+=loadchunk(poss)
 	if loaded<=0:
 		var list=[]
 		for e in range(pos.x-Global.viewdistance,pos.x+Global.viewdistance):
@@ -49,11 +50,12 @@ func loadmap():
 				break
 
 func loadchunk(pos):
-	var mapedge=world_to_map(get_parent().get_node("map").map_to_world(Vector2(Global.mapsize,Global.mapsize))).x-1
+	var mapedge=world_to_map(to_local(mainmap.to_global(mainmap.map_to_world(Vector2(Global.mapsize,Global.mapsize))))).x-1
 	if not pos in loadedchunks:
 		loadedchunks.append(pos)
-		for e in range(clamp((pos.x)*(Global.chunksize/1.5),0,mapedge),clamp((pos.x+1)*(Global.chunksize/1.5),0,mapedge)):
-			for i in range(clamp((pos.y)*(Global.chunksize/1.5),0,mapedge),clamp((pos.y+1)*(Global.chunksize/1.5),0,mapedge)):
+		print(pos)
+		for e in range(clamp((pos.x)*(Global.chunksize),0,mapedge),clamp((pos.x+1)*(Global.chunksize),0,mapedge)):
+			for i in range(clamp((pos.y)*(Global.chunksize),0,mapedge),clamp((pos.y+1)*(Global.chunksize),0,mapedge)):
 				rng.state=int(str(e)+str(i))*random*(e%7)
 				var rnd=rng.Randi_range(e,i,0,37)
 				print(rnd)
@@ -72,7 +74,7 @@ func loadchunk(pos):
 	loadedchunks.append(pos)
 
 func erasemap():
-	var pos=(world_to_map(to_local(Global.playerposition))/Global.chunksize).round()
+	var pos=(world_to_map(to_local(Global.player.global_position))/Global.chunksize).round()
 	
 	for a in loadedchunks:
 		if abs(pos.x-a.x)>6 or abs(pos.y-a.y)>6:

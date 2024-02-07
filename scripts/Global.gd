@@ -12,10 +12,10 @@ var maps=[]
 var speedmod=0
 var speedmodmin=0
 var speedmodmax=150
-var viewdistance=5
+var viewdistance=7
 var playerontilemap=-1
 var playerjump=true
-var mapsize=400
+var mapsize=200
 var chunksize=16
 var small_stuff=[200,2000,200,200,200]
 var scene
@@ -36,6 +36,7 @@ var Debug=true
 var itemloot=[load("res://scenes/item.tscn"),item("pizza")]
 signal zoomout
 signal item
+signal reload
 signal givemoney
 signal kill
 signal inv

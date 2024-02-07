@@ -18,6 +18,7 @@ func _ready():
 	Global.map2=$"../map2"
 	Global.map3=$"../map3"
 	connect("loaded",self,"loading")
+	Global.connect("reload",self,"reload")
 	loading()
 	
 	pass
@@ -50,7 +51,7 @@ func loading():
 	
 	
 	
-	for e in range(-2,3):for i in range(-2,3):
+	for e in range(-3,4):for i in range(-3,4):
 		var chunk=pos+Vector2(e,i)
 		chunk.x=clamp(chunk.x,0,Global.mapsize/Global.chunksize)
 		chunk.y=clamp(chunk.y,0,Global.mapsize/Global.chunksize)
@@ -61,8 +62,7 @@ func loading():
 				var matrix=thread.wait_to_finish()
 				if matrix!=null:for m in [Global.map1,Global.map2,Global.map3]:
 					m.loadmap(matrix)
-				yield(get_tree(),"idle_frame")
-				yield(get_tree(),"idle_frame")
+					break
 		
 	for e in range(-Global.viewdistance,Global.viewdistance+1):
 		var canbreak=false
@@ -99,3 +99,6 @@ func _exit_tree():
 func _on_Timer_timeout():
 	noise.seed=Seed
 	pass # Replace with function body.
+
+func reload():
+	loadedchunks=[]
