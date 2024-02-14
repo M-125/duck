@@ -135,7 +135,7 @@ func _on_item_body_entered(body):
 	pass # Replace with function body.
 func _on_item_area_entered(body):
 
-	if (body is enemyprojectile):
+	if (body.is_class("enemyprojectile")):
 		in_hitbox.append(body)
 		hitbox.append(body)
 
