@@ -20,6 +20,9 @@ func setvalues():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	\"pass\"
+
+func Damage(vel):
+	queue_free()
 "
 
 [sub_resource type="CircleShape2D" id=2]

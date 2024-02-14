@@ -423,7 +423,6 @@ func _process(delta):
 		
 		progressbar(delta)
 		$ui/ProgressBar.value=hp
-		quack()
 		var zoom=(Global.speedmod/1000)
 		var zoom1=(guicam.scale.x+1-zoom+1+1)/4
 		guicam.scale=Vector2(zoom1,zoom1)
@@ -584,11 +583,11 @@ func exit_tree():
 	
 func zoomout(num):
 	$Camera2D.zoom=Vector2(num,num)
-func spawnitem(Item):
-	var item=load("res://items/"+Item+".tscn")
+func spawnitem(tem):
+	var item=load("res://items/"+tem+".tscn")
 	if item!=null:
 		item=item.instance()
-		print("res://items/"+Item+".tscn")
+		print("res://items/"+tem+".tscn")
 		Global.scene.add_child(item)
 		item.global_position=global_position
 func spawnenemy(enemy):

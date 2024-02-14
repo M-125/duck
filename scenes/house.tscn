@@ -68,6 +68,7 @@ extents = Vector2( 16.5, 143.5 )
 script = ExtResource( 3 )
 
 [node name="Jelmez4" type="Sprite" parent="."]
+position = Vector2( 3, 3 )
 scale = Vector2( 3.00469, 3.09677 )
 texture = ExtResource( 1 )
 centered = false
@@ -97,9 +98,8 @@ scale = Vector2( 3, 3 )
 z_index = 4
 
 [node name="playerspawn" type="Node2D" parent="."]
-position = Vector2( 303, 687 )
+position = Vector2( 252, 694 )
 script = ExtResource( 4 )
-smallitems = true
 randomspawn = false
 
 [node name="walls" type="StaticBody2D" parent="."]

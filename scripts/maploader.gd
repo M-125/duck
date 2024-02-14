@@ -60,8 +60,9 @@ func loading():
 			yield(get_tree(),"idle_frame")
 			if not thread.is_alive():
 				var matrix=thread.wait_to_finish()
-				if matrix!=null:for m in [Global.map1,Global.map2,Global.map3]:
-					m.loadmap(matrix)
+				if matrix!=null:
+					for m in [$"../map",$"../map2",$"../map3"]:
+						m.loadmap(matrix)
 					break
 		
 	for e in range(-Global.viewdistance,Global.viewdistance+1):
@@ -82,7 +83,7 @@ func loading():
 			if canbreak:break
 		if canbreak:break
 	for chunk in loadedchunks:
-		if abs(pos.x-chunk.x) > Global.viewdistance or  abs(pos.y-chunk.y) > Global.viewdistance:
+		if abs(pos.x-chunk.x) > 5 or  abs(pos.y-chunk.y) > 5:
 			for m in [Global.map1,Global.map2,Global.map3]:
 					m.erasemap(chunk)
 					loadedchunks.erase(chunk)

@@ -45,7 +45,7 @@ margin_right = 488.0
 margin_bottom = 280.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-amount1 = 500
+amount1 = 50
 
 [node name="craftbutton3" parent="VBoxContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -55,7 +55,7 @@ margin_right = 924.0
 margin_bottom = 280.0
 isunique = true
 uniqueitem = ExtResource( 6 )
-amount1 = 500
+amount1 = 250
 
 [node name="craftbutton4" parent="VBoxContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -65,7 +65,7 @@ margin_right = 488.0
 margin_bottom = 500.0
 isunique = true
 uniqueitem = ExtResource( 7 )
-amount1 = 500
+amount1 = 150
 
 [node name="craftbutton2" parent="VBoxContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -74,6 +74,6 @@ margin_left = 492.0
 margin_top = 284.0
 margin_right = 924.0
 margin_bottom = 500.0
-amount1 = 500
+amount1 = 50
 
 [connection signal="pressed" from="button2" to="." method="leaveshop"]

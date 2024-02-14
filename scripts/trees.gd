@@ -53,7 +53,6 @@ func loadchunk(pos):
 	var mapedge=world_to_map(to_local(mainmap.to_global(mainmap.map_to_world(Vector2(Global.mapsize,Global.mapsize))))).x-1
 	if not pos in loadedchunks:
 		loadedchunks.append(pos)
-		print(pos)
 		for e in range(clamp((pos.x)*(Global.chunksize),0,mapedge),clamp((pos.x+1)*(Global.chunksize),0,mapedge)):
 			for i in range(clamp((pos.y)*(Global.chunksize),0,mapedge),clamp((pos.y+1)*(Global.chunksize),0,mapedge)):
 				rng.state=int(str(e)+str(i))*random*(e%7)

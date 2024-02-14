@@ -40,3 +40,8 @@ func _on_item_body_entered(body):
 	if body is Player:
 		body.dmg(damage,velocity*100,stun)
 		queue_free()
+		
+func damage(dmg=0,velocity=Vector2(0,0),stunn=0.2):
+	Damage(velocity)
+func Damage(vel):
+	pass

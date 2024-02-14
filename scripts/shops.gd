@@ -38,7 +38,6 @@ func loadpos(pos):
 	
 	var rnd=rng.randi_range(0,100)
 	
-	Global.debug.text=str(rnd)
 #			Global.debug.text=str((pos.x+x)*217+(pos.y+y)*16*random)+"---"+str(rng.state)+"++++"+str(rng.seed)
 	if rnd==1:
 		var canspawn=true

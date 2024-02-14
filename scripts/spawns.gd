@@ -16,7 +16,7 @@ func _process(delta):
 	if Global.endgame and spawnwait<=0:
 		var spwn=false
 		while !spwn:
-			var rnd=round(rand_range(0,3))
+			var rnd=int(round(rand_range(0,3)))
 			var vector=Vector2(rand_range(-1,1),rand_range(-1,1)).normalized()*1500
 			match rnd:
 				0,2:

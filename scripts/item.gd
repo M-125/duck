@@ -121,14 +121,21 @@ func interact(player):
 	return false
 	pass # Replace with function body.
 
-func _on_item_body_exited(body):
-	
-	if "enemy" in body.name:
-		hitbox.erase(body)
+#func _on_item_body_exited(body):
+#
+#	if "enemy" in body.name:
+#		hitbox.erase(body)
 
 func _on_item_body_entered(body):
 	
-	if body is enemy:
+	if (body is enemy):
+		in_hitbox.append(body)
+		hitbox.append(body)
+
+	pass # Replace with function body.
+func _on_item_area_entered(body):
+
+	if (body is enemyprojectile):
 		in_hitbox.append(body)
 		hitbox.append(body)
 

@@ -17,7 +17,7 @@ var playerontilemap=-1
 var playerjump=true
 var mapsize=200
 var chunksize=16
-var small_stuff=[200,2000,200,200,200]
+var small_stuff=[2000,2000,2000,2000,2000]
 var scene
 signal valuechange
 var nochick =false
@@ -242,3 +242,5 @@ func music(Music):
 		music.stop()
 func money(num):
 	small_stuff[0]+=int(num)
+func debug(object):
+	debug.text=str(object)
