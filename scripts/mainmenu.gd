@@ -13,6 +13,11 @@ func _ready():
 	get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D,  SceneTree.STRETCH_ASPECT_KEEP, Vector2(1024,600),1)
 	OS.window_borderless=false
 	OS.window_per_pixel_transparency_enabled=false
+	var ip=""
+	for iip in IP.get_local_addresses():
+		if iip.begins_with("192.168"):
+			ip=iip
+	$TextEdit.text=ip
 	pass # Replace with function body.
 
 

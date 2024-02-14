@@ -82,7 +82,7 @@ func loading():
 			if canbreak:break
 		if canbreak:break
 	for chunk in loadedchunks:
-		if abs(pos.x-chunk.x) > 5 or  abs(pos.y-chunk.y) > 5:
+		if abs(pos.x-chunk.x) > Global.viewdistance or  abs(pos.y-chunk.y) > Global.viewdistance:
 			for m in [Global.map1,Global.map2,Global.map3]:
 					m.erasemap(chunk)
 					loadedchunks.erase(chunk)
