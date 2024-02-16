@@ -68,32 +68,32 @@ func erasemap():
 			break
 
 func erasechunk(pos):
-	for e in range(clamp((pos.x)*Global.chunksize,0,Global.mapsize),clamp((pos.x+1)*Global.chunksize,0,Global.mapsize)):
-		for i in range(clamp((pos.y)*Global.chunksize,0,Global.mapsize),clamp((pos.y+1)*Global.chunksize,0,Global.mapsize)):
+	for e in range(clamp((pos.x)*Global.chunksize,0,Global.mapsize-1),clamp((pos.x+1)*Global.chunksize,0,Global.mapsize-1)):
+		for i in range(clamp((pos.y)*Global.chunksize,0,Global.mapsize-1),clamp((pos.y+1)*Global.chunksize,0,Global.mapsize-1)):
 			set_cell(e,i,-1)
 			loadedchunks.erase(pos)
 			if i%16==0:yield(get_tree(), "idle_frame")
 func loadchunk(pos):
 	if not pos in loadedchunks:
 	
-		for e in range(clamp((pos.x)*Global.chunksize,0,Global.mapsize),clamp((pos.x+1)*Global.chunksize,0,Global.mapsize)):
+		for e in range(clamp((pos.x)*Global.chunksize,0,Global.mapsize-1),clamp((pos.x+1)*Global.chunksize,0,Global.mapsize-1)):
 			
-			for i in range(clamp((pos.y)*Global.chunksize,0,Global.mapsize),clamp((pos.y+1)*Global.chunksize,0,Global.mapsize)):
+			for i in range(clamp((pos.y)*Global.chunksize,0,Global.mapsize-1),clamp((pos.y+1)*Global.chunksize,0,Global.mapsize-1)):
 				if e==0:
 					set_cell(e,i,terrain["left"])
 				if i==0:
 					set_cell(e,i,terrain["up"])
-				if e==Global.mapsize-1:
+				if e==Global.mapsize-2:
 					set_cell(e,i,terrain["right"])
-				if i==Global.mapsize-1:
+				if i==Global.mapsize-2:
 					set_cell(e,i,terrain["down"])
 				if e==0 and i==0:
 					set_cell(e,i,terrain["leftup"])
-				if e==Global.mapsize-1 and i==0:
+				if e==Global.mapsize-2 and i==0:
 					set_cell(e,i,terrain["rightup"])
-				if e==0 and i==Global.mapsize-1:
+				if e==0 and i==Global.mapsize-2:
 					set_cell(e,i,terrain["leftdown"])
-				if e==Global.mapsize-1 and i==Global.mapsize-1:
+				if e==Global.mapsize-2 and i==Global.mapsize-2:
 					set_cell(e,i,terrain["rightdown"])
 				if get_cell(e,i)==-1:
 					set_cell(e,i,7)

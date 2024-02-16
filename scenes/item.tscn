@@ -118,6 +118,5 @@ script = ExtResource( 6 )
 all = true
 refresh_rate = 8
 
-[connection signal="area_entered" from="." to="." method="_on_item_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_item_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_item_body_exited"]

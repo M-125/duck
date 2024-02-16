@@ -35,7 +35,7 @@ func _process(delta):
 func movement():
 	var velocity=velTo(findplayer())*DEFAULT_SPEED
 	velocity=pathfind_velocity(velocity)
-	if Attack or abs(savedveloc.x)>10 or abs(savedveloc.y)>10:
+	if Attack or abs(savedveloc.x)>20 or abs(savedveloc.y)>20:
 		position+=get_process_delta_time()*savedveloc
 		return Vector2()
 	if findplayer().global_position.distance_to(global_position)<200 and _cooldown<0:

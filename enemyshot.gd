@@ -17,6 +17,7 @@ func _ready():
 	set_collision_layer_bit(1,true)
 	set_collision_mask_bit(1,true)
 	connect("body_entered",self,"_on_item_body_entered")
+	connect("area_entered",self,"area")
 	setvalues()
 	look_at(to_global(velocity*10))
 	randomize()
@@ -38,10 +39,19 @@ func process(delta):
 
 func _on_item_body_entered(body):
 	if body is Player:
-		body.dmg(damage,velocity*100,stun)
-		queue_free()
+		onhit(body)
 		
 func damage(dmg=0,velocity=Vector2(0,0),stunn=0.2):
 	Damage(velocity)
+func damageplayer(body):
+	body.dmg(damage,velocity*100,stun)
+func onhit(body):
+	damageplayer(body)
+	queue_free()
 func Damage(vel):
+	pass
+func area(a):
+	if a is Item:
+		parried()
+func parried():
 	pass

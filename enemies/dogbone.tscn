@@ -10,21 +10,25 @@ script/source = "extends enemyprojectile
 
 
 # Called when the node enters the scene tree for the first time.
+func _init():
+	decay=30
 func _ready():
-	decay=1
 	Global.addsound(\"catshot\")
-	pass # Replace with function body.
-
+	 # Replace with function body.
+func process(delta):
+	speed-=delta*1000
+	if speed <0:
+		speed=0
 func setvalues():
 	stun=1
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	\"pass\"
 
-func Damage(vel):
-	queue_free()
+
+func onhit(body):
+	damageplayer(body)
 func parried():
-	queue_free()"
+	queue_free()
+"
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 13.0
@@ -40,11 +44,10 @@ margin_left = -10.0
 margin_top = -14.0
 margin_right = 10.0
 margin_bottom = 15.0
-color = Color( 0.431373, 0, 1, 1 )
+color = Color( 0, 0, 0, 1 )
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 margin_left = -14.0
 margin_top = -10.0
 margin_right = 14.0
 margin_bottom = 11.0
-color = Color( 0.431373, 0, 1, 1 )

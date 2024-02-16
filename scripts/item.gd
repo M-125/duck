@@ -121,10 +121,10 @@ func interact(player):
 	return false
 	pass # Replace with function body.
 
-#func _on_item_body_exited(body):
-#
-#	if "enemy" in body.name:
-#		hitbox.erase(body)
+func _on_item_body_exited(body):
+
+	if "enemy" in body.name:
+		hitbox.erase(body)
 
 func _on_item_body_entered(body):
 	
@@ -133,14 +133,7 @@ func _on_item_body_entered(body):
 		hitbox.append(body)
 
 	pass # Replace with function body.
-func _on_item_area_entered(body):
-
-	if (body.is_class("enemyprojectile")):
-		in_hitbox.append(body)
-		hitbox.append(body)
-
-	pass # Replace with function body.
-
+ 
 
 func shot():
 	if cldn<=0:
