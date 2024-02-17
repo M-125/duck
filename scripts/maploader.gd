@@ -31,7 +31,10 @@ func loadmap(pos):
 		for e in range(clamp((pos.x*Global.chunksize)-1,-1,Global.mapsize),clamp(((pos.x+1)*Global.chunksize)+1,-1,Global.mapsize)):
 			var list=[]
 			for i in range(clamp(((pos.y)*Global.chunksize)-1,-1,Global.mapsize),clamp(((pos.y+1)*Global.chunksize)+1,-1,Global.mapsize)):
-				list.append(noise.get_noise_2d(e,i))
+				if not(i>=Global.mapsize-1 or e>=Global.mapsize-1):
+					list.append(noise.get_noise_2d(e,i))
+				else:
+					list.append(0)
 
 			matrix.append(list)
 		positionn=pos

@@ -73,5 +73,13 @@ func _process(delta):
 func sorting(a,b):
 	return a.global_position.distance_to(Global.player.global_position)<b.global_position.distance_to(Global.player.global_position)
 func _exit_tree():
-	Global.savemap=PackedScene.new()
-	Global.savemap.pack(self)
+	if name=="map2":
+		var relative_path = "user://myfile.txt"
+		var absolute_path = ProjectSettings.globalize_path(relative_path)
+		print(absolute_path)
+		Global.savemap=PackedScene.new()
+		Global.savemap.pack(self)
+		ResourceSaver.save("user://save.tscn",Global.savemap)
+		ResourceSaver.save("user://saveplayer.tscn",Global.playerpack)
+		Saver.save(Global.small_stuff,"user://coins.json")
+		

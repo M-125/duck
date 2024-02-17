@@ -135,7 +135,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("button4:enabled")
+tracks/3/path = NodePath("singleplayer:enabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -223,7 +223,7 @@ tracks/2/keys = {
 "values": [ true ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("button4:enabled")
+tracks/3/path = NodePath("singleplayer:enabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -311,7 +311,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("button4:enabled")
+tracks/3/path = NodePath("singleplayer:enabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -420,7 +420,7 @@ script = ExtResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="cursor"]
 shape = SubResource( 8 )
 
-[node name="button4" parent="." instance=ExtResource( 2 )]
+[node name="singleplayer" parent="." instance=ExtResource( 2 )]
 position = Vector2( 125, 250 )
 scale = Vector2( 2.008, 2.082 )
 text = "play on map2.0"
@@ -527,7 +527,7 @@ anchor_mode = 0
 [connection signal="pressed" from="button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="button2" to="." method="_on_button2_pressed"]
 [connection signal="pressed" from="button3" to="." method="_on_button3_pressed"]
-[connection signal="pressed" from="button4" to="." method="_on_button4_pressed"]
+[connection signal="pressed" from="singleplayer" to="." method="_on_button4_pressed"]
 [connection signal="pressed" from="button7" to="." method="_on_button7_pressed"]
 [connection signal="pressed" from="button5" to="." method="_on_button5_pressed"]
 [connection signal="pressed" from="button6" to="." method="_on_button6_pressed"]

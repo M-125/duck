@@ -58,10 +58,7 @@ func _on_button3_pressed():
 	
 
 func _on_button4_pressed():
-	if Global.savemap==null:
-		get_tree().change_scene("res://scenes/map2.0.tscn")
-	else:
-		get_tree().change_scene_to(Global.savemap)
+	get_tree().change_scene("res://scenes/loadgame.tscn")
 	
 	pass # Replace with function body.
 
@@ -95,7 +92,7 @@ func _on_button6_pressed():
 
 
 func _on_button7_pressed():
-	if $button4.enabled:
+	if $singleplayer.enabled:
 		$AnimationPlayer.play("close")
 	else:
 		$AnimationPlayer.play("open")

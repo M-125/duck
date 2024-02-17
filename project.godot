@@ -44,6 +44,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/rng.gd"
 }, {
+"base": "Resource",
+"class": "Saver",
+"language": "GDScript",
+"path": "res://classes/saver.gd"
+}, {
 "base": "Control",
 "class": "VirtualJoystick",
 "language": "GDScript",
@@ -147,6 +152,7 @@ _global_script_class_icons={
 "Noise": "",
 "Player": "",
 "Rng": "",
+"Saver": "",
 "VirtualJoystick": "",
 "button": "",
 "craftbutton": "",
