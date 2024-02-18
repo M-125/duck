@@ -11,7 +11,7 @@ var interacting=false
 func _ready():
 	isgun=true
 	damage=100
-	cooldown=3.5
+	cooldown=1
 	chargetime=1.5
 	pass # Replace with function body.
 

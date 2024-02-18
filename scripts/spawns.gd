@@ -6,69 +6,39 @@ var eraselist=[]
 var rng=RandomNumberGenerator.new()
 var rng2=RandomNumberGenerator.new()
 var random
-var spawned=[]
-var spawnwait=10
+export var spawnwait=30
+var enemies={
+	"dog":load("res://enemies/dog.tscn")
+}
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 func _process(delta):
 	loadmap()
-	if Global.endgame and spawnwait<=0:
-		var spwn=false
-		while !spwn:
-			var rnd=int(round(rand_range(0,3)))
-			var vector=Vector2(rand_range(-1,1),rand_range(-1,1)).normalized()*1500
-			match rnd:
-				0,2:
-					print("rnd",rnd)
-					spwn=true
-					var chicken=preload("res://scenes/enemychicken.tscn")
-					
-					place(chicken.instance(),
-					Global.player.global_position.x+vector.x,
-					Global.player.global_position.y+vector.y,false)
-			
-				
-				1:
-					spwn=true
-					var chicken=preload("res://scenes/enemy.tscn")
-					place(chicken.instance(),
-					Global.player.global_position.x+vector.x,
-					Global.player.global_position.y+vector.y,false)
-				3:
-					spwn=true
-					var chicken=preload("res://enemies/cat.tscn")
-					place(chicken.instance(),
-					Global.player.global_position.x+vector.x,
-					Global.player.global_position.y+vector.y,false)
-				
-		spawnwait=0.5
 	spawnwait-=delta
+	
 func loadmap():
-	if Global.nochick or spawnwait>=0:
-		return
+	if not( Global.nochick or spawnwait>=0):
+		
 			
-			
-	var pos=(to_local(Global.playerposition)/16/3/(Global.chunksize)).round()
-	if pos !=positionn:
-		positionn=pos
-		var viewdist=2
-		for e in range(clamp((pos.x-viewdist)*(Global.chunksize),0,Global.mapsize-2),clamp((pos.x+viewdist)*(Global.chunksize),0,Global.mapsize-2)):
-			for i in range(clamp((pos.y-viewdist)*(Global.chunksize),0,Global.mapsize-2),clamp((pos.y+viewdist)*(Global.chunksize),0,Global.mapsize-2)):
-				rng.state=int(str(e)+str(i))*random*(e%8)
-				var rnd=rng.randi_range(0,1000)
-				
-				
-				var spawnn=false
-				for spawn in spawned:
-					if spawn==Vector2(e,i):
-						spawnn=true
-				
-				
-				if round(rnd)==200 and !spawnn:
-					spawn(e,i)
-					spawned.append(Vector2(e,i))
-				
+	
+		var pos=(to_local(Global.playerposition)/16/3/(Global.chunksize)).round()
+		if pos !=positionn:
+			positionn=pos
+			var viewdist=2
+			for e in range(clamp((pos.x-viewdist)*(Global.chunksize),0,Global.mapsize-2),clamp((pos.x+viewdist)*(Global.chunksize),0,Global.mapsize-2)):
+				for i in range(clamp((pos.y-viewdist)*(Global.chunksize),0,Global.mapsize-2),clamp((pos.y+viewdist)*(Global.chunksize),0,Global.mapsize-2)):
+					rng.state=int(str(e)+str(i))*random*(e%8)
+					var rnd=rng.randi_range(0,1000)
+					
+					
+					
+					
+					if round(rnd)==200:
+						
+						spawnwait=spawn(e,i)
+						print(spawnwait)
+					
 				
 			
 
@@ -83,27 +53,30 @@ func place(chick,x,y,gridsnap=true):
 
 func _ready():
 	if Server.client!=null:queue_free()
-	print(spawnwait)
 	rng2.randomize()
 	random=(rng2.randi()+rng2.randi()/rng2.randi()*rng2.randi()-rng2.randi())*rng2.state
 
 func spawn(x,y):
-	print(spawnwait)
-	var spwn=false
-	var random=int(round(rand_range(0,2)))
-	while !spwn:
+	var spwn=int(round(rand_range(1,5)))
+	var spawnwait=spwn*20
+	var random=int(round(rand_range(0,4)))
+	while spwn >0:
 		match random:
-			0:
-				spwn=true
+			0,3:
+				spwn-=1
 				var chicken=preload("res://scenes/enemychicken.tscn")
-				print("rnd",random)
-				for i in range(rand_range(2,5)):
+				for i in range(rand_range(1,2)):
 					place(chicken.instance(),x,y)
 #				place(preload("res://scenes/enemy.tscn").instance(),x,y)
 			1:
-				spwn=true
+				spwn-=1
 				place(preload("res://scenes/enemy.tscn").instance(),x,y)
 			2:
-				spwn=true
+				spwn-=1
 				place(preload("res://enemies/cat.tscn").instance(),x,y)
-		random=round(rand_range(0,2))
+			4:
+				spwn-=1
+				place(enemies["dog"].instance(),x,y)
+		random=int(round(rand_range(0,4)))
+		
+	return spawnwait

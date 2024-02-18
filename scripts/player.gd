@@ -181,7 +181,7 @@ func move(delta):
 	
 	
 	if $hrot/helditem.get_child_count()==1:if $hrot/helditem.get_child(0).rotatable:
-		$hrot.rotation+=rotspeed*delta
+		$hrot.rotation+=rotspeed*delta*1.3
 #	rotate item if rotatable
 	if $hrot/helditem.get_child_count()==1:
 		if clickattack>0:

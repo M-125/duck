@@ -211,11 +211,8 @@ func reset():
 	speedmod=0
 	speedmodmin=0
 	speedmodmax=150
-	viewdistance=2
 	playerontilemap=-1
 	playerjump=true
-	mapsize=2000
-	chunksize=16
 	small_stuff=[0,0,0,0,0]
 	scene=null
 	nochick =false

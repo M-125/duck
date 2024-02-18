@@ -39,22 +39,28 @@ func movement():
 	var velocity=Vector2()
 	match state:
 		states.move:
+			Attackdelay=0.3
+			scale=Vector2(1,1)
 			velocity=velTo(findplayer())*DEFAULT_SPEED
 			velocity=pathfind_velocity(velocity)
 			if Attack or abs(savedveloc.x)>10 or abs(savedveloc.y)>10:
 				position+=get_process_delta_time()*savedveloc
 				return Vector2()
-			if findplayer().global_position.distance_to(global_position)<200 and _cooldown<0:
+			if findplayer().global_position.distance_to(global_position)<400 and _cooldown<0:
 				savedveloc=velocity*3
 				_cooldown=3
 				emit_signal("attack")
 		states.tobone:
+			scale=Vector2(2,2)
 			if is_instance_valid(bone) :
 				velocity=velTo(bone)*DEFAULT_SPEED*3
+				savedveloc=velocity/3
+				Attackdelay=0
 				if bone.position.distance_to(position)<10:
 					bone.queue_free()
 			else:
 				state=states.move
+				_cooldown=0
 			
 		states.stop:
 			velocity=Vector2()

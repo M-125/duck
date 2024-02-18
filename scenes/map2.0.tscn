@@ -1277,7 +1277,6 @@ autospawn = false
 script = ExtResource( 13 )
 
 [node name="Timer" type="Timer" parent="loader"]
-wait_time = 3.0
 autostart = true
 
 [node name="animation" type="Node2D" parent="."]

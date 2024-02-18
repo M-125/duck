@@ -54,11 +54,12 @@ func loading():
 	
 	
 	
-	for e in range(-3,4):for i in range(-3,4):
+	for e in range(-2,3):for i in range(-2,3):
 		var chunk=pos+Vector2(e,i)
 		chunk.x=clamp(chunk.x,0,Global.mapsize/Global.chunksize)
 		chunk.y=clamp(chunk.y,0,Global.mapsize/Global.chunksize)
-		thread.start(self,"loadmap",chunk)
+		if not chunk in loadedchunks:
+			thread.start(self,"loadmap",chunk,0)
 		while thread.is_active():
 			yield(get_tree(),"idle_frame")
 			if not thread.is_alive():
@@ -66,15 +67,17 @@ func loading():
 				if matrix!=null:
 					for m in [$"../map",$"../map2",$"../map3"]:
 						m.loadmap(matrix)
+					print(chunk)
 					break
-		
+	
 	for e in range(-Global.viewdistance,Global.viewdistance+1):
-		var canbreak=false
+		var canbreak=5
 		for i in range(-Global.viewdistance,Global.viewdistance+1):
 			var chunk=pos+Vector2(e,i)
 			chunk.x=clamp(chunk.x,0,Global.mapsize/Global.chunksize)
 			chunk.y=clamp(chunk.y,0,Global.mapsize/Global.chunksize)
-			thread.start(self,"loadmap",chunk,0)
+			thread.start(self,"loadmap",chunk)
+			
 			
 			while thread.is_active():
 				yield(get_tree(),"idle_frame")
@@ -82,14 +85,17 @@ func loading():
 					var matrix=thread.wait_to_finish()
 					if matrix!=null:for m in [Global.map1,Global.map2,Global.map3]:
 						m.loadmap(matrix)
-						canbreak=true
-			if canbreak:break
-		if canbreak:break
+						canbreak-=1
+						print(chunk,"slowloading")
+			if canbreak<0:break
+		if canbreak<0:break
 	for chunk in loadedchunks:
-		if abs(pos.x-chunk.x) > 5 or  abs(pos.y-chunk.y) > 5:
+		if abs(pos.x-chunk.x) > Global.viewdistance+1 or  abs(pos.y-chunk.y) > Global.viewdistance+1:
 			for m in [Global.map1,Global.map2,Global.map3]:
 					m.erasemap(chunk)
+					print("earse",abs(pos.x-chunk.x),Global.viewdistance+1)
 					loadedchunks.erase(chunk)
+	
 	emit_signal("loaded")
 
 

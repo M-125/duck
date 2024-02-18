@@ -18,6 +18,7 @@ func _ready():
 	$TouchScreenButton.shape=$CollisionShape2D.shape
 	$TouchScreenButton.position=$CollisionShape2D.position
 	$TouchScreenButton.shape_centered=false
+	$TouchScreenButton.connect("pressed",self,"_on_TouchScreenButton_pressed")
 	for e in get_children():
 		if e != $TouchScreenButton:
 			e.visible=not invisible

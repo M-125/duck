@@ -10,8 +10,9 @@ var pos=Vector2(0,0)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$AnimationPlayer.current_animation="e"
-	if Global.player !=null and is_instance_valid(Global.player):
-		Global.player.connect("interactshop",self,"showmenu")
+	while not (Global.player !=null and is_instance_valid(Global.player)):
+		yield(get_tree(),"idle_frame")
+	Global.player.connect("interactshop",self,"showmenu")
 	pass # Replace with function body.
 
 

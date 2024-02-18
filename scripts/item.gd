@@ -58,7 +58,6 @@ func _ready():
 	if Server.isserver:
 		id=rand_range(0,2000)
 		Server.items.append(self)
-	owner=get_parent()
 	reload()
 	
 			
@@ -87,7 +86,10 @@ func reload():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	owner=get_parent().owner
+	if get_parent().owner!=null:
+		owner=get_parent().owner
+	else:
+		owner=get_parent()
 	process(delta)
 	$press_E.visible=selected
 	cldn-=delta

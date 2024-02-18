@@ -11,7 +11,7 @@ var interacting=false
 func _ready():
 	isgun=true
 	damage=20
-	cooldown=3.5
+	cooldown=2
 	chargetime=1.5
 	bullet=load("res://scenes/rocket.tscn")
 	pass # Replace with function body.
