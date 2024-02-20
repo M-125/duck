@@ -21,18 +21,19 @@ func ready():
 func process(delta):
 	_cooldown-=delta
 	throwcooldown-=delta
-	for body in $throw.get_overlapping_bodies():
-		if body is Player and throwcooldown<0:
-			var bullet=load("res://enemies/dogbone.tscn").instance()
-			Global.scene.add_child(bullet)
-			bullet.global_position=global_position
-			bullet.velocity=velTo(findplayer())
-			bullet.speed=1000
-			bone=bullet
-			throwcooldown=3
-			movewait=1
-			$Timer.start()
-			state=states.stop
+	if state==states.move:
+		for body in $throw.get_overlapping_bodies():
+			if body is Player and throwcooldown<0:
+				var bullet=load("res://enemies/dogbone.tscn").instance()
+				Global.scene.add_child(bullet)
+				bullet.global_position=global_position
+				bullet.velocity=velTo(findplayer())
+				bullet.speed=1000
+				bone=bullet
+				throwcooldown=3
+				movewait=1
+				$Timer.start()
+				state=states.stop
 	savedveloc-=savedveloc.normalized()*delta*1000
 	
 func movement():
