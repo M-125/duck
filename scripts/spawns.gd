@@ -44,7 +44,7 @@ func loadmap():
 
 func place(chick,x,y,gridsnap=true):
 	get_node("/root/map2").add_child(chick)
-	if gridsnap:chick.global_position=to_global(Vector2(x,y)*16)
+	if gridsnap:chick.global_position=to_global(Vector2(x,y)*16*3*Global.chunksize)
 	else:chick.global_position=to_global(Vector2(x,y))
 	chick.global_position+=Vector2(rand_range(-32,32),rand_range(-32,32))
 
