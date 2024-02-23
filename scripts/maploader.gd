@@ -8,6 +8,7 @@ var canrun=true
 export var Seed=0
 export var noisereplace=[]
 onready var map=$"../map"
+var stop=false
 signal loaded
 func _ready():
 	noise.replace=noisereplace
@@ -69,24 +70,26 @@ func loading():
 						m.loadmap(matrix)
 					print(chunk)
 					break
-	
-	for e in range(-Global.viewdistance,Global.viewdistance+1):
-		var canbreak=5
-		for i in range(-Global.viewdistance,Global.viewdistance+1):
-			var chunk=pos+Vector2(e,i)
-			chunk.x=clamp(chunk.x,0,Global.mapsize/Global.chunksize)
-			chunk.y=clamp(chunk.y,0,Global.mapsize/Global.chunksize)
-			thread.start(self,"loadmap",chunk)
+	for n in range(Global.viewdistance):
+		var canbreak=4
+		for e in range(-n,n+1):
 			
-			
-			while thread.is_active():
-				yield(get_tree(),"idle_frame")
-				if not thread.is_alive():
-					var matrix=thread.wait_to_finish()
-					if matrix!=null:for m in [Global.map1,Global.map2,Global.map3]:
-						m.loadmap(matrix)
-						canbreak-=1
-						print(chunk,"slowloading")
+			for i in range(-n,n+1):
+				var chunk=pos+Vector2(e,i)
+				chunk.x=clamp(chunk.x,0,Global.mapsize/Global.chunksize)
+				chunk.y=clamp(chunk.y,0,Global.mapsize/Global.chunksize)
+				thread.start(self,"loadmap",chunk)
+				
+				
+				while thread.is_active():
+					yield(get_tree(),"idle_frame")
+					if not thread.is_alive():
+						var matrix=thread.wait_to_finish()
+						if matrix!=null:for m in [Global.map1,Global.map2,Global.map3]:
+							m.loadmap(matrix)
+							canbreak-=1
+							print(chunk,"slowloading")
+				if canbreak<0:break
 			if canbreak<0:break
 		if canbreak<0:break
 	for chunk in loadedchunks:
@@ -95,7 +98,8 @@ func loading():
 					m.erasemap(chunk)
 					print("earse",abs(pos.x-chunk.x),Global.viewdistance+1)
 					loadedchunks.erase(chunk)
-	
+	if stop:
+		return
 	emit_signal("loaded")
 
 
@@ -111,4 +115,16 @@ func _on_Timer_timeout():
 	pass # Replace with function body.
 
 func reload():
-	loadedchunks=[]
+	var n=200
+	stop=true
+	while n>0:
+		n-=1
+		for chunk in loadedchunks:
+			
+			yield(get_tree(),"idle_frame")
+			for m in [Global.map1,Global.map2,Global.map3]:
+					m.erasemap(chunk)
+					loadedchunks.erase(chunk)
+			print(n)
+	stop=false
+	emit_signal("loaded")

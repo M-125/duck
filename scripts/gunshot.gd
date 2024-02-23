@@ -11,10 +11,8 @@ var speed=100
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	set_collision_layer_bit(0,true)
-	set_collision_mask_bit(0,true)
-	set_collision_layer_bit(1,true)
-	set_collision_mask_bit(1,true)
+	collision_layer=11
+	collision_mask=11
 	connect("body_entered",self,"_on_item_body_entered")
 	setvalues()
 	look_at(to_global(velocity*10))

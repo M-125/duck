@@ -59,7 +59,8 @@ func _ready():
 		id=rand_range(0,2000)
 		Server.items.append(self)
 	reload()
-	
+	collision_layer=11
+	collision_mask=11
 			
 	pass # Replace with function body.
 

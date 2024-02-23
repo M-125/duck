@@ -27,6 +27,7 @@ func loadmap():
 			positionn=pos
 			var viewdist=2
 			for e in range(clamp((pos.x-viewdist)*(Global.chunksize),0,Global.mapsize-2),clamp((pos.x+viewdist)*(Global.chunksize),0,Global.mapsize-2)):
+				var canbreak=false
 				for i in range(clamp((pos.y-viewdist)*(Global.chunksize),0,Global.mapsize-2),clamp((pos.y+viewdist)*(Global.chunksize),0,Global.mapsize-2)):
 					rng.state=int(str(e)+str(i))*random*(e%8)
 					var rnd=rng.randi_range(0,1000)
@@ -38,13 +39,15 @@ func loadmap():
 						
 						spawnwait=spawn(e,i)
 						print(spawnwait)
+						canbreak=true
+						break
 					
-				
+				if canbreak:break
 			
 
 func place(chick,x,y,gridsnap=true):
 	get_node("/root/map2").add_child(chick)
-	if gridsnap:chick.global_position=to_global(Vector2(x,y)*16)
+	if gridsnap:chick.global_position=to_global(Vector2(x,y)*16*3)
 	else:chick.global_position=to_global(Vector2(x,y))
 	chick.global_position+=Vector2(rand_range(-32,32),rand_range(-32,32))
 
