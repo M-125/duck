@@ -222,7 +222,7 @@ texture={
 "flags/anisotropic": false,
 "flags/filter": false,
 "flags/mipmaps": false,
-"flags/repeat": 1,
+"flags/repeat": 0,
 "flags/srgb": 2,
 "process/HDR_as_SRGB": false,
 "process/fix_alpha_border": true,

@@ -61,6 +61,8 @@ func _ready():
 	reload()
 	collision_layer=11
 	collision_mask=11
+	connect("body_entered",self,"_on_item_body_entered")
+	connect("body_exited",self,"_on_item_body_exited")
 			
 	pass # Replace with function body.
 
@@ -126,7 +128,7 @@ func interact(player):
 
 func _on_item_body_exited(body):
 
-	if "enemy" in body.name:
+	if body is enemy:
 		hitbox.erase(body)
 
 func _on_item_body_entered(body):

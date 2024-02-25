@@ -58,12 +58,12 @@ func loadchunk(pos):
 				rng.state=int(str(e)+str(i))*random*(e%7)
 				var rnd=rng.Randi_range(e,i,0,37)
 				if round(rnd)==5 and not (
-				get_cell(e,i+1)==45 or
-				get_cell(e+1,i)==45 or
-				get_cell(e,i-1)==45 or
-				get_cell(e-1,i)==45
+				get_cell(e,i+1)!=-1 or
+				get_cell(e+1,i)!=-1 or
+				get_cell(e,i-1)!=-1 or
+				get_cell(e-1,i)!=-1
 				):
-					set_cell(e,i,45)
+					set_cell(e,i,rng.Randi_range(e,i,0,3))
 		return 1
 	return 0
 			

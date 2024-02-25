@@ -288,6 +288,11 @@ position = Vector2( 749, 60 )
 scale = Vector2( 2, 2 )
 z_index = 1
 
+[node name="ColorRect" type="ColorRect" parent="ui"]
+margin_right = 1032.0
+margin_bottom = 602.0
+color = Color( 1, 0, 0, 0.333333 )
+
 [node name="shopui" type="CanvasLayer" parent="."]
 
 [node name="MultiPlayerSyncer" type="Node" parent="."]

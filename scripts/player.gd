@@ -253,17 +253,17 @@ func weapon(rotspeed):
 #	end of clickattack
 	
 	
-	
-	if clickattack>0:
-			
-			if weapon.rotatable:for enemy in weapon.hitbox:
-				if abs(rotspeed)>=10 and is_instance_valid(enemy) and (not enemy in nohitbox):
-					var knock=weapon.calc_knockback(abs(weapon.damage*rotspeed/10),enemy)
-			
-					enemy.damage(weapon.damage*rotspeed/10,
-					knock
-					)
-					nohitbox.append(enemy)
+#
+#	if clickattack>0:
+#
+#			if weapon.rotatable:for enemy in weapon.hitbox:
+#				if abs(rotspeed)>=10 and is_instance_valid(enemy) and (not enemy in nohitbox):
+#					var knock=weapon.calc_knockback(abs(weapon.damage*rotspeed/10),enemy)
+#
+#					enemy.damage(weapon.damage*rotspeed/10,
+#					knock
+#					)
+#					nohitbox.append(enemy)
 #	attack enemy in weapon hitbox clickattack
 	
 	if weapon.rotatable:for enemy in weapon.in_hitbox:
@@ -280,7 +280,7 @@ func weapon(rotspeed):
 			knock
 			)
 #	damage depending on rotspeed
-	if weapon.rotatable and not weapon.isgun:
+	if weapon.rotatable and not weapon.isgun and weapon.get_node_or_null("particles")!=null:
 		if abs(rotspeed)>=10:
 			weapon.get_node("particles").emitting=true
 		else:
@@ -410,6 +410,7 @@ func _ready():
 
 func _process(delta):
 	if localplayer:
+		$ui/ColorRect.color.a=clamp($ui/ColorRect.color.a-(delta*2),0,0.5)
 		interacttime-=delta
 		stun-=delta
 		Global.playerfloor=clamp(Global.playerfloor,0,4)
@@ -479,6 +480,7 @@ func quack():
 
 func dmg(dmg,veloc=Vector2(),stun=0):
 	if invincible:return
+	$ui/ColorRect.color.a=1
 	Global.addsound("playerdamage")
 	state_machine.travel("damage")
 	var label=load("res://scenes/damagemeter.tscn").instance()

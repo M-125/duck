@@ -55,6 +55,7 @@ func place(chick,x,y,gridsnap=true):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func _ready():
+	Global.connect("horde",self,"horde")
 	if Server.client!=null:queue_free()
 	rng2.randomize()
 	random=(rng2.randi()+rng2.randi()/rng2.randi()*rng2.randi()-rng2.randi())*rng2.state
@@ -83,3 +84,6 @@ func spawn(x,y):
 		random=int(round(rand_range(0,4)))
 		
 	return spawnwait
+func horde():
+	var pos=(to_local(Global.playerposition)/16/3/(Global.chunksize)).round()
+	spawn(pos.x,pos.y)

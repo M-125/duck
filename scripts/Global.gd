@@ -17,7 +17,7 @@ var playerontilemap=-1
 var playerjump=true
 var mapsize=200
 var chunksize=16
-var small_stuff=[2000,2000,2000,2000,2000]
+var small_stuff=[0,0,0,0,0]
 var scene
 signal valuechange
 var nochick =false
@@ -40,6 +40,7 @@ signal reload
 signal givemoney
 signal kill
 signal inv
+signal horde
 signal enemy
 # Declare member variables here. Examples:
 # var a = 2
