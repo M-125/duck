@@ -5,7 +5,7 @@ export var Master=false
 export var reliable=false
 export var all=false
 export var refresh_rate=30
-var timer=0
+var timer=-0.3
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -38,13 +38,14 @@ func get_from_node(path:String):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	timer+=delta
-	if timer>1/refresh_rate and Server.isconnect():
-		timer=0
-		if islocal() or (Master and Server.isserver()):
-			for e in variables:
-				if reliable:rpc("setvar",e,get_from_node(e))
-				else: rpc_unreliable("setvar",e,get_from_node(e))
+	if is_inside_tree():
+		timer+=delta
+		if timer>1/refresh_rate and Server.isconnect():
+			timer=0
+			if islocal() or (Master and Server.isserver()):
+				for e in variables:
+					if reliable:rpc("setvar",e,get_from_node(e))
+					else: rpc_unreliable("setvar",e,get_from_node(e))
 	pass
 func set_from_node(path:String,val):
 	var array = path.split(":",false,2)

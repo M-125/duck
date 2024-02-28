@@ -36,12 +36,16 @@ remote func spawn(node,path,name):
 func add_node(node):
 	while not Server.isconnect():yield(get_tree(),"idle_frame")
 	for e in nodes:
+		if not is_instance_valid(e):
+			nodes.erase(e)
+	for e in nodes:
 		if node.get_path()==e.get_path():
 			return
 	if node in nodes:
 		return
 	nodes.append(node)
 	rpc("spawn",node.filename,node.get_parent().get_path(),node.name)
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

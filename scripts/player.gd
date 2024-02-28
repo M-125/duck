@@ -273,7 +273,7 @@ func weapon(rotspeed):
 				
 				
 		weapon.in_hitbox.erase(enemy)
-		if abs(rotspeed)>=10 and is_instance_valid(enemy):
+		if abs(rotspeed)>=10 and is_instance_valid(enemy) and  not weapon.isgun:
 			var knock=weapon.calc_knockback(abs(weapon.damage*rotspeed/10),enemy)
 			
 			enemy.damage(weapon.damage*rotspeed/10,
@@ -344,10 +344,11 @@ func _ready():
 	if Server.isconnect():
 		if name=="playerduckie":
 			name=str(Server.ID)+"player"
-		else:
+		elif name!=str(Server.ID)+"player":
 			$ui/ViewportContainer.free()
 			$ui.visible=false
-	
+	if $ui.visible:
+		Global.player=self
 	
 	var canbecamera=true
 	for e in get_parent().get_children():
@@ -393,7 +394,6 @@ func _ready():
 	if OS.has_touchscreen_ui_hint():
 		$"ui/ViewportContainer/UI/phone gui".visible=true
 	Global.nochick=true
-	Global.player=self
 	releasetime=0.05
 	randomize()
 	Global.playerfloor=3
@@ -480,7 +480,7 @@ func quack():
 
 func dmg(dmg,veloc=Vector2(),stun=0):
 	if invincible:return
-	$ui/ColorRect.color.a=1
+	$ui/ColorRect.color.a=0.5
 	Global.addsound("playerdamage")
 	state_machine.travel("damage")
 	var label=load("res://scenes/damagemeter.tscn").instance()

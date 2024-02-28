@@ -39,6 +39,8 @@ func _ready():
 		$collision.collision_mask=2
 	collision_mask=8
 	collision_layer=8
+	if get_parent().get_node_or_null("MultiPlayerSpawner")!=null:
+		get_parent().get_node_or_null("MultiPlayerSpawner").add_node(self)
 	ready()
 	pass # Replace with function body.
 
@@ -203,7 +205,7 @@ func velTo(player):
 
 func attacking():
 	for body in $damage.get_overlapping_bodies():
-		if "duckie" in body.name and cooldown<=0 and not attacking:
+		if body.is_in_group("player") and cooldown<=0 and not attacking:
 			attacking=true
 			attack=Attackdelay
 			attackedplayer=body

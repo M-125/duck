@@ -68,7 +68,6 @@ func loading():
 				if matrix!=null:
 					for m in [$"../map",$"../map2",$"../map3"]:
 						m.loadmap(matrix)
-					print(chunk)
 					break
 	for n in range(Global.viewdistance):
 		var canbreak=4
@@ -88,7 +87,6 @@ func loading():
 						if matrix!=null:for m in [Global.map1,Global.map2,Global.map3]:
 							m.loadmap(matrix)
 							canbreak-=1
-							print(chunk,"slowloading")
 				if canbreak<0:break
 			if canbreak<0:break
 		if canbreak<0:break
@@ -96,7 +94,6 @@ func loading():
 		if abs(pos.x-chunk.x) > Global.viewdistance+1 or  abs(pos.y-chunk.y) > Global.viewdistance+1:
 			for m in [Global.map1,Global.map2,Global.map3]:
 					m.erasemap(chunk)
-					print("earse",abs(pos.x-chunk.x),Global.viewdistance+1)
 					loadedchunks.erase(chunk)
 	if stop:
 		return
@@ -125,6 +122,5 @@ func reload():
 			for m in [Global.map1,Global.map2,Global.map3]:
 					m.erasemap(chunk)
 					loadedchunks.erase(chunk)
-			print(n)
 	stop=false
 	emit_signal("loaded")

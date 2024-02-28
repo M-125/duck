@@ -17,12 +17,7 @@ func _ready():
 	pass # Replace with function body.
 
 func process(delta):
-	usetime-=delta
-	if interacting:
-		interacting=get_parent().name=="helditem"
-	if usetime<=0 and interacting:
-		queue_free()
-		Global.player.hp+=15
+	$Sprite.frame=int(cldn<0)
 	var rot=global_rotation_degrees
 	while rot<0:
 		rot=360-rot

@@ -5,7 +5,7 @@
 [sub_resource type="GDScript" id=2]
 script/source = "extends projectile
 
-
+var explosion=load(\"res://scenes/eggbomb.tscn\").instance()
 # Declare member variables here. Examples:
 # var a = 2
 # var b = \"text\"
@@ -22,7 +22,7 @@ func process(delta):
 #func _process(delta):
 #	pass
 func _exit_tree():
-	var explosion=load(\"res://scenes/eggbomb.tscn\").instance()
+	
 	Global.scene.add_child(explosion)
 	explosion.global_position=global_position
 	Global.addsound(\"boom\")
@@ -33,7 +33,7 @@ extents = Vector2( 10, 7.25 )
 
 [sub_resource type="Gradient" id=6]
 offsets = PoolRealArray( 0, 0.675182, 1 )
-colors = PoolColorArray( 0.209961, 0.209961, 0.209961, 1, 1, 1, 1, 0.603922, 1, 1, 1, 0 )
+colors = PoolColorArray( 1, 1, 1, 0.427451, 1, 1, 1, 0.603922, 1, 1, 1, 0 )
 
 [sub_resource type="GradientTexture" id=4]
 gradient = SubResource( 6 )
@@ -45,8 +45,9 @@ flag_disable_z = true
 gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-scale = 3.0
+scale = 10.0
 scale_random = 1.0
+color = Color( 0.647059, 0.647059, 0.647059, 1 )
 color_ramp = SubResource( 4 )
 
 [node name="gunshot" type="Area2D"]
@@ -59,14 +60,16 @@ script = SubResource( 2 )
 position = Vector2( 0, -0.75 )
 shape = SubResource( 1 )
 
-[node name="Particles2D" type="Particles2D" parent="."]
-amount = 200
-lifetime = 0.6
-local_coords = false
-process_material = SubResource( 5 )
-
 [node name="Sprite" type="Sprite" parent="."]
 rotation = 1.57079
+scale = Vector2( 2, 2 )
+z_index = 1
 texture = ExtResource( 1 )
+
+[node name="Particles2D" type="Particles2D" parent="Sprite"]
+amount = 100
+lifetime = 0.3
+local_coords = false
+process_material = SubResource( 5 )
 
 [connection signal="body_entered" from="." to="." method="_on_item_body_entered"]

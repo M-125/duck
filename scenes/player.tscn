@@ -210,7 +210,7 @@ func _process(delta):
 
 [sub_resource type="RectangleShape2D" id=11]
 
-[node name="playerduckie" type="KinematicBody2D"]
+[node name="playerduckie" type="KinematicBody2D" groups=["player"]]
 z_index = 1
 collision_layer = 3
 collision_mask = 3
@@ -291,7 +291,7 @@ z_index = 1
 [node name="ColorRect" type="ColorRect" parent="ui"]
 margin_right = 1032.0
 margin_bottom = 602.0
-color = Color( 1, 0, 0, 0.333333 )
+color = Color( 1, 0, 0, 0 )
 
 [node name="shopui" type="CanvasLayer" parent="."]
 

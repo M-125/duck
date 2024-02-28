@@ -1305,7 +1305,7 @@ script = ExtResource( 16 )
 
 [node name="sync" type="Node" parent="."]
 script = ExtResource( 17 )
-variables = [ "../loader:Seed" ]
+variables = [ "../loader:Seed", "../trees:Seed" ]
 refresh_rate = 1
 
 [connection signal="timeout" from="chests/Timer" to="chests" method="loadstuff"]

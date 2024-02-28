@@ -16,6 +16,6 @@ func _process(delta):
 	if Global.player!=null and is_instance_valid(Global.player):
 		global_position=Global.player.global_position
 		material.set_shader_param("offset",global_position/3)
-	if Global.gamefinished:
-		set_process(false)
+#	if Global.gamefinished:
+#		set_process(false)
 	pass

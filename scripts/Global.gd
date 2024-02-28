@@ -17,7 +17,7 @@ var playerontilemap=-1
 var playerjump=true
 var mapsize=200
 var chunksize=16
-var small_stuff=[0,0,0,0,0]
+var small_stuff=[0,0,0,500,0]
 var scene
 signal valuechange
 var nochick =false

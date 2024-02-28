@@ -43,13 +43,14 @@ func _on_button_pressed():
 
 
 func _on_button2_pressed():
-	
+	Global.playerpack=null
 	get_tree().change_scene("res://scenes/map2.0.tscn")
 	Server.createserver()
 	pass # Replace with function body.
 
 
 func _on_button3_pressed():
+	Global.playerpack=null
 	Server.ip=$TextEdit.text
 	Server.join()
 	yield(Server,"ID_received")
