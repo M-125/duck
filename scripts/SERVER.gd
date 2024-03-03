@@ -47,7 +47,9 @@ func reset():
 	 itemload=load("res://scenes/item.tscn")
 	 wait=0
 	 ID=0
-	 
+	
+func serverspawned(node):
+	return node.is_in_group("serverspawned")
 #func _connected_to_server():
 #	pass
 
@@ -157,3 +159,5 @@ remote func leavetree(path):
 		Server.outsideTreeList.append(node)
 		
 		node.get_parent().remove_child(node)
+func getsyncer(node):
+	return node.get_node("MultiPlayerSyncer")

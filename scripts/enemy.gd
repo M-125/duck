@@ -39,7 +39,8 @@ func _ready():
 		$collision.collision_mask=2
 	collision_mask=8
 	collision_layer=8
-	if get_parent().get_node_or_null("MultiPlayerSpawner")!=null:
+	if not Server.serverspawned(self):name="enemy"+str(randi())
+	if get_parent().get_node_or_null("MultiPlayerSpawner")!=null and not is_in_group("serverspawned"):
 		get_parent().get_node_or_null("MultiPlayerSpawner").add_node(self)
 	ready()
 	pass # Replace with function body.
@@ -95,6 +96,7 @@ func damage(dmg,velocity=Vector2(0,0),stunn=0.2):
 		if not dropped:
 			drop()
 			dropped=true
+		rpc("die")
 		queue_free()
 
 	
@@ -222,3 +224,8 @@ func kill():
 	while hp>0:
 		yield(get_tree(),"idle_frame")
 		damage(1)
+remote func die():
+	if not dropped:
+			drop()
+			dropped=true
+	queue_free()

@@ -25,7 +25,7 @@ var itemname=["pan","AR","sword"]
 var itemtype={
 	"pan":"pan.png",
 	"sword":"redsword.png",
-	"AR":"AR.png",
+	"AR":"rpk.png",
 	"amethyst sword":"amsword.png"
 }
 var damagedir={
@@ -43,21 +43,20 @@ static func get_img(item):
 	var itemtype={
 	"pan":"pan.png",
 	"sword":"redsword.png",
-	"AR":"AR.png",
+	"AR":"rpk.png",
 	"amethyst sword":"amsword.png"
 	}
 	return load("res://"+itemtype[item])
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if get_parent().get_node_or_null("MultiPlayerSpawner")!=null:get_parent().get_node("MultiPlayerSpawner").add_node(self)
+	while int(name)==0:
+		name="item"+str(randi())
+	if get_parent().get_node_or_null("MultiPlayerSpawner")!=null and not Server.serverspawned(self):get_parent().get_node("MultiPlayerSpawner").add_node(self)
 	rng.randomize()
 	if item=="random":
 		item=itemname[round(rng.randf_range(0,1))]
 	randomize()
-	if Server.isserver:
-		id=rand_range(0,2000)
-		Server.items.append(self)
 	reload()
 	collision_layer=11
 	collision_mask=11

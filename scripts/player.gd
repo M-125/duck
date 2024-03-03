@@ -334,9 +334,11 @@ func item_manager():
 	if Input.is_action_just_pressed("drop") and $hrot/helditem.get_child_count()==1:
 		var item=$hrot/helditem.get_child(0)
 		var itempos=item.global_position
+		
 		item.get_parent().remove_child(item)
 		get_parent().add_child(item)
 		item.global_position=itempos
+		Server.getsyncer(item).syncnow()
 
 
 func _ready():

@@ -227,10 +227,9 @@ func reset():
 	_ready()
 
 func alert(string):
-	if alertfeed.get_child_count()==1:
-		var alert=load("res://scenes/alert.tscn").instance()
-		alert.text=str(string)
-		alertfeed.add_child(alert)
+	var alert=load("res://scenes/alert.tscn").instance()
+	alert.text=str(string)
+	alertfeed.add_child(alert)
 
 func music(Music):
 	if Music!="":

@@ -13,9 +13,11 @@ func _ready():
 	rpc("get_spawned",Server.ID)
 	pass # Replace with function body.
 
-
+func _process(delta):
+	for e in nodes:
+		if not is_instance_valid(e):
+			nodes.erase(e)
 master func get_spawned(id):
-	print(str(id)+" wants stuff")
 	print(nodes)
 	for e in nodes:
 		var node =e.filename
@@ -24,12 +26,14 @@ master func get_spawned(id):
 remote func spawn(node,path,name):
 	print(path,node,name)
 	node=load(node)
+	Global.alert(str(node)+"  "+path+"   "+name)
 	for e in nodes:
 		if str(path)+"/"+name ==e.get_path():
 			return
 	if get_node_or_null(path)!=null:
 		var instance=node.instance()
 		instance.name=name
+		instance.add_to_group("serverspawned")
 		get_node(path).add_child(instance)
 		nodes.append(instance)
 
@@ -39,7 +43,7 @@ func add_node(node):
 		if not is_instance_valid(e):
 			nodes.erase(e)
 	for e in nodes:
-		if node.get_path()==e.get_path():
+		if (not is_instance_valid(e)) and node.get_path()==e.get_path():
 			return
 	if node in nodes:
 		return

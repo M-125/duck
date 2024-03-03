@@ -28,7 +28,9 @@ func _ready():
 	for e in variables:
 		list.append(NodePath(e))
 	variables=list
-	
+	if ((not Master) and islocal()) or (Master and Server.isserver()):
+		for e in variables:
+			rpc("setvar",e,get_from_node(e))
 	
 	pass # Replace with function body.
 func get_from_node(path:String):
@@ -42,8 +44,9 @@ func _process(delta):
 		timer+=delta
 		if timer>1/refresh_rate and Server.isconnect():
 			timer=0
-			if islocal() or (Master and Server.isserver()):
+			if ((not Master) and islocal()) or (Master and Server.isserver()):
 				for e in variables:
+					if "enemy" in get_parent().name:print(Server.isserver)
 					if reliable:rpc("setvar",e,get_from_node(e))
 					else: rpc_unreliable("setvar",e,get_from_node(e))
 	pass
@@ -54,3 +57,6 @@ func set_from_node(path:String,val):
 
 remote func setvar(path,value):
 	set_from_node(path,value)
+func syncnow():
+	for e in variables:
+			rpc("setvar",e,get_from_node(e))

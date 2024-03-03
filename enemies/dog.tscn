@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://enemies/dog.gd" type="Script" id=1]
 [ext_resource path="res://duckie.png" type="Texture" id=2]
 [ext_resource path="res://scenes/enemy.tres" type="Material" id=3]
+[ext_resource path="res://enemies/enemysyncer.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.5, 7.5 )
@@ -190,6 +191,8 @@ shape = SubResource( 23 )
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="MultiPlayerSyncer" parent="." instance=ExtResource( 4 )]
 
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="screenenter"]
 [connection signal="body_entered" from="throw" to="." method="_on_throw_body_entered"]

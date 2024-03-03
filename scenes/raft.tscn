@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scripts/raft.gd" type="Script" id=1]
 [ext_resource path="res://scenes/press E.tscn" type="PackedScene" id=2]
 [ext_resource path="res://raft.png" type="Texture" id=3]
+[ext_resource path="res://classes/multiplayerpathcontroller.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
@@ -133,6 +134,9 @@ process_material = SubResource( 14 )
 
 [node name="press_E" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1, -25.5 )
+
+[node name="MultiPlayerPathController" type="Node" parent="."]
+script = ExtResource( 4 )
 
 [connection signal="body_entered" from="." to="." method="_on_item_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_item_body_exited"]

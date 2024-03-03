@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://classes/multiplayersyncer.gd" type="Script" id=1]
+
+[node name="MultiPlayerSyncer" type="Node"]
+script = ExtResource( 1 )
+variables = [ "..:position", "..:hp" ]
+Master = true
