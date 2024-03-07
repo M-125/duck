@@ -84,20 +84,25 @@ func placedrop(type):
 func damage(dmg,velocity=Vector2(0,0),stunn=0.2):
 	attacking=false
 	Global.addsound("hit",global_position)
-	veloc=velocity
 	var label=load("res://scenes/damagemeter.tscn").instance()
 	label.get_node("Label").text=str(round(abs(dmg)))
 	get_parent().add_child(label)
 	label.global_position=global_position
-	hp-=abs(dmg)
-	stun=stunn
 	flash()
-	if hp<=0:
-		if not dropped:
-			drop()
-			dropped=true
-		rpc("die")
-		queue_free()
+	if $MultiPlayerSyncer.ismaster():
+		
+		veloc=velocity
+		
+		hp-=abs(dmg)
+		stun=stunn
+		
+		if hp<=0:
+			if not dropped:
+				drop()
+				dropped=true
+			rpc("die")
+			queue_free()
+	else:rpc("askdmg",dmg,velocity,stunn)
 
 	
 	pass # Replace with function body.
@@ -229,3 +234,17 @@ remote func die():
 			drop()
 			dropped=true
 	queue_free()
+
+master func askdmg(dmg,velocity,stunn):
+		
+	veloc=velocity
+	
+	hp-=abs(dmg)
+	stun=stunn
+	flash()
+	if hp<=0:
+		if not dropped:
+			drop()
+			dropped=true
+		rpc("die")
+		queue_free()

@@ -45,7 +45,6 @@ handle_input_locally = false
 render_target_update_mode = 3
 
 [node name="phone gui" parent="ViewportContainer/UI" instance=ExtResource( 4 )]
-visible = false
 
 [node name="gui" type="Sprite" parent="."]
 position = Vector2( 512, 300 )

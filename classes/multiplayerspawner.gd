@@ -20,8 +20,9 @@ func _process(delta):
 master func get_spawned(id):
 	print(nodes)
 	for e in nodes:
-		var node =e.filename
-		rpc_id(id,"spawn",node,e.get_parent().get_path(),e.name)
+		if is_instance_valid(e):
+			var node =e.filename
+			rpc_id(id,"spawn",node,e.get_parent().get_path(),e.name)
 
 remote func spawn(node,path,name):
 	print(path,node,name)

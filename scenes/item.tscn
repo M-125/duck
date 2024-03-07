@@ -83,6 +83,8 @@ item = "AR"
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+z_index = -1
+z_as_relative = false
 texture = ExtResource( 2 )
 
 [node name="particles" type="Particles2D" parent="."]

@@ -60,3 +60,5 @@ remote func setvar(path,value):
 func syncnow():
 	for e in variables:
 			rpc("setvar",e,get_from_node(e))
+func is_master():
+	return Server.isserver

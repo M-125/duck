@@ -62,6 +62,8 @@ func _ready():
 	collision_mask=11
 	connect("body_entered",self,"_on_item_body_entered")
 	connect("body_exited",self,"_on_item_body_exited")
+	$Sprite.z_as_relative=false
+	$Sprite.z_index=-1
 			
 	pass # Replace with function body.
 

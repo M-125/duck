@@ -65,6 +65,7 @@ extents = Vector2( 658, 15.5 )
 extents = Vector2( 16.5, 143.5 )
 
 [node name="map" type="Node2D"]
+z_index = -2
 script = ExtResource( 3 )
 
 [node name="Jelmez4" type="Sprite" parent="."]
@@ -199,8 +200,10 @@ position = Vector2( 75, 396 )
 
 [node name="item" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1145, 146 )
+z_index = 2
 item = "random"
 
 [node name="item3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 144, 458 )
+z_index = 2
 item = "pan"
