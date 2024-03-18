@@ -42,6 +42,11 @@ func _ready():
 	if not Server.serverspawned(self):name="enemy"+str(randi())
 	if get_parent().get_node_or_null("MultiPlayerSpawner")!=null and not is_in_group("serverspawned"):
 		get_parent().get_node_or_null("MultiPlayerSpawner").add_node(self)
+	if get_node_or_null("damage")!=null:
+		var node=$damage.duplicate(0)
+		node.scale/=2
+		add_child(node)
+		node.name="near"
 	ready()
 	pass # Replace with function body.
 
@@ -89,7 +94,7 @@ func damage(dmg,velocity=Vector2(0,0),stunn=0.2):
 	get_parent().add_child(label)
 	label.global_position=global_position
 	flash()
-	if $MultiPlayerSyncer.ismaster():
+	if $MultiPlayerSyncer.is_master() or not Server.isconnect():
 		
 		veloc=velocity
 		
@@ -144,6 +149,9 @@ func pathfind_velocity(velocity):
 		$Sprite.flip_h=false
 	elif velocity.x<0:
 		$Sprite.flip_h=true
+	
+	if get_node_or_null("damage")!=null and findplayer() in $near.get_overlapping_bodies():
+		velocity=Vector2.ZERO
 	return velocity
 
 func movement():
@@ -209,7 +217,8 @@ func findplayer():
 func velTo(player):
 	return (player.position-position).normalized()
 
-
+func distTo(player):
+	return position.distance_to(player.position)
 func attacking():
 	for body in $damage.get_overlapping_bodies():
 		if body.is_in_group("player") and cooldown<=0 and not attacking:

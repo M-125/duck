@@ -177,3 +177,13 @@ func use():
 	return false
 	pass
 
+func getplayer():
+	if get_parent().get_parent().get_parent().is_in_group("player"):return get_parent().get_parent().get_parent()
+		
+func animate(string):
+	var anim=$AnimationPlayer.get_animation(string)
+	for e in range(anim.get_track_count()):
+		var path=str(anim.track_get_path(e))
+		path.replace("player",str(getplayer().get_path()))
+		anim.track_set_path(e,path)
+	$AnimationPlayer.play(string)

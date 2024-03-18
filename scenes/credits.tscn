@@ -62,11 +62,11 @@ columns = 2
 
 [node name="Label" type="Label" parent="ColorRect/GridContainer"]
 margin_right = 248.0
-margin_bottom = 98.0
+margin_bottom = 72.0
 size_flags_horizontal = 15
 size_flags_vertical = 15
 text = "Skorpio_48
-(chicken art, main menu ui buttons, phone controls art)"
+(chicken art, main menu ui buttons, phone controls art,some weapons)"
 align = 1
 valign = 1
 autowrap = true
@@ -74,19 +74,19 @@ autowrap = true
 [node name="Label2" type="Label" parent="ColorRect/GridContainer"]
 margin_left = 252.0
 margin_right = 500.0
-margin_bottom = 98.0
+margin_bottom = 72.0
 size_flags_horizontal = 15
 size_flags_vertical = 15
 text = "da cringe meme maker
-(shop art,rifle)"
+(shop art, old rifle :( )"
 align = 1
 valign = 1
 autowrap = true
 
 [node name="Label3" type="Label" parent="ColorRect/GridContainer"]
-margin_top = 102.0
+margin_top = 76.0
 margin_right = 248.0
-margin_bottom = 199.0
+margin_bottom = 148.0
 size_flags_horizontal = 15
 size_flags_vertical = 15
 text = "MacroFaizo
@@ -97,9 +97,9 @@ autowrap = true
 
 [node name="Label4" type="Label" parent="ColorRect/GridContainer"]
 margin_left = 252.0
-margin_top = 102.0
+margin_top = 76.0
 margin_right = 500.0
-margin_bottom = 199.0
+margin_bottom = 148.0
 size_flags_horizontal = 15
 size_flags_vertical = 15
 text = "martinfuchs
@@ -109,13 +109,38 @@ valign = 1
 autowrap = true
 
 [node name="Label5" type="Label" parent="ColorRect/GridContainer"]
-margin_top = 203.0
+margin_top = 152.0
 margin_right = 248.0
-margin_bottom = 300.0
+margin_bottom = 224.0
 size_flags_horizontal = 15
 size_flags_vertical = 15
 text = "PixelHole
 (world tileset)"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Label6" type="Label" parent="ColorRect/GridContainer"]
+margin_left = 252.0
+margin_top = 152.0
+margin_right = 500.0
+margin_bottom = 224.0
+size_flags_horizontal = 15
+size_flags_vertical = 15
+text = "Rox24
+(new art stuff coming soon)"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Label7" type="Label" parent="ColorRect/GridContainer"]
+margin_top = 228.0
+margin_right = 248.0
+margin_bottom = 300.0
+size_flags_horizontal = 15
+size_flags_vertical = 15
+text = "Akos36
+(pizza pixelart)"
 align = 1
 valign = 1
 autowrap = true

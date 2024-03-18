@@ -18,7 +18,7 @@ func _ready():
 	damage=20
 	while not is_instance_valid(Global.player):
 		yield(get_tree(),"idle_frame")
-	
+	$AnimationPlayer.get_animation("jump")
 	playersprite=Global.player.get_node("Sprite")
 	pass # Replace with function body.
 
@@ -33,10 +33,10 @@ func idle(delta):
 func abilitymove(delta):
 	if Enemy!=null and is_instance_valid(Enemy):
 		var dist=Enemy.global_position.distance_squared_to(Global.player.global_position)
-		if dist<30*30:
+		if dist<900:
 			
 			process="idle"
-			
+			yield(getplayer(),"custom_anim_finish")
 			playersprite.rotation_degrees=0
 			Global.player.collision_layer=playercoll
 			Global.player.collision_mask=playercoll
@@ -69,12 +69,12 @@ func ability():
 				dist=e.global_position.distance_to(Global.player.global_position)
 				Enemy=e
 		speed=clamp(dist,500,99999)
-	
-	playersprite.rotation_degrees=180
-	process="abilitymove"
-	playercoll=Global.player.collision_layer
-	Global.player.collision_layer=0
-	Global.player.collision_mask=0
+	if Enemy!=null:
+		process="abilitymove"
+		playercoll=Global.player.collision_layer
+		Global.player.collision_layer=0
+		Global.player.collision_mask=0
+		getplayer().animate("jump")
 	pass
 
 

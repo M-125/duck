@@ -23,6 +23,7 @@ var nohitbox=[]
 var clickend=false
 var chargetime=0
 signal interactshop
+signal custom_anim_finish
 signal interact
 var lastveloc:Vector2
 var invincible=false
@@ -99,10 +100,10 @@ func move(delta):
 	
 	if velocity.x>0:
 		
-		$Sprite.flip_h=false
+		$Sprite/Sprite.flip_h=false
 	elif velocity.x<0:
 		
-		$Sprite.flip_h=true
+		$Sprite/Sprite.flip_h=true
 		
 		
 	var velocit=Vector2(0,0)
@@ -274,7 +275,7 @@ func weapon(rotspeed):
 				
 		weapon.in_hitbox.erase(enemy)
 		if abs(rotspeed)>=10 and is_instance_valid(enemy) and  not weapon.isgun:
-			var knock=weapon.calc_knockback(abs(weapon.damage*rotspeed/10),enemy)
+			var knock=weapon.calc_knockback(abs(10*rotspeed/10),enemy)
 			
 			enemy.damage(weapon.damage*rotspeed/10,
 			knock
@@ -605,3 +606,14 @@ func spawnenemy(enemy):
 
 func inv():
 	invincible=!invincible
+
+func animate(path):
+	var anim=load("res://itemanims/"+path+".tres")
+	if $customplayer.add_animation("custom",anim)==0:
+		$AnimationTree.active=false
+		$AnimationPlayer.stop()
+		$customplayer.play("custom")
+		yield($customplayer,"animation_finished")
+		emit_signal("custom_anim_finish")
+		$AnimationTree.active=true
+		$AnimationPlayer.play()
