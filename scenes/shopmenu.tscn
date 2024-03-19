@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://shopmenu.png" type="Texture" id=1]
 [ext_resource path="res://scenes/craftbutton.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scripts/shopmenu.gd" type="Script" id=5]
 [ext_resource path="res://items/rpg.tscn" type="PackedScene" id=6]
 [ext_resource path="res://items/rifle.tscn" type="PackedScene" id=7]
+[ext_resource path="res://items/pizza.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1, 1 )
@@ -74,6 +75,8 @@ margin_left = 492.0
 margin_top = 284.0
 margin_right = 924.0
 margin_bottom = 500.0
-amount1 = 50
+isunique = true
+uniqueitem = ExtResource( 8 )
+amount1 = 20
 
 [connection signal="pressed" from="button2" to="." method="leaveshop"]

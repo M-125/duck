@@ -7,7 +7,6 @@ extends enemy
 
 # Called when the node enters the scene tree for the first time.
 func ready():
-	hp=300
 	pass # Replace with function body.
 #func flash():
 #	$Sprite.material.set_shader_param("white",1)

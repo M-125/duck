@@ -11,7 +11,6 @@ var throwcooldown=0
 func ready():
 	connect("attack",self,"attack")
 	connect("attacked",self,"attacked")
-	hp=50
 	pass 
 
 func _process(delta):

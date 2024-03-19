@@ -117,6 +117,7 @@ z_index = 1
 collision_layer = 8
 collision_mask = 8
 script = ExtResource( 2 )
+hp = 300
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2( 9, 9 )

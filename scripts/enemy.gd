@@ -17,6 +17,7 @@ var attack=0
 var attacking=false
 var attackedplayer=null
 var Attackdelay=0.2
+export var max_hp=0
 const DEFAULT_SPEED=300
 signal attacked
 # Declare member variables here. Examples:
@@ -57,8 +58,10 @@ func ready():
 func _process(delta):
 	
 	if get_node_or_null("hpbar")!= null:
-		if $hpbar.max_value<hp:
-			$hpbar.max_value=hp
+		if max_hp<hp:
+			
+			max_hp=hp
+		$hpbar.max_value=max_hp
 		$hpbar.value=hp
 	mustattack-=delta
 	resetdirdelay-=delta
