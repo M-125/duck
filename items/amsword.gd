@@ -32,6 +32,7 @@ func idle(delta):
 	
 func abilitymove(delta):
 	if Enemy!=null and is_instance_valid(Enemy):
+		getplayer().stun=1
 		var dist=Enemy.global_position.distance_squared_to(Global.player.global_position)
 		if dist<900:
 			
@@ -70,6 +71,7 @@ func ability():
 				Enemy=e
 		speed=clamp(dist,500,99999)
 	if Enemy!=null:
+		yield(get_tree(),"idle_frame")
 		process="abilitymove"
 		playercoll=Global.player.collision_layer
 		Global.player.collision_layer=0

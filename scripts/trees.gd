@@ -19,7 +19,7 @@ func _ready():
 	else:
 		rng.randomize()
 		Seed=rng.Seed
-		
+	loadpos0()
 
 
 func _process(delta):
@@ -28,19 +28,39 @@ func _process(delta):
 		erasemap()
 		wait=0
 	wait+=delta
-
+func loadpos0():
+	var pos=Vector2(0,0)
+#	var viewdistance=Global.viewdistance*Global.chunksize
+	var loaded=0
+	for e in range(-2,3):
+		for i in range(-2,3):
+			var poss=Vector2(pos.x+e,pos.y+i)
+			loaded+=loadchunk(poss)
+	if loaded<=0:
+		var view=Global.viewdistance/2
+		var list=[]
+		for e in range(pos.x-view,pos.x+view):
+			for i in range(pos.y-view,pos.y+view):
+				list.append(Vector2(e,i))
+		var counter=0
+		for e in list:
+			if loadchunk(e)==1:
+				counter+=1
+#				if counter>=1:
+				break
 func loadmap():
 	var pos=(world_to_map(to_local(Global.player.global_position))/Global.chunksize).round()
 #	var viewdistance=Global.viewdistance*Global.chunksize
 	var loaded=0
-	for e in range(-Global.viewdistance,Global.viewdistance):
-		for i in range(-Global.viewdistance,Global.viewdistance):
+	for e in range(-2,3):
+		for i in range(-2,3):
 			var poss=Vector2(pos.x+e,pos.y+i)
 			loaded+=loadchunk(poss)
 	if loaded<=0:
+		var view=Global.viewdistance/2
 		var list=[]
-		for e in range(pos.x-Global.viewdistance,pos.x+Global.viewdistance):
-			for i in range(pos.y-Global.viewdistance,pos.y+Global.viewdistance):
+		for e in range(pos.x-view,pos.x+view):
+			for i in range(pos.y-view,pos.y+view):
 				list.append(Vector2(e,i))
 		var counter=0
 		for e in list:
@@ -51,6 +71,8 @@ func loadmap():
 
 func loadchunk(pos):
 	var mapedge=world_to_map(to_local(mainmap.to_global(mainmap.map_to_world(Vector2(Global.mapsize,Global.mapsize))))).x-1
+	pos.x=clamp(pos.x,0,INF)
+	pos.y=clamp(pos.y,0,INF)
 	if not pos in loadedchunks:
 		loadedchunks.append(pos)
 		for e in range(clamp((pos.x)*(Global.chunksize),0,mapedge),clamp((pos.x+1)*(Global.chunksize),0,mapedge)):

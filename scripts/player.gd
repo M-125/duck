@@ -249,7 +249,6 @@ func weapon(rotspeed):
 	var weapon=$hrot/helditem.get_child(0)
 	if clickattack<0 and !clickend:
 		nohitbox=[]
-		
 		clickend=true
 #	end of clickattack
 	
@@ -436,7 +435,9 @@ func _process(delta):
 		interact()
 		item_manager()
 		Global.playerposition=global_position
-		jump()
+		
+		if stun<=0:
+			jump()
 		
 		wait +=delta
 

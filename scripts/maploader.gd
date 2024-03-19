@@ -21,7 +21,6 @@ func _ready():
 	connect("loaded",self,"loading")
 	Global.connect("reload",self,"reload")
 	loading()
-	
 	pass
 	
 func loadmap(pos):
@@ -70,7 +69,7 @@ func loading():
 						m.loadmap(matrix)
 					break
 	for n in range(Global.viewdistance):
-		var canbreak=4
+		var canbreak=1
 		for e in range(-n,n+1):
 			
 			for i in range(-n,n+1):

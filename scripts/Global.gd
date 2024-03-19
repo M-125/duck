@@ -39,6 +39,7 @@ signal item
 signal reload
 signal givemoney
 signal kill
+signal shake
 signal inv
 signal horde
 signal enemy
@@ -241,3 +242,5 @@ func money(num):
 	small_stuff[0]+=int(num)
 func debug(object):
 	debug.text=str(object)
+func shake(strength:float):
+	emit_signal("shake",strength)

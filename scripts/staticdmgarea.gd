@@ -14,6 +14,6 @@ func _physics_process(delta):
 	p.emitting=true
 	for body in get_overlapping_bodies():
 		if body is enemy:
-			body.damage(80,Vector2(rand_range(0,0.1),rand_range(0,0.1)).normalized()*8000,0.6)
+			body.damage(80,Vector2(rand_range(-0.1,0.1),rand_range(-0.1,0.1)).normalized()*16000,0.6)
 	
 	queue_free()
