@@ -73,19 +73,20 @@ func erasemap():
 		eraselist=[]
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
-puppet func randoms(s1,rnd):
+puppet func random(s1,rnd):
 	rng.Seed=s1
+	rngseed=s1
 	random=rnd
-	
-func update():
-	if Server.isserver:
-		rpc("randoms",rng.Seed,random)
+
+master func askrandoms():
+	rpc("random",rngseed,random)
 
 func _ready():
 	if random==0:
 		random=randi()+randi()/randi()*randi()
+	rpc("askrandoms")
+	Global.connect("reload",self,"reload")
 
-
-func _on_Timer_timeout():
-	rng.Seed=rngseed
-	pass # Replace with function body.
+func reload():
+	positionn=Vector2(-200,-200)
+	positionnn=Vector2(-200,-200)

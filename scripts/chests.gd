@@ -34,6 +34,7 @@ func loadmap():
 				
 				if round(rnd)==50 and !opened:
 					set_cell(e,i,0)
+				yield(get_tree(),"idle_frame")
 				
 				
 			
@@ -60,7 +61,8 @@ func _ready():
 		Seed=rng.seed
 	if random==0:
 		random=(rng2.randi()+rng2.randi()/rng2.randi()*rng2.randi()-rng2.randi())*rng2.state
-
+	rpc("askrandoms")
+	Global.connect("reload",self,"reload")
 
 func _on_Timer_timeout():
 	rng.seed=Seed
@@ -70,3 +72,16 @@ func _on_Timer_timeout():
 func loadstuff():
 	erasemap()
 	loadmap()
+
+
+puppet func random(s1,rnd):
+	rng.seed=s1
+	Seed=s1
+	random=rnd
+
+master func askrandoms():
+	rpc("random",Seed,random)
+
+func reload():
+	positionn=Vector2(-200,-200)
+	positionnn=Vector2(-200,-200)

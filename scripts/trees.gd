@@ -20,6 +20,8 @@ func _ready():
 		rng.randomize()
 		Seed=rng.Seed
 	loadpos0()
+	rpc("askrandoms")
+	Global.connect("reload",self,"reload")
 
 
 func _process(delta):
@@ -110,13 +112,18 @@ func erasechunk(pos):
 
 puppet func random(s1,rnd):
 	rng.Seed=s1
+	Seed=s1
 	random=rnd
-	
-func update():
-	if Server.isserver:
-		rpc("randoms",rng.Seed,random)
+	print("randoms",s1," ",rnd)
+	Global.emit_signal("reload")
 
+master func askrandoms():
+	rpc("random",Seed,random)
+	print("asked randoms")
 
 func _on_Timer_timeout():
 	rng.Seed=Seed
 	pass # Replace with function body.
+func reload():
+	for e in loadedchunks:
+		erasechunk(e)
