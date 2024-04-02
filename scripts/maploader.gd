@@ -54,12 +54,12 @@ func loading():
 	
 	
 	
-	for e in range(-2,3):for i in range(-2,3):
+	for e in range(-1,2):for i in range(-1,2):
 		var chunk=pos+Vector2(e,i)
 		chunk.x=clamp(chunk.x,0,Global.mapsize/Global.chunksize)
 		chunk.y=clamp(chunk.y,0,Global.mapsize/Global.chunksize)
 		if not chunk in loadedchunks:
-			thread.start(self,"loadmap",chunk,0)
+			thread.start(self,"loadmap",chunk,2)
 		while thread.is_active():
 			yield(get_tree(),"idle_frame")
 			if not thread.is_alive():

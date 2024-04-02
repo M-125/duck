@@ -10,7 +10,7 @@ var firstpos
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	firstpos=position
+	firstpos=global_position
 	
 	pass # Replace with function body.
 
@@ -20,11 +20,11 @@ func _process(delta):
 	if Input.is_action_just_pressed("recallcursor"):
 		reset()
 	if get_global_mouse_position()!=mosepos:
-		position=get_global_mouse_position()
-		mosepos=position
+		global_position=get_global_mouse_position()
+		mosepos=global_position
 	else:
 		var veloc=Vector2(Input.get_joy_axis(0,0)*500*delta,Input.get_joy_axis(0,1)*500*delta)
-		position+=veloc
+		global_position+=veloc
 		for e in get_children():
 			if e is Sprite:
 				hassprite=true
@@ -38,13 +38,13 @@ func _process(delta):
 	pass
 func _input(event):
 	if event is InputEventScreenTouch and event.pressed:
-		position=event.position
+		global_position=event.global_position
 #		get_viewport().set_input_as_handled()
 	if event is InputEventScreenDrag:
 
-		position=event.position
+		global_position=event.global_position
 
 #		get_viewport().set_input_as_handled()
 #
 func reset():
-	position=firstpos
+	global_position=firstpos

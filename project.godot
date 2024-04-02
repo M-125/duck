@@ -69,6 +69,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Node2D.gd"
 }, {
+"base": "Area2D",
+"class": "custombutton",
+"language": "GDScript",
+"path": "res://classes/custonbutton.gd"
+}, {
 "base": "Node2D",
 "class": "damagemeter",
 "language": "GDScript",
@@ -157,6 +162,7 @@ _global_script_class_icons={
 "button": "",
 "craftbutton": "",
 "cursor": "",
+"custombutton": "",
 "damagemeter": "",
 "enemy": "",
 "enemyprojectile": "",
