@@ -18,6 +18,7 @@ var attacking=false
 var attackedplayer=null
 var Attackdelay=0.2
 export var max_hp=0
+export var flip_h=false
 const DEFAULT_SPEED=300
 signal attacked
 # Declare member variables here. Examples:
@@ -45,7 +46,7 @@ func _ready():
 		get_parent().get_node_or_null("MultiPlayerSpawner").add_node(self)
 	if get_node_or_null("damage")!=null:
 		var node=$damage.duplicate(0)
-		node.scale/=2
+		node.scale/=1.5
 		add_child(node)
 		node.name="near"
 	ready()
@@ -149,9 +150,9 @@ func pathfind_velocity(velocity):
 	if Global.gamefinished:
 		velocity=-velocity
 	if velocity.x>0:
-		$Sprite.flip_h=false
+		$Sprite.flip_h=flip_h
 	elif velocity.x<0:
-		$Sprite.flip_h=true
+		$Sprite.flip_h=not flip_h
 	
 	if get_node_or_null("damage")!=null and findplayer() in $near.get_overlapping_bodies():
 		velocity=Vector2.ZERO

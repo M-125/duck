@@ -1,0 +1,27 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+uniform sampler2D tx;
+void fragment(){
+	COLOR=texture(TEXTURE,UV);
+	if (COLOR.g==1.0){
+		COLOR=texture(tx,UV)
+	}
+}"
+
+[sub_resource type="Gradient" id=2]
+interpolation_mode = 1
+offsets = PoolRealArray( 0, 0.277419, 0.567742, 0.806452 )
+colors = PoolColorArray( 0.92549, 0.65098, 0, 1, 1, 1, 1, 1, 0.92549, 0.65098, 0, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture2D" id=3]
+flags = 3
+gradient = SubResource( 2 )
+width = 28
+height = 28
+fill_to = Vector2( 0.764445, 0.788467 )
+
+[resource]
+shader = SubResource( 1 )
+shader_param/tx = SubResource( 3 )

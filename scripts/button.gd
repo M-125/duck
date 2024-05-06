@@ -1,6 +1,5 @@
 extends Area2D
 class_name button
-export var waittime=0.3
 export var text=""
 export(Color) var color
 var curs=false
@@ -50,7 +49,7 @@ func _process(delta):
 		if (Input.is_action_just_released("interact")or Input.is_action_just_released("attack")) and curs:
 			emit_signal("pressed")
 #			queue_free()
-			wait=waittime
+			wait=0.3
 		if canchangelooks:
 			if curs:
 				$ColorRect2.color=Color.greenyellow

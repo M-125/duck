@@ -49,6 +49,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/saver.gd"
 }, {
+"base": "Sprite",
+"class": "Sprites",
+"language": "GDScript",
+"path": "res://classes/scratchsprite.gd"
+}, {
 "base": "Control",
 "class": "VirtualJoystick",
 "language": "GDScript",
@@ -68,11 +73,6 @@ _global_script_classes=[ {
 "class": "cursor",
 "language": "GDScript",
 "path": "res://scripts/Node2D.gd"
-}, {
-"base": "Area2D",
-"class": "custombutton",
-"language": "GDScript",
-"path": "res://classes/custonbutton.gd"
 }, {
 "base": "Node2D",
 "class": "damagemeter",
@@ -158,11 +158,11 @@ _global_script_class_icons={
 "Player": "",
 "Rng": "",
 "Saver": "",
+"Sprites": "",
 "VirtualJoystick": "",
 "button": "",
 "craftbutton": "",
 "cursor": "",
-"custombutton": "",
 "damagemeter": "",
 "enemy": "",
 "enemyprojectile": "",
@@ -186,7 +186,7 @@ config/name="duck"
 run/main_scene="res://scenes/mainmenu.tscn"
 boot_splash/image="res://splash.png"
 boot_splash/use_filter=false
-boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
+boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://zsCwbf.png"
 config/macos_native_icon="res://zsCwbf.png"
 config/windows_native_icon="res://zsCwbf.png"
@@ -308,7 +308,7 @@ drop={
 }
 attack={
 "deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"doubleclick":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":7,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
@@ -320,7 +320,7 @@ craft={
 }
 "reverse aim"={
 "deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"canceled":false,"pressed":false,"doubleclick":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":6,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
@@ -334,10 +334,6 @@ debug={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777248,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
-
-[input_devices]
-
-pointing/emulate_mouse_from_touch=false
 
 [physics]
 

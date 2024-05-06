@@ -1,35 +1,18 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://scenes/enemy.tres" type="Material" id=1]
-[ext_resource path="res://duckie.png" type="Texture" id=2]
+[ext_resource path="res://classes/scratchsprite.gd" type="Script" id=1]
+[ext_resource path="res://catrun/1.png" type="Texture" id=2]
 [ext_resource path="res://enemies/cat.gd" type="Script" id=3]
 [ext_resource path="res://enemies/enemysyncer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://greentotexture.tres" type="Material" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.5, 7.5 )
 
-[sub_resource type="Animation" id=17]
-resource_name = "FLY"
-length = 0.3
-loop = true
-step = 0.15
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 11, 12 ]
-}
-
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=25]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -37,57 +20,36 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
+"update": 1,
+"values": [ ExtResource( 2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:Frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=26]
+resource_name = "walk"
 loop = true
-step = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprite:Frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 4, 5, 6, 7 ]
-}
-
-[sub_resource type="Animation" id=18]
-resource_name = "open wings"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 9, 10, 11, 12 ]
-}
-
-[sub_resource type="Animation" id=4]
-length = 0.2
-loop = true
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1, 0.15 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3 ]
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 10 ]
 }
 
 [sub_resource type="RectangleShape2D" id=11]
@@ -122,25 +84,23 @@ collision_layer = 2
 collision_mask = 2
 script = ExtResource( 3 )
 hp = 50
+flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2( 3, 3 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-material = ExtResource( 1 )
-scale = Vector2( 3, 3 )
+material = ExtResource( 5 )
+scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 2 )
-hframes = 4
-vframes = 4
+flip_h = true
+script = ExtResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-playback_speed = 0.3
-anims/FLY = SubResource( 17 )
-anims/RESET = SubResource( 2 )
-anims/idle = SubResource( 3 )
-"anims/open wings" = SubResource( 18 )
-anims/walk = SubResource( 4 )
+autoplay = "walk"
+anims/RESET = SubResource( 25 )
+anims/walk = SubResource( 26 )
 
 [node name="damage" type="Area2D" parent="."]
 scale = Vector2( 3, 3 )
