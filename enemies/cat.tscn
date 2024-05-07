@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://classes/scratchsprite.gd" type="Script" id=1]
 [ext_resource path="res://catrun/1.png" type="Texture" id=2]
@@ -36,6 +36,35 @@ tracks/1/keys = {
 "values": [ 0 ]
 }
 
+[sub_resource type="Animation" id=27]
+resource_name = "idle"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:folder")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "catrun/idle" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:Frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
 [sub_resource type="Animation" id=26]
 resource_name = "walk"
 loop = true
@@ -50,6 +79,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0, 10 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:folder")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "catrun" ]
 }
 
 [sub_resource type="RectangleShape2D" id=11]
@@ -83,6 +124,9 @@ z_index = 1
 collision_layer = 2
 collision_mask = 2
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_vertical_guides_": [ -217.0 ]
+}
 hp = 50
 flip_h = true
 
@@ -94,12 +138,13 @@ shape = SubResource( 1 )
 material = ExtResource( 5 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 2 )
-flip_h = true
 script = ExtResource( 1 )
+folder = "catrun/idle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "walk"
 anims/RESET = SubResource( 25 )
+anims/idle = SubResource( 27 )
 anims/walk = SubResource( 26 )
 
 [node name="damage" type="Area2D" parent="."]

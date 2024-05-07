@@ -1,10 +1,10 @@
 tool
 extends Sprite
 class_name Sprites
-var textures=[]
+var textures={}
 export var Frame=0
 export var folder="catrun"
-export var files_in_folder=11
+var prevar=""
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -12,17 +12,27 @@ export var files_in_folder=11
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	prevar=folder
+	var f=File.new()
+	var i=0
+	textures[folder]=[]
+	while f.file_exists("res://"+folder+"/"+str(i+1)+".png"):
 	
-	for e in range(files_in_folder):
-		textures.append(load("res://"+folder+"/"+str(e+1)+".png"))
-	texture=textures[0]
+		textures[folder].append(load("res://"+folder+"/"+str(i+1)+".png"))
+		i+=1
+
+	texture=textures[folder][0]
+
 	pass # Replace with function body.
 
 
 # Called every Frame. 'delta' is the elapsed time since the previous Frame.
 func _process(delta):
-	if Frame>=files_in_folder:
-		Frame=files_in_folder-1
+	if prevar!=folder or (not textures.has(folder)):_ready()
+	if Frame>=textures[folder].size():
+		Frame=textures[folder].size()-1
 	elif Frame<0:
 		Frame=0
-	texture=textures[Frame]
+	texture=textures[folder][Frame]
+	
+	
