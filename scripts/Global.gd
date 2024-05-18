@@ -11,7 +11,7 @@ var ingame
 var maps=[]
 var speedmod=0
 var speedmodmin=0
-var speedmodmax=150
+var speedmodmax=100
 var viewdistance=7
 var playerontilemap=-1
 var playerjump=true
@@ -64,7 +64,10 @@ func _ready():
 		debug=Label.new()
 		if Debug:alertfeed.add_child(debug)
 	
-	
+func in_dict(value,dict:Dictionary,key:String):
+	for e in dict:
+		if value==dict[key]:return true
+	return false
 	
 	
 func item(itemname:String):

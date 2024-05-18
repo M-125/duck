@@ -85,3 +85,6 @@ master func askrandoms():
 func reload():
 	positionn=Vector2(-200,-200)
 	positionnn=Vector2(-200,-200)
+func loot(tilepos):
+	if get_cellv(tilepos)==0:
+		return Global.itemloot[floor(rand_range(0,len(Global.itemloot)))]

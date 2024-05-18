@@ -553,8 +553,9 @@ func openchest():
 				var tilepos=playerpos+Vector2(e,i)
 				if chestmap.get_cellv(tilepos)==0:
 					
-					var item=Global.itemloot[floor(rand_range(0,len(Global.itemloot)))].instance()
+					var item=chestmap.loot(tilepos).instance()
 					item.item="random"
+					
 					chestmap.set_cellv(tilepos,-1)
 					chestmap.openchests.append(tilepos)
 					get_parent().add_child(item)

@@ -21,6 +21,8 @@ export var max_hp=0
 export var flip_h=false
 const DEFAULT_SPEED=300
 signal attacked
+var detected=[]
+var forgettime=10
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -28,6 +30,7 @@ signal attacked
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	add_to_group("enemy")
 	Global.connect("kill",self,"kill")
 	if get_node_or_null('pathfind')!=null:
 		$pathfind.collision_layer=4
@@ -70,6 +73,10 @@ func _process(delta):
 	dircd-=delta
 	deletecooldown-=delta
 	attack-=delta
+	for e in detected:
+		e["time"]-=delta
+		if e["time"]<0:
+			detected.erase(e)
 	if get_node_or_null("damage")!=null:
 		attacking()
 	if resetdirdelay<0:
@@ -202,8 +209,14 @@ func findplayer():
 	var players=[]
 	for i in get_parent().get_children():
 		
-		if "player" in i.name:
-			players.append(i)
+		if i.is_in_group("player"):
+			for e in detected:
+				if i==e["player"]:
+					players.append(i)
+			if i.position.distance_squared_to(position)<200000:
+				detected.append({"player":i,"time":forgettime})
+		if i.is_in_group("enemy") and i.position.distance_squared_to(position)<250000:
+			i.detect(detected)
 		
 	var minn=4000
 	if mustattack>0:
@@ -261,3 +274,10 @@ master func askdmg(dmg,velocity,stunn):
 			dropped=true
 		rpc("die")
 		queue_free()
+func detect(r):
+	for e in r:
+		var add=true
+		for i in detected:
+			if e["player"]==i["player"]:
+				add=false
+				break

@@ -10,12 +10,17 @@ export var spawnwait=30
 var enemies={
 	"dog":load("res://enemies/dog.tscn")
 }
+var chunk=[]
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 func _process(delta):
 	loadmap()
 	spawnwait-=delta
+	for e in chunk:
+		e["time"]-=delta
+		if e["time"]<=0:
+			chunk.erase(e)
 	
 func loadmap():
 	if not( Global.nochick or spawnwait>=0):
@@ -25,19 +30,19 @@ func loadmap():
 		var pos=(to_local(Global.playerposition)/16/3/(Global.chunksize)).round()
 		if pos !=positionn:
 			positionn=pos
-			var viewdist=2
+			var viewdist=1
 			for e in range(clamp((pos.x-viewdist)*(Global.chunksize),0,Global.mapsize-2),clamp((pos.x+viewdist)*(Global.chunksize),0,Global.mapsize-2)):
 				var canbreak=false
 				for i in range(clamp((pos.y-viewdist)*(Global.chunksize),0,Global.mapsize-2),clamp((pos.y+viewdist)*(Global.chunksize),0,Global.mapsize-2)):
 					rng.state=int(str(e)+str(i))*random*(e%8)
-					var rnd=rng.randi_range(0,1000)
+					var rnd=rng.randi_range(0,150)
 					
 					
 					
 					
-					if round(rnd)==200:
+					if round(rnd)==100:
 						
-						spawnwait=spawn(e,i)
+						spawn(e,i)
 						print(spawnwait)
 						canbreak=true
 						break
@@ -61,12 +66,15 @@ func _ready():
 	random=(rng2.randi()+rng2.randi()/rng2.randi()*rng2.randi()-rng2.randi())*rng2.state
 
 func spawn(x,y):
+	for e in chunk:
+		if Global.in_dict(Vector2(x,y),e,"pos"):
+			return
 	var spwn=int(round(rand_range(1,5)))
 	var spawnwait=spwn*20
 	var random=int(round(rand_range(0,4)))
 	while spwn >0:
 		match random:
-			0,3:
+			0,3,4:
 				spwn-=1
 				var chicken=preload("res://scenes/enemychicken.tscn")
 				for i in range(rand_range(1,2)):
@@ -78,12 +86,9 @@ func spawn(x,y):
 			2:
 				spwn-=1
 				place(preload("res://enemies/cat.tscn").instance(),x,y)
-			4:
-				spwn-=1
-				place(enemies["dog"].instance(),x,y)
 		random=int(round(rand_range(0,4)))
 		
-	return spawnwait
+	chunk.append({"pos":Vector2(x,y),"time":spawnwait})
 func horde():
 	var pos=(to_local(Global.playerposition)/16/3/(Global.chunksize)).round()
 	spawn(pos.x,pos.y)
