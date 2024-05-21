@@ -21,10 +21,16 @@ func spawn():
 	
 	var plr
 	if Global.playerpack==null:
-		plr=load("res://scenes/player.tscn").instance()
+		plr=load(loadskin()).instance()
 	else:
 		plr=Global.playerpack.instance()
 	plr.position=pos
 	plr.smallitems=smallitems
 	plr.randomspawn=randomspawn
 	get_parent().add_child(plr)
+func loadskin():
+	var file = File.new()
+	file.open("user://skin.dat", File.READ)
+	var content = file.get_as_text()
+	file.close()
+	return content
