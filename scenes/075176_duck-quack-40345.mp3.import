@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/075176_duck-quack-40345.mp3-786a6137be717bab9c2d162b582c63b7.mp3str"
+
+[deps]
+
+source_file="res://scenes/075176_duck-quack-40345.mp3"
+dest_files=[ "res://.import/075176_duck-quack-40345.mp3-786a6137be717bab9c2d162b582c63b7.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/83a9787d4cb6f3b7632b4ddfebf74367.wav-6ef8c9d3d639159d9d116698e3f40086.sample"
+
+[deps]
+
+source_file="res://idle/83a9787d4cb6f3b7632b4ddfebf74367.wav"
+dest_files=[ "res://.import/83a9787d4cb6f3b7632b4ddfebf74367.wav-6ef8c9d3d639159d9d116698e3f40086.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

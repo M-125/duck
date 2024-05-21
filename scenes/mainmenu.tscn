@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://scripts/Particles2D.gd" type="Script" id=1]
 [ext_resource path="res://scenes/button.tscn" type="PackedScene" id=2]
@@ -12,6 +12,9 @@
 [ext_resource path="res://menu.png" type="Texture" id=10]
 [ext_resource path="res://addons/onscreenkeyboard/onscreen_keyboard.gd" type="Script" id=11]
 [ext_resource path="res://scripts/volslider.gd" type="Script" id=12]
+[ext_resource path="res://up.png" type="Texture" id=13]
+[ext_resource path="res://scripts/button.gd" type="Script" id=14]
+[ext_resource path="res://back.png" type="Texture" id=15]
 
 [sub_resource type="Shader" id=12]
 code = "shader_type canvas_item;
@@ -375,6 +378,86 @@ bg_color = Color( 0.00392157, 0.454902, 0, 1 )
 [sub_resource type="RectangleShape2D" id=19]
 extents = Vector2( 128, 12.5 )
 
+[sub_resource type="RectangleShape2D" id=25]
+extents = Vector2( 28, 28 )
+
+[sub_resource type="GDScript" id=26]
+script/source = "extends Node2D
+export var list=[\"player\",\"playerupsidedown\"]
+var index=0
+onready var tween=$\"../Tween\"
+func _ready():
+	var path=loadskin()
+	for e in range(list.size()):
+		if \"res://players/\"+list[e]+\".tscn\"==path:
+			index=e
+	index()
+func index():
+	index=index%list.size()
+	addplayer()
+	save(\"res://players/\"+list[index]+\".tscn\")
+	
+func addplayer():
+	for e in get_children():
+		e.queue_free()
+	var player=load(\"res://players/\"+list[index]+\".tscn\").instance()
+	player=player.get_node(\"Sprite/Sprite\")
+	player.position=Vector2.ZERO
+	player.get_parent().remove_child(player)
+	add_child(player)
+	
+func _on_custombutton_pressed():
+	index-=1
+	index()
+	pass # Replace with function body.
+
+
+func _on_custombutton2_pressed():
+	index+=1
+	index()
+	pass # Replace with function body.
+
+func save(content):
+	var file = File.new()
+	file.open(\"user://skin.dat\", File.WRITE)
+	file.store_string(content)
+	file.close()
+
+func loadskin():
+	var file = File.new()
+	file.open(\"user://skin.dat\", File.READ)
+	var content = file.get_as_text()
+	file.close()
+	return content
+"
+
+[sub_resource type="RectangleShape2D" id=27]
+
+[sub_resource type="GDScript" id=29]
+resource_name = "skins"
+script/source = "extends button
+onready var tween=$\"../Tween\"
+func _ready():
+	connect(\"pressed\",self,\"pressed\")
+func pressed():
+	tween.interpolate_property($\"../Camera2D\",\"position:x\",0,1024,0.3,Tween.TRANS_CUBIC,Tween.EASE_IN_OUT)
+	tween.start()
+"
+
+[sub_resource type="RectangleShape2D" id=28]
+extents = Vector2( 30, 30 )
+
+[sub_resource type="GDScript" id=30]
+resource_name = "back"
+script/source = "extends button
+onready var tween=$\"../Tween\"
+func _ready():
+	connect(\"pressed\",self,\"pressed\")
+func pressed():
+	tween.interpolate_property($\"../Camera2D\",\"position:x\",1024,0,0.3,Tween.TRANS_CUBIC,Tween.EASE_IN_OUT)
+	tween.start()
+"
+
 [node name="mainmenu" type="Node2D"]
 script = ExtResource( 5 )
 
@@ -414,6 +497,7 @@ script = SubResource( 20 )
 enabled = false
 
 [node name="cursor" type="Area2D" parent="."]
+visible = false
 position = Vector2( 595, 269 )
 script = ExtResource( 3 )
 
@@ -466,7 +550,6 @@ script = ExtResource( 7 )
 position = Vector2( -494, -274 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 11 )
-frame = 1
 playing = true
 script = ExtResource( 8 )
 
@@ -523,6 +606,91 @@ shape = SubResource( 19 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
+current = true
+
+[node name="skinmenu" type="Node2D" parent="."]
+position = Vector2( 1024, 0 )
+
+[node name="custombutton" type="Area2D" parent="skinmenu"]
+position = Vector2( 388, 288 )
+script = ExtResource( 14 )
+invisible = false
+canchangelooks = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="skinmenu/custombutton"]
+shape = SubResource( 25 )
+
+[node name="Sprite" type="Sprite" parent="skinmenu/custombutton/CollisionShape2D"]
+rotation = -1.5708
+scale = Vector2( 6, 6 )
+texture = ExtResource( 13 )
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="skinmenu/custombutton"]
+
+[node name="custombutton2" type="Area2D" parent="skinmenu"]
+position = Vector2( 634, 288 )
+script = ExtResource( 14 )
+invisible = false
+canchangelooks = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="skinmenu/custombutton2"]
+rotation = -3.14159
+shape = SubResource( 25 )
+
+[node name="Sprite" type="Sprite" parent="skinmenu/custombutton2/CollisionShape2D"]
+rotation = -1.5708
+scale = Vector2( 6, 6 )
+texture = ExtResource( 13 )
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="skinmenu/custombutton2"]
+
+[node name="Node2D" type="Node2D" parent="skinmenu"]
+position = Vector2( 512, 288 )
+scale = Vector2( 2, 2 )
+script = SubResource( 26 )
+
+[node name="cursor" type="Area2D" parent="skinmenu"]
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="skinmenu/cursor"]
+shape = SubResource( 27 )
+
+[node name="Camera2D" type="Camera2D" parent="skinmenu"]
+anchor_mode = 0
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="button4" type="Area2D" parent="."]
+position = Vector2( 958, 553 )
+script = SubResource( 29 )
+invisible = false
+canchangelooks = false
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="button4"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="button4"]
+shape = SubResource( 28 )
+
+[node name="Sprite" type="Sprite" parent="button4"]
+scale = Vector2( 3.5, 3.5 )
+texture = ExtResource( 9 )
+hframes = 4
+vframes = 4
+
+[node name="button9" type="Area2D" parent="."]
+position = Vector2( 1066, 52 )
+script = SubResource( 30 )
+invisible = false
+canchangelooks = false
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="button9"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="button9"]
+shape = SubResource( 28 )
+
+[node name="Sprite" type="Sprite" parent="button9"]
+scale = Vector2( 3.5, 3.5 )
+texture = ExtResource( 15 )
 
 [connection signal="pressed" from="button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="button2" to="." method="_on_button2_pressed"]
@@ -534,3 +702,5 @@ anchor_mode = 0
 [connection signal="focus_entered" from="TextEdit" to="." method="_on_TextEdit_focus_entered"]
 [connection signal="released" from="TouchScreenButton" to="." method="_on_TouchScreenButton_released"]
 [connection signal="value_changed" from="HSlider" to="." method="_on_HSlider_value_changed"]
+[connection signal="pressed" from="skinmenu/custombutton" to="skinmenu/Node2D" method="_on_custombutton_pressed"]
+[connection signal="pressed" from="skinmenu/custombutton2" to="skinmenu/Node2D" method="_on_custombutton2_pressed"]
