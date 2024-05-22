@@ -21,6 +21,15 @@ func _process(delta):
 		e["time"]-=delta
 		if e["time"]<=0:
 			chunk.erase(e)
+	var enemies=[]
+	for e in get_parent().get_children():
+		if e.is_in_group("enemy"):
+			enemies.append(e)
+	if enemies.size()>8:
+		enemies.sort_custom(self,"sort")
+		for e in range(enemies.size(),8,-1):
+			enemies[e].queue_free()
+			
 	
 func loadmap():
 	if not( Global.nochick or spawnwait>=0):
@@ -67,7 +76,7 @@ func _ready():
 
 func spawn(x,y):
 	for e in chunk:
-		if Global.in_dict(Vector2(x,y),e,"pos"):
+		if e["pos"]==Vector2(x,y):
 			return
 	var spwn=int(round(rand_range(1,5)))
 	var spawnwait=spwn*20
@@ -92,3 +101,11 @@ func spawn(x,y):
 func horde():
 	var pos=(to_local(Global.playerposition)/16/3/(Global.chunksize)).round()
 	spawn(pos.x,pos.y)
+
+func sort(a,b):
+	if a==null:return false
+	if b==null:return true
+	if (Global.player==null and a.position.x>b.position.x):return true
+	if a.position.distance_to(Global.player.position)<b.position.distance_to(Global.player.position) :
+		return true
+	return false

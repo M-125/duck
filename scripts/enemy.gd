@@ -205,18 +205,21 @@ func movement():
 
 
 func findplayer():
-	
+	var det=[]
+	det.append_array(detected)
 	var players=[]
 	for i in get_parent().get_children():
 		
+		if i!=self and i.is_in_group("enemy") and i.position.distance_squared_to(position)<300000:
+			det.append_array(i.detected)
+			
 		if i.is_in_group("player"):
-			for e in detected:
+			for e in det:
 				if i==e["player"]:
 					players.append(i)
-			if i.position.distance_squared_to(position)<200000:
+			if i.position.distance_squared_to(position)<200000 and not Global.in_dict(i,detected,"player"):
 				detected.append({"player":i,"time":forgettime})
-		if i.is_in_group("enemy") and i.position.distance_squared_to(position)<250000:
-			i.detect(detected)
+		
 		
 	var minn=4000
 	if mustattack>0:
@@ -276,8 +279,9 @@ master func askdmg(dmg,velocity,stunn):
 		queue_free()
 func detect(r):
 	for e in r:
-		var add=true
+	
 		for i in detected:
 			if e["player"]==i["player"]:
-				add=false
+				
 				break
+		detected.append(e)

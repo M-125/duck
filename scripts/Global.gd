@@ -15,7 +15,7 @@ var speedmodmax=100
 var viewdistance=7
 var playerontilemap=-1
 var playerjump=true
-var mapsize=200
+var mapsize=600
 var chunksize=16
 var small_stuff=[0,0,0,500,0]
 var scene
@@ -64,9 +64,9 @@ func _ready():
 		debug=Label.new()
 		if Debug:alertfeed.add_child(debug)
 	
-func in_dict(value,dict:Dictionary,key:String):
+func in_dict(value,dict:Array,key:String):
 	for e in dict:
-		if value==dict[key]:return true
+		if value==e[key]:return true
 	return false
 	
 	
