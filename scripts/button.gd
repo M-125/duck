@@ -44,7 +44,6 @@ func _process(delta):
 	$TouchScreenButton.visible=enabled
 	curs=overlaps_area(cursor)
 #	curs=false
-	
 	if wait<=0 and enabled:
 		if (Input.is_action_just_released("interact")or Input.is_action_just_released("attack")) and curs:
 			emit_signal("pressed")

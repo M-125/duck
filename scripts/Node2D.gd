@@ -20,8 +20,8 @@ func _process(delta):
 	if Input.is_action_just_pressed("recallcursor"):
 		reset()
 	if get_global_mouse_position()!=mosepos:
-		position=get_global_mouse_position()
-		mosepos=position
+		global_position=get_global_mouse_position()
+		mosepos=global_position
 	else:
 		var veloc=Vector2(Input.get_joy_axis(0,0)*500*delta,Input.get_joy_axis(0,1)*500*delta)
 		position+=veloc

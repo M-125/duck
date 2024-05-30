@@ -27,7 +27,7 @@ func _process(delta):
 			enemies.append(e)
 	if enemies.size()>8:
 		enemies.sort_custom(self,"sort")
-		for e in range(enemies.size(),8,-1):
+		for e in range(enemies.size()-1,8,-1):
 			enemies[e].queue_free()
 			
 	
@@ -44,12 +44,12 @@ func loadmap():
 				var canbreak=false
 				for i in range(clamp((pos.y-viewdist)*(Global.chunksize),0,Global.mapsize-2),clamp((pos.y+viewdist)*(Global.chunksize),0,Global.mapsize-2)):
 					rng.state=int(str(e)+str(i))*random*(e%8)
-					var rnd=rng.randi_range(0,150)
+					var rnd=rng.randi_range(0,100)
 					
 					
 					
 					
-					if round(rnd)==100:
+					if round(rnd)==50:
 						
 						spawn(e,i)
 						print(spawnwait)

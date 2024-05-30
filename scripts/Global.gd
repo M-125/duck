@@ -37,7 +37,7 @@ var itemloot=[load("res://scenes/item.tscn"),item("pizza")]
 signal zoomout
 signal item
 signal reload
-signal givemoney
+signal money
 signal kill
 signal shake
 signal inv

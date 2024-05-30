@@ -497,7 +497,6 @@ script = SubResource( 20 )
 enabled = false
 
 [node name="cursor" type="Area2D" parent="."]
-visible = false
 position = Vector2( 595, 269 )
 script = ExtResource( 3 )
 

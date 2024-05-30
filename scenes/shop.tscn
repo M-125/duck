@@ -58,6 +58,7 @@ tracks/1/keys = {
 [node name="Shop" type="StaticBody2D"]
 scale = Vector2( 3, 3 )
 z_index = -1
+collision_layer = 255
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -70,6 +71,7 @@ position = Vector2( -3.08333, 3.17891e-07 )
 shape = SubResource( 1 )
 
 [node name="shoparea" type="Area2D" parent="."]
+collision_layer = 255
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="shoparea"]
 position = Vector2( -2.66667, 14.6667 )
