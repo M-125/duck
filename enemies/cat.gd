@@ -17,7 +17,7 @@ func _process(delta):
 	_cooldown-=delta
 	throwcooldown-=delta
 	for body in $throw.get_overlapping_bodies():
-		if body is Player and throwcooldown<0 and Player==findplayer():
+		if body is Player and throwcooldown<0 and Player in Players:
 			var bullet=load("res://enemies/catshot.tscn").instance()
 			Global.scene.add_child(bullet)
 			bullet.global_position=global_position

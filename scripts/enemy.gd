@@ -23,6 +23,7 @@ const DEFAULT_SPEED=300
 signal attacked
 var detected=[]
 var forgettime=10
+var Players=[]
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -226,7 +227,7 @@ func findplayer():
 		minn=INF
 	var player=null
 	
-	
+	Players=players
 	for collision in players:
 		if position.distance_to(collision.position)<minn:
 			minn=position.distance_to(collision.position)
