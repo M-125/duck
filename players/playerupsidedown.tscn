@@ -290,7 +290,6 @@ script = SubResource( 43 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2( 3, 3 )
-zoom = Vector2( 5, 5 )
 script = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
