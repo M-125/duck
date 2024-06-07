@@ -25,9 +25,9 @@ func _process(delta):
 	for e in get_parent().get_children():
 		if e.is_in_group("enemy"):
 			enemies.append(e)
-	if enemies.size()>8:
+	if enemies.size()>20:
 		enemies.sort_custom(self,"sort")
-		for e in range(enemies.size()-1,8,-1):
+		for e in range(enemies.size()-1,20,-1):
 			enemies[e].queue_free()
 			
 	
@@ -44,12 +44,12 @@ func loadmap():
 				var canbreak=false
 				for i in range(clamp((pos.y-viewdist)*(Global.chunksize),0,Global.mapsize-2),clamp((pos.y+viewdist)*(Global.chunksize),0,Global.mapsize-2)):
 					rng.state=int(str(e)+str(i))*random*(e%8)
-					var rnd=rng.randi_range(0,41)
+					var rnd=rng.randi_range(0,33)
 					
 					
 					
 					
-					if round(rnd)==21:
+					if round(rnd)==5:
 						
 						spawn(e,i)
 						print(spawnwait)
