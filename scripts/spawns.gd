@@ -44,7 +44,7 @@ func loadmap():
 				var canbreak=false
 				for i in range(clamp((pos.y-viewdist)*(Global.chunksize),0,Global.mapsize-2),clamp((pos.y+viewdist)*(Global.chunksize),0,Global.mapsize-2)):
 					rng.state=int(str(e)+str(i))*random*(e%8)
-					var rnd=rng.randi_range(0,33)
+					var rnd=rng.randi_range(0,11)
 					
 					
 					

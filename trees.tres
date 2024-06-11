@@ -6,16 +6,16 @@
 [ext_resource path="res://tree1.png" type="Texture" id=5]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
-points = PoolVector2Array( 19.7885, 39, 6.85932, 39, 6.85932, 28.9012, 19.7885, 28.9012 )
+points = PoolVector2Array( 13.8763, 39, 7.94376, 37.14, 14.202, 33.3106, 20.3407, 37.6172 )
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
-points = PoolVector2Array( 18.8289, 39, 9.19591, 39, 9.19591, 30.8484, 18.8289, 30.8484 )
+points = PoolVector2Array( 13.3688, 39, 7.94376, 37.5944, 13.1384, 31.4933, 19.8864, 38.6978 )
 
 [sub_resource type="ConvexPolygonShape2D" id=3]
-points = PoolVector2Array( 25.0069, 38, 12.2335, 38, 12.2335, 28.6675, 25.0069, 28.6675 )
+points = PoolVector2Array( 24.949, 34.9068, 17.9067, 37.6329, 12.961, 35.2314, 18.4453, 30.1687 )
 
 [sub_resource type="ConvexPolygonShape2D" id=4]
-points = PoolVector2Array( 18.3086, 39, 9.35169, 39, 9.35169, 31.5493, 18.3086, 31.5493 )
+points = PoolVector2Array( 14.8413, 39, 7.02875, 37.3608, 14.7062, 33.8921, 19.5913, 38.1421 )
 
 [resource]
 0/name = "tree1.png 0"
