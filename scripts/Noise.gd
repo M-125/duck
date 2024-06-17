@@ -8,18 +8,19 @@ func get_noise_2d(x,y):
 	
 	if not file.file_exists("user://noise"+str(self.seed)):
 		file.open("user://noise"+str(self.seed),File.WRITE)
-		for e in range(Global.mapsize):for i in range(Global.mapsize):
+		for e in range(pow(ceil(Global.mapsize/16)*16,2)):
 			file.store_8(0)
 		file.close()
 		print("created")
 	if not file.is_open():
-		file.open("user://noise"+str(self.seed))
-	print("read")
+		file.open("user://noise"+str(self.seed),File.READ_WRITE)
+
 	var noiseval
 	if readpos(x,y)==0:
+		noiseval=round(abs(get_noise_2dv(Vector2(x,y)))*10)
 		writepos(x,y,round(abs(get_noise_2dv(Vector2(x,y)))*10*10))
-	noiseval=readpos(x,y)/10
-	print("ns",noiseval)
+	else:noiseval=readpos(x,y)/10
+	
 	for e in replace:
 		var rect=e[0]
 		if x>=rect.position.x and x<=rect.end.x and y>=rect.position.y and y<=rect.end.y:
@@ -41,10 +42,15 @@ func addzone(rect:Rect2,req:String):
 		replace.append([rect,req])
 
 func readpos(x,y):
-	file.seek(x+(Global.mapsize*y))
+	var chunk=Vector2(floor(x/Global.chunksize),floor(y/Global.chunksize))
+	var pos=Vector2(x%Global.chunksize,y%Global.chunksize)
+	file.seek((chunk.x*pow(Global.chunksize,2)+(ceil(Global.mapsize/Global.chunksize)*pow(Global.chunksize,2)*chunk.y))+pos.x+(Global.chunksize*pos.y))
 	return file.get_8()
 
 func writepos(x,y,val):
-	file.seek(x+(Global.mapsize*y))
-	return file.store_8(val)
+	var chunk=Vector2(floor(x/Global.chunksize),floor(y/Global.chunksize))
+	var pos=Vector2(x%Global.chunksize,y%Global.chunksize)
+	file.seek((chunk.x*pow(Global.chunksize,2)+(ceil(Global.mapsize/Global.chunksize)*pow(Global.chunksize,2)*chunk.y))+pos.x+(Global.chunksize*pos.y))
+	
+	file.store_8(val)
 			

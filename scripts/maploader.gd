@@ -82,6 +82,7 @@ func loading():
 				while thread.is_active():
 					yield(get_tree(),"idle_frame")
 					if not thread.is_alive():
+						Global.alert("chunk"+str(chunk)+" loaded")
 						var matrix=thread.wait_to_finish()
 						if matrix!=null:for m in [Global.map1,Global.map2,Global.map3]:
 							m.loadmap(matrix)

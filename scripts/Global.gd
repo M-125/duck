@@ -63,6 +63,11 @@ func _ready():
 		add_child(music)
 		debug=Label.new()
 		if Debug:alertfeed.add_child(debug)
+	var timer=Timer.new()
+	timer.wait_time=9
+	timer.start(9)
+	add_child(timer)
+	timer.connect("timeout",self,"save")
 	
 func in_dict(value,dict:Array,key:String):
 	for e in dict:
@@ -247,3 +252,5 @@ func debug(object):
 	debug.text=str(object)
 func shake(strength:float):
 	emit_signal("shake",strength)
+func save():
+	emit_signal("save")
