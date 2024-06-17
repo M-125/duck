@@ -58,7 +58,7 @@ func erasemap():
 
 func _ready():
 	if Seed!=0:
-		rng.seed=Seed
+		rng.Seed=Seed
 	else:
 		rng.randomize()
 		Seed=rng.Seed

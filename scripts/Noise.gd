@@ -4,8 +4,6 @@ var replace=[]
 var file=File.new()
 func _init():
 	Global.connect("save",self,"save")
-func get_noise_2d(x,y):
-	
 	if not file.file_exists("user://noise"+str(self.seed)):
 		file.open("user://noise"+str(self.seed),File.WRITE)
 		for e in range(pow(ceil(Global.mapsize/16)*16,2)):
@@ -14,11 +12,17 @@ func get_noise_2d(x,y):
 		print("created")
 	if not file.is_open():
 		file.open("user://noise"+str(self.seed),File.READ_WRITE)
+func get_noise_2d(x,y):
+	if x<0 or y<0:
+		return 0
+	
+	if not file.is_open():
+		file.open("user://noise"+str(self.seed),File.READ_WRITE)
 
 	var noiseval
 	if readpos(x,y)==0:
 		noiseval=round(abs(get_noise_2dv(Vector2(x,y)))*10)
-		writepos(x,y,round(abs(get_noise_2dv(Vector2(x,y)))*10*10))
+		writepos(x,y,noiseval*10)
 	else:noiseval=readpos(x,y)/10
 	
 	for e in replace:
@@ -35,7 +39,6 @@ func get_noise_2d(x,y):
 				noiseval=level+0.01
 			elif "=" in e[1]:
 				noiseval=level+0.01
-			
 	return noiseval
 func addzone(rect:Rect2,req:String):
 	if not [rect,req] in replace:

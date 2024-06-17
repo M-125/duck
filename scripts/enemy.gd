@@ -258,7 +258,7 @@ func attacking():
 func kill():
 	while hp>0:
 		yield(get_tree(),"idle_frame")
-		damage(1)
+		damage(5)
 remote func die():
 	if not dropped:
 			drop()

@@ -15,7 +15,7 @@ var speedmodmax=100
 var viewdistance=7
 var playerontilemap=-1
 var playerjump=true
-var mapsize=600
+var mapsize=300
 var chunksize=16
 var small_stuff=[0,0,0,0,0]
 var scene

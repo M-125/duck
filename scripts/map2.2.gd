@@ -48,6 +48,7 @@ func _ready():pass
 func loadmap(matrix:Array):
 	var pos=(world_to_map(to_local(Global.playerposition))/Global.chunksize).round()
 	
+		
 	for e in range(1,matrix.size()-2):
 		
 		if not matrix[e] is Vector2:
@@ -56,7 +57,7 @@ func loadmap(matrix:Array):
 				var blockpos=matrix[matrix.size()-1]+Vector2(e,i)+Vector2(-1,-1)
 				var noiser=matrix[e][i]
 				
-				if noiser>myfloor :
+				if noiser>=myfloor :
 					
 					var side=""
 					if (matrix[clamp(e+1,0,matrix.size()-2)][i]<myfloor or blockpos.x==Global.mapsize-1) :

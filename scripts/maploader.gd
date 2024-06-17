@@ -59,7 +59,7 @@ func loading():
 		chunk.x=clamp(chunk.x,0,Global.mapsize/Global.chunksize)
 		chunk.y=clamp(chunk.y,0,Global.mapsize/Global.chunksize)
 		if not chunk in loadedchunks:
-			thread.start(self,"loadmap",chunk,0)
+			thread.start(self,"loadmap",chunk)
 		while thread.is_active():
 			yield(get_tree(),"idle_frame")
 			if not thread.is_alive():
@@ -76,13 +76,12 @@ func loading():
 				var chunk=pos+Vector2(e,i)
 				chunk.x=clamp(chunk.x,0,Global.mapsize/Global.chunksize)
 				chunk.y=clamp(chunk.y,0,Global.mapsize/Global.chunksize)
-				thread.start(self,"loadmap",chunk)
+				thread.start(self,"loadmap",chunk,0)
 				
 				
 				while thread.is_active():
 					yield(get_tree(),"idle_frame")
 					if not thread.is_alive():
-						Global.alert("chunk"+str(chunk)+" loaded")
 						var matrix=thread.wait_to_finish()
 						if matrix!=null:for m in [Global.map1,Global.map2,Global.map3]:
 							m.loadmap(matrix)
@@ -118,7 +117,6 @@ func reload():
 		n-=1
 		for chunk in loadedchunks:
 			
-			yield(get_tree(),"idle_frame")
 			for m in [Global.map1,Global.map2,Global.map3]:
 					m.erasemap(chunk)
 					loadedchunks.erase(chunk)
