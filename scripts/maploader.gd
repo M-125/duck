@@ -15,6 +15,7 @@ func _ready():
 	if Seed==0:
 		Seed=randi()
 	noise.seed=Seed
+	noise.init()
 	Global.map1=$"../map"
 	Global.map2=$"../map2"
 	Global.map3=$"../map3"
@@ -121,4 +122,5 @@ func reload():
 					m.erasemap(chunk)
 					loadedchunks.erase(chunk)
 	stop=false
+	yield(get_tree().create_timer(4),"timeout")
 	emit_signal("loaded")

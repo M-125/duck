@@ -24,7 +24,7 @@ func loadmap():
 	pos.y=clamp(pos.y,0,floor(mapedge.y))
 	for x in range(-5,6):
 		for y in range(-5,6):
-			loadpos(pos+Vector2(x,y))
+			loadpos(pos+Vector2(clamp(x,0,floor(mapedge.x)),clamp(y,0,floor(mapedge.y))))
 				
 	for e in noshop:
 		if abs(pos.x-e.x)>10 or abs(pos.y-e.y)>10:

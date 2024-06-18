@@ -51,9 +51,9 @@ uniqueitem = ExtResource( 8 )
 item = "amethyst sword"
 amount1 = 144
 need2 = 4
-amount2 = 50
-need3 = 3
-amount3 = 15
+amount2 = 100
+need3 = 2
+amount3 = 30
 
 [node name="Control2" parent="Panel/ScrollContainer/gridcontainer" instance=ExtResource( 1 )]
 anchor_right = 0.0
@@ -75,7 +75,7 @@ margin_bottom = 216.0
 isunique = true
 uniqueitem = ExtResource( 5 )
 need1 = 3
-amount1 = 500
+amount1 = 1500
 
 [node name="Panel2" type="Panel" parent="."]
 margin_left = 24.0

@@ -42,7 +42,10 @@ func movement():
 		_cooldown=3
 		emit_signal("attack")
 	
-	
+	if velocity==Vector2(0,0):
+		$AnimationPlayer.play("idle")
+	else:
+		$AnimationPlayer.play("walk")
 	return velocity
 func drop():
 	for e in range(20):

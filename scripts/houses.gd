@@ -28,7 +28,7 @@ func _process(delta):
 func loadmap():
 	
 			
-	var mapedge=to_local(mainmap.to_global(mainmap.map_to_world(Vector2(Global.mapsize,Global.mapsize)))).x
+	var mapedge=floor(world_to_map(to_local(mainmap.to_global(mainmap.map_to_world(Vector2(Global.mapsize-1,Global.mapsize-1))))).x-1)
 	var pos=(world_to_map(to_local(Global.playerposition))/(Global.chunksize/1.5)).round()
 	if pos !=positionn:
 		positionn=pos

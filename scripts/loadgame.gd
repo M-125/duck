@@ -21,6 +21,7 @@ func new():
 	get_tree().change_scene("res://scenes/map2.0.tscn")
 	Global.savemap=null
 	Global.playerpack=null
+	Global.small_stuff=[0,0,0,0,0]
 	var dir=Directory.new()
 	for e in dir_contents("user://"):
 		if "noise" in e:

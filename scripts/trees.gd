@@ -72,13 +72,13 @@ func loadmap():
 				break
 
 func loadchunk(pos):
-	var mapedge=world_to_map(to_local(mainmap.to_global(mainmap.map_to_world(Vector2(Global.mapsize,Global.mapsize))))).x-1
+	var mapedge=floor(world_to_map(to_local(mainmap.to_global(mainmap.map_to_world(Vector2(Global.mapsize-1,Global.mapsize-1))))).x-1)
 	pos.x=clamp(pos.x,0,INF)
 	pos.y=clamp(pos.y,0,INF)
 	if not pos in loadedchunks:
 		loadedchunks.append(pos)
 		for e in range(clamp((pos.x)*(Global.chunksize),0,mapedge),clamp((pos.x+1)*(Global.chunksize),0,mapedge)):
-			for i in range(clamp((pos.y)*(Global.chunksize),0,mapedge),clamp((pos.y+1)*(Global.chunksize),0,mapedge)):
+			for i in range(clamp((pos.y)*(Global.chunksize),0,mapedge-1),clamp((pos.y+1)*(Global.chunksize),0,mapedge-1)):
 				rng.state=int(str(e)+str(i))*random*(e%7)
 				var rnd=rng.Randi_range(e,i,0,37)
 				if round(rnd)==5 and not (

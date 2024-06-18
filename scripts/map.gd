@@ -40,7 +40,7 @@ func _ready():
 		if Global.Seed!=0:
 			$map.noise.seed=Global.Seed
 		$map._ready()
-		
+	ready()
 #	if Server.client!=null:
 #		for c in get_children():
 #			if "item" in c.name:
@@ -80,3 +80,5 @@ func _exit_tree():
 		ResourceSaver.save("user://saveplayer.tscn",Global.playerpack)
 		Saver.save(Global.small_stuff,"user://coins.json")
 		
+func ready():
+	pass

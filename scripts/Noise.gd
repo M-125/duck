@@ -2,7 +2,7 @@ extends OpenSimplexNoise
 class_name Noise
 var replace=[]
 var file=File.new()
-func _init():
+func init():
 	Global.connect("save",self,"save")
 	if not file.file_exists("user://noise"+str(self.seed)):
 		file.open("user://noise"+str(self.seed),File.WRITE)
@@ -21,7 +21,7 @@ func get_noise_2d(x,y):
 
 	var noiseval
 	if readpos(x,y)==0:
-		noiseval=round(abs(get_noise_2dv(Vector2(x,y)))*10)
+		noiseval=stepify(abs(get_noise_2dv(Vector2(x,y)))*10,0.1)
 		writepos(x,y,noiseval*10)
 	else:noiseval=readpos(x,y)/10
 	
