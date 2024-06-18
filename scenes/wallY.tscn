@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="GDScript" id=36]
+resource_name = "scale"
+script/source = "extends Node2D
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+# Called when the node enters the scene tree for the first time.
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	global_scale.y=Global.mapsize-1
+	pass # Replace with function body.
+			
+			
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+"
+
+[sub_resource type="RectangleShape2D" id=35]
+extents = Vector2( 24, 24 )
+
+[node name="Node2D" type="Node2D"]
+position = Vector2( 0, -48 )
+script = SubResource( 36 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 24, 24 )
+shape = SubResource( 35 )
