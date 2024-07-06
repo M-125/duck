@@ -573,10 +573,16 @@ func openchest():
 func houses():
 	var e=$Area2D.overlaps_body(Global.scene.get_node("houses"))
 #	Global.alert(e)
+	
 	if e:
+		var house:TileMap=Global.scene.get_node("houses")
+		var housepos=house.world_to_map(house.to_local(global_position))
 #		Global.alert("inside")
-		var i=get_tree().change_scene("res://scenes/house.tscn")
-		
+		if ResourceLoader.exists("user://house"+str(housepos)+".tscn"):
+			get_tree().change_scene_to(load("user://house"+str(housepos)+".tscn"))
+		else:
+			var i=get_tree().change_scene("res://scenes/house.tscn")
+		Global.house=str(housepos)
 		return true
 	return false
 

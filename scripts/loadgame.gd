@@ -26,6 +26,9 @@ func new():
 	for e in dir_contents("user://"):
 		if "noise" in e:
 			dir.remove(e)
+	for e in dir_contents("user://"):
+		if "house" in e:
+			dir.remove(e)
 func Load():
 	Global.savemap=load("user://save.tscn")
 	Global.playerpack=load("user://saveplayer.tscn")

@@ -2,11 +2,11 @@ extends Node2D
 
 var positionn
 var positionnn
-var eraselist=[]
-var rng=RandomNumberGenerator.new()
+var noload=[]
+var rng=Rng.new()
 var rng2=RandomNumberGenerator.new()
 var random
-export var spawnwait=30
+export var spawnwait=15
 var enemies={
 	"dog":load("res://enemies/dog.tscn")
 }
@@ -25,7 +25,7 @@ func _process(delta):
 	for e in get_parent().get_children():
 		if e.is_in_group("enemy"):
 			enemies.append(e)
-	if enemies.size()>20:
+	if enemies.size()>9:
 		enemies.sort_custom(self,"sort")
 		for e in range(enemies.size()-1,20,-1):
 			enemies[e].queue_free()
@@ -37,33 +37,36 @@ func loadmap():
 			
 	
 		var pos=(to_local(Global.playerposition)/16/3/(Global.chunksize)).round()
-		if pos !=positionn:
-			positionn=pos
-			var viewdist=1
-			for e in range(clamp((pos.x-viewdist)*(Global.chunksize),0,Global.mapsize-2),clamp((pos.x+viewdist)*(Global.chunksize),0,Global.mapsize-2)):
-				var canbreak=false
-				for i in range(clamp((pos.y-viewdist)*(Global.chunksize),0,Global.mapsize-2),clamp((pos.y+viewdist)*(Global.chunksize),0,Global.mapsize-2)):
-					rng.state=int(str(e)+str(i))*random*(e%8)
-					var rnd=rng.randi_range(0,11)
+		
+		var viewdist=0.5
+		for e in range(clamp((pos.x-viewdist)*(Global.chunksize),0,Global.mapsize-2),clamp((pos.x+viewdist)*(Global.chunksize),0,Global.mapsize-2),Global.chunksize/2):
+			var canbreak=false
+			for i in range(clamp((pos.y-viewdist)*(Global.chunksize),0,Global.mapsize-2),clamp((pos.y+viewdist)*(Global.chunksize),0,Global.mapsize-2),Global.chunksize/2):
+				
+				
+				if not Vector2(e,i)in noload:
+					rng.state=(1+int(str(e)+str(i)))*random+1*(e%8)+1
+					var rnd=rng.randi_range(1,4)
 					
 					
 					
-					
-					if round(rnd)==5:
+					print(rnd)
+					if round(rnd)==3:
 						
 						spawn(e,i)
-						print(spawnwait)
+						spawnwait=0.1
 						canbreak=true
 						break
-					
-				if canbreak:break
+					else:
+						noload.append(Vector2(e,i))
+			if canbreak:break
 			
 
 func place(chick,x,y,gridsnap=true):
 	get_node("/root/map2").add_child(chick)
 	if gridsnap:chick.global_position=to_global(Vector2(x,y)*16*3)
 	else:chick.global_position=to_global(Vector2(x,y))
-	chick.global_position+=Vector2(rand_range(-32,32),rand_range(-32,32))
+	chick.global_position+=Vector2(rand_range(-64,64),rand_range(-64,64))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -78,7 +81,7 @@ func spawn(x,y):
 	for e in chunk:
 		if e["pos"]==Vector2(x,y):
 			return
-	var spwn=int(round(rand_range(1,5)))
+	var spwn=int(round(rand_range(3,5)))
 	var spawnwait=spwn*20
 	var random=int(round(rand_range(0,4)))
 	while spwn >0:

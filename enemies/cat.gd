@@ -21,12 +21,13 @@ func _process(delta):
 			var bullet=load("res://enemies/catshot.tscn").instance()
 			Global.scene.add_child(bullet)
 			bullet.global_position=global_position
+			var playerpos=body.global_position+Vector2(rand_range(-64,64),rand_range(-64,64))
 			if body.global_position.y>global_position.y:
-				$Tween.interpolate_property(bullet,"global_position:x",bullet.global_position.x,body.global_position.x+body.velocpredict.x*0.9,0.9,1,1)
-				$Tween.interpolate_property(bullet,"global_position:y",bullet.global_position.y,body.global_position.y+body.velocpredict.y*0.9,0.9,Tween.TRANS_SINE,0)
+				$Tween.interpolate_property(bullet,"global_position:x",bullet.global_position.x,playerpos.x+body.velocpredict.x*0.9,0.9,1,1)
+				$Tween.interpolate_property(bullet,"global_position:y",bullet.global_position.y,playerpos.y+30+body.velocpredict.y*0.9,0.9,Tween.TRANS_SINE,0)
 			else:
-				$Tween.interpolate_property(bullet,"global_position:y",bullet.global_position.y,body.global_position.y+body.velocpredict.y*0.9,0.9,1,1)
-				$Tween.interpolate_property(bullet,"global_position:x",bullet.global_position.x,body.global_position.x+body.velocpredict.x*0.9,0.9,Tween.TRANS_SINE,0)
+				$Tween.interpolate_property(bullet,"global_position:y",bullet.global_position.y,playerpos.y-30+body.velocpredict.y*0.9,0.9,1,1)
+				$Tween.interpolate_property(bullet,"global_position:x",bullet.global_position.x,playerpos.x+body.velocpredict.x*0.9,0.9,Tween.TRANS_SINE,0)
 			$Tween.start()
 			throwcooldown=3
 	savedveloc-=savedveloc.normalized()*delta*1000

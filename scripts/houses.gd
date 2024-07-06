@@ -53,7 +53,7 @@ func loadmap():
 					get_parent().get_node("loader").noise.addzone(Rect2(startpos2-Vector2(10,10),endpos2-startpos2+Vector2(20,20)),"<3")
 					var map2=get_parent().get_node("trees")
 					var startpos3=map2.world_to_map(map2.to_local(startpos))
-					var endpos3=map2.world_to_map(map2.to_local(endpos))-Vector2(1,1)
+					var endpos3=map2.world_to_map(map2.to_local(endpos))
 					map2.rng.addzone(Rect2(startpos3,endpos3-startpos3))
 				
 				

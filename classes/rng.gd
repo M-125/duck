@@ -20,9 +20,15 @@ func addzone(rect:Rect2):
 		replace.append(rect)
 func randi_range(r1:int,r2:int):
 	var modulo=r2-r1
+	if modulo %2==0: modulo-=1
 	var _Seed=int(str(Seed).rstrip("02468"))
 	var _state=int(str(state).rstrip("02468"))
-	return r1+int(round(fmod((r2*_Seed*_state*217)+_state/7,modulo)))
+	var number=r1+int(round(fmod((r2*_Seed*_state*217)+_state/7,modulo)))
+	number*=abs(_Seed)
+	if number<r1:
+		number=r2-number
+	number+=r1
+	return number % modulo
 func randomize():
 	Seed=rand_range(0,65535)
 	var string=""

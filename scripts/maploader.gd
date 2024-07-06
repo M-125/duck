@@ -97,7 +97,8 @@ func loading():
 					loadedchunks.erase(chunk)
 	if stop:
 		return
-	emit_signal("loaded")
+	else:
+		emit_signal("loaded")
 
 
 
@@ -121,6 +122,7 @@ func reload():
 			for m in [Global.map1,Global.map2,Global.map3]:
 					m.erasemap(chunk)
 					loadedchunks.erase(chunk)
+		yield(get_tree(),"idle_frame")
 	stop=false
 	yield(get_tree().create_timer(4),"timeout")
 	emit_signal("loaded")

@@ -28,6 +28,7 @@ var endgame=false
 var playerpack:PackedScene=null
 var savemap:PackedScene=null
 var Seed=0
+var house=""
 var gamefinished=false
 var alertfeed:CanvasLayer
 var music:AudioStreamPlayer
