@@ -13,6 +13,10 @@ func _ready():
 	while not (Global.player !=null and is_instance_valid(Global.player)):
 		yield(get_tree(),"idle_frame")
 	Global.player.connect("interactshop",self,"showmenu")
+	for e in $shoparea.get_overlapping_bodies():
+		if e.name=="trees":
+			print("despawn")
+			queue_free()
 	pass # Replace with function body.
 
 

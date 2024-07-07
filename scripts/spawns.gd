@@ -50,7 +50,6 @@ func loadmap():
 					
 					
 					
-					print(rnd)
 					if round(rnd)==3:
 						
 						spawn(e,i)

@@ -47,13 +47,13 @@ func loadmap():
 					var endpos=to_global(map_to_world(Vector2(e+1,i+1)))
 					var startpos2=map.world_to_map(map.to_local(startpos))
 					var endpos2=map.world_to_map(map.to_local(endpos))-Vector2(1,1)
-					get_parent().get_node("loader").noise.addzone(Rect2(startpos2,endpos2-startpos2),"<1")
+					get_parent().get_node("loader").noise.addzone(Rect2(startpos2-Vector2(1,1),endpos2-startpos2+Vector2(2,2)),"<1")
 					
-					get_parent().get_node("loader").noise.addzone(Rect2(startpos2-Vector2(5,5),endpos2-startpos2+Vector2(10,10)),"<2")
-					get_parent().get_node("loader").noise.addzone(Rect2(startpos2-Vector2(10,10),endpos2-startpos2+Vector2(20,20)),"<3")
+					get_parent().get_node("loader").noise.addzone(Rect2(startpos2-Vector2(4,4),endpos2-startpos2+Vector2(8,8)),"<2")
+					get_parent().get_node("loader").noise.addzone(Rect2(startpos2-Vector2(6,6),endpos2-startpos2+Vector2(12,12)),"<3")
 					var map2=get_parent().get_node("trees")
-					var startpos3=map2.world_to_map(map2.to_local(startpos))
-					var endpos3=map2.world_to_map(map2.to_local(endpos))
+					var startpos3=map2.world_to_map(map2.to_local(startpos))-Vector2(4,4)
+					var endpos3=map2.world_to_map(map2.to_local(endpos))+Vector2(4,4)
 					map2.rng.addzone(Rect2(startpos3,endpos3-startpos3))
 				
 				

@@ -36,10 +36,10 @@ func loadpos(pos):
 		return
 	rng.state=fmod((pos.y)*(pos.x)*random,65535)
 	
-	var rnd=rng.randi_range(0,100)
+	var rnd=rng.randi_range(0,27)
 	
 #			Global.debug.text=str((pos.x+x)*217+(pos.y+y)*16*random)+"---"+str(rng.state)+"++++"+str(rng.seed)
-	if rnd==1:
+	if rnd==12:
 		var canspawn=true
 		for e in shops:
 			if is_instance_valid(e) and e.pos==pos:

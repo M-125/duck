@@ -28,7 +28,7 @@ func randi_range(r1:int,r2:int):
 	if number<r1:
 		number=r2-number
 	number+=r1
-	return number % modulo
+	return (number% modulo)+r1
 func randomize():
 	Seed=rand_range(0,65535)
 	var string=""
