@@ -11,6 +11,8 @@ var throwcooldown=0
 func ready():
 	connect("attack",self,"attack")
 	connect("attacked",self,"attacked")
+	var fur=Global.dir_contents("res://enemies/catfur")
+	$Sprite.material.set_shader_param("tx",load(fur[rand_range(0,fur.size())]))
 	pass 
 
 func _process(delta):

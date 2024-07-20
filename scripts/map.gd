@@ -13,7 +13,7 @@ func _ready():
 	Server.map=self
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	Global.ingame=true
-	
+	Global.connect("save",self,"save")
 #	if Global.playerpack!=null:
 #		var pos =$playerduckie.position
 #		var small =$playerduckie.smallitems
@@ -73,12 +73,14 @@ func _process(delta):
 func sorting(a,b):
 	return a.global_position.distance_to(Global.player.global_position)<b.global_position.distance_to(Global.player.global_position)
 func _exit_tree():
+	save()
+
+func save():
 	if name=="map2" and not Server.isconnect():
 		Global.savemap=PackedScene.new()
 		Global.savemap.pack(self)
 		ResourceSaver.save("user://save.tscn",Global.savemap)
-		ResourceSaver.save("user://saveplayer.tscn",Global.playerpack)
-		Saver.save(Global.small_stuff,"user://coins.json")
-		
+	ResourceSaver.save("user://saveplayer.tscn",Global.playerpack)
+	Saver.save(Global.small_stuff,"user://coins.json")
 func ready():
 	pass

@@ -41,9 +41,13 @@ signal reload
 signal money
 signal kill
 signal shake
+signal quest
 signal inv
 signal horde
 signal enemy
+signal savequests
+signal delquests
+signal save
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -51,6 +55,7 @@ signal enemy
 func _ready():
 	connect("valuechange",self,"valuechange")
 	connect("givemoney",self,"money")
+	connect("quest",self,"givequest")
 	if !ingame:
 		ingame=get_parent().get_node_or_null("map2")!=null
 		if ingame:
@@ -255,3 +260,22 @@ func shake(strength:float):
 	emit_signal("shake",strength)
 func save():
 	emit_signal("save")
+func givequest(e=-1):
+	if int(e)==-1:
+		Global.player.quest=Quest.new(Quests.quests[rand_range(0,Quests.quests.size())])
+	else:
+		Global.player.quest=Quest.new(Quests.quests[int(e)])
+
+func dir_contents(path):
+	var dir = Directory.new()
+	var files=[]
+	if dir.open(path) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if not dir.current_is_dir():
+				files.append(path+"/"+file_name)
+			file_name = dir.get_next()
+	else:
+		print("An error occurred when trying to access the path.")
+	return files

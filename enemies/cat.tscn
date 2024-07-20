@@ -119,7 +119,7 @@ radius = 200.0
 [sub_resource type="CircleShape2D" id=23]
 radius = 517.313
 
-[node name="enemygiant" type="KinematicBody2D"]
+[node name="cat" type="KinematicBody2D"]
 z_index = 1
 collision_layer = 2
 collision_mask = 2

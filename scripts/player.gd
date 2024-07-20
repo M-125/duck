@@ -615,13 +615,15 @@ func spawnitem(tem):
 		print("res://items/"+tem+".tscn")
 		Global.scene.add_child(item)
 		item.global_position=global_position
-func spawnenemy(enemy):
-	var item=load("res://enemies/"+enemy+".tscn")
-	if item!=null:
-		item=item.instance()
-		print("res://items/"+enemy+".tscn")
-		Global.scene.add_child(item)
-		item.global_position=global_position
+func spawnenemy(enemy,count=1):
+	for i in range(count):
+		var item=load("res://enemies/"+enemy+".tscn")
+		if item!=null:
+			item=item.instance()
+			print("res://items/"+enemy+".tscn")
+			Global.scene.add_child(item)
+			item.global_position=global_position
+		yield(get_tree().create_timer(0.1),"timeout")
 
 
 func inv():

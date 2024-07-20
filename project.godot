@@ -44,11 +44,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/quest.gd"
 }, {
-"base": "Quest",
-"class": "Quest1",
-"language": "GDScript",
-"path": "res://quests/quest1.gd"
-}, {
 "base": "Resource",
 "class": "Rng",
 "language": "GDScript",
@@ -182,7 +177,6 @@ _global_script_class_icons={
 "Noise": "",
 "Player": "",
 "Quest": "",
-"Quest1": "",
 "Rng": "",
 "Saver": "",
 "Sprites": "",

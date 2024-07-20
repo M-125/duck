@@ -6,7 +6,7 @@ export(int,"coin","red dye","white dye","wood","amethyst") var type
 # var a = 2
 # var b = "text"
 var velocity=Vector2(rand_range(-30,30),rand_range(-30,30))
-
+var speed=400
 static func name2int(name):
 	var names=["coin","red dye","white dye","wood","amethyst"]
 	for e in range(names.size()): if name==names[e]:return e
@@ -33,7 +33,7 @@ func _process(delta):
 					player=e
 			else:
 				player=e
-	if global_position.distance_to(player.global_position)>200:
+	if global_position.distance_to(player.global_position)>300:
 		player=null
 				
 	if velocity<Vector2.ZERO:
@@ -49,14 +49,14 @@ func _process(delta):
 		position+=velocity*delta*8
 	if player !=null:
 		if velocity==Vector2.ZERO:
-			position-=(position-player.position).normalized()*400*delta
-		if position.distance_to(player.position)<5:
-			
-			
-			Global.small_stuff[type]+=1
-			Global.addsound("coin")
-			Quests.emit_signal("itemcollected",type)
-			queue_free()
+			position-=(position-player.position).normalized()*speed*delta
+			if position.distance_to(player.position)<15:
+				
+				
+				Global.small_stuff[type]+=1
+				Global.addsound("coin")
+				Quests.emit_signal("itemcollected",type)
+				queue_free()
 
 	pass
 
