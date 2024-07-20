@@ -1,5 +1,5 @@
 extends Node2D
-
+class_name enspw
 var positionn
 var positionnn
 var noload=[]

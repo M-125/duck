@@ -1,6 +1,8 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://eggshell.png" type="Texture" id=1]
+[ext_resource path="res://materials/boom.tres" type="Material" id=2]
+[ext_resource path="res://materials/eggbomb.tres" type="Material" id=3]
 
 [sub_resource type="GDScript" id=8]
 script/source = "extends Area2D
@@ -31,64 +33,6 @@ func _physics_process(delta):
 [sub_resource type="CircleShape2D" id=1]
 radius = 225.0
 
-[sub_resource type="Gradient" id=3]
-offsets = PoolRealArray( 0, 0.0437956, 0.0839416, 0.237226, 1 )
-colors = PoolColorArray( 1, 1, 1, 1, 1, 0.878828, 0.385742, 1, 1, 0.739943, 0.280273, 1, 0.462745, 0.462745, 0.462745, 1, 0.356863, 0.356863, 0.356863, 0 )
-
-[sub_resource type="GradientTexture" id=7]
-gradient = SubResource( 3 )
-
-[sub_resource type="Curve" id=5]
-_data = [ Vector2( 0, 1 ), 0.0, 0.26612, 0, 0, Vector2( 0.769084, 0.929448 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=6]
-curve = SubResource( 5 )
-
-[sub_resource type="ParticlesMaterial" id=4]
-lifetime_randomness = 0.37
-flag_disable_z = true
-spread = 180.0
-gravity = Vector3( 0, -200, 0 )
-initial_velocity = 500.0
-initial_velocity_random = 0.76
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-linear_accel = -300.0
-scale = 50.0
-scale_random = 1.0
-scale_curve = SubResource( 6 )
-color_ramp = SubResource( 7 )
-
-[sub_resource type="Curve" id=12]
-min_value = -360.0
-max_value = 360.0
-_data = [ Vector2( 0.00257732, -167.853 ), 0.0, 0.0, 0, 0, Vector2( 0.339347, 0 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=13]
-curve = SubResource( 12 )
-
-[sub_resource type="Gradient" id=9]
-offsets = PoolRealArray( 0, 0.788321, 1 )
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
-
-[sub_resource type="GradientTexture" id=10]
-gradient = SubResource( 9 )
-
-[sub_resource type="ParticlesMaterial" id=11]
-lifetime_randomness = 0.39
-flag_disable_z = true
-spread = 180.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 194.52
-initial_velocity_random = 0.55
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-linear_accel = -200.0
-angle = 720.0
-angle_random = 1.0
-angle_curve = SubResource( 13 )
-color_ramp = SubResource( 10 )
-
 [node name="dmgarea" type="Area2D"]
 collision_layer = 15
 collision_mask = 15
@@ -106,7 +50,7 @@ one_shot = true
 speed_scale = 1.5
 explosiveness = 1.0
 visibility_rect = Rect2( -353.009, -539.222, 671.405, 744.414 )
-process_material = SubResource( 4 )
+process_material = ExtResource( 2 )
 
 [node name="Particles2D2" type="Particles2D" parent="."]
 scale = Vector2( 2, 2 )
@@ -115,5 +59,5 @@ amount = 30
 lifetime = 2.0
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource( 11 )
+process_material = ExtResource( 3 )
 texture = ExtResource( 1 )

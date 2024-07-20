@@ -55,6 +55,7 @@ func _process(delta):
 			
 			Global.small_stuff[type]+=1
 			Global.addsound("coin")
+			Quests.emit_signal("itemcollected",type)
 			queue_free()
 
 	pass

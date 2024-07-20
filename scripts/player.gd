@@ -7,6 +7,7 @@ var lookat=0
 export var hp=100
 export var randomspawn=true
 onready var guicam=$"ui/gui"
+onready var ui=$ui
 onready var items=[$hrot/helditem,$ui/item1,$ui/item2]
 onready var state_machine = $AnimationTree.get("parameters/playback")
 var quack=load("res://sounds/quack.tscn")
@@ -33,6 +34,7 @@ onready var ITEM2=$ui/item2
 export var smallitems=false
 var stun=0
 var velocpredict=Vector2(0,0)
+export var quest:Resource=null
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -412,6 +414,13 @@ func _ready():
 
 func _process(delta):
 	if localplayer:
+		if quest!=null:
+			ui.task.text=quest.text
+			if quest.completed:
+				quest.reward()
+				quest=null
+		else:
+			ui.task.text=""
 		$ui/ColorRect.color.a=clamp($ui/ColorRect.color.a-(delta*2),0,0.5)
 		interacttime-=delta
 		stun-=delta
@@ -440,7 +449,10 @@ func _process(delta):
 			jump()
 		
 		wait +=delta
-
+		
+		
+		
+		
 
 
 func _on_Area2D_area_entered(area):

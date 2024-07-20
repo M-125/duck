@@ -31,6 +31,11 @@ position = Vector2( 754, 96 )
 text = "exit"
 invisible = false
 
+[node name="button3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 244, 98 )
+text = "get quest"
+invisible = false
+
 [node name="VBoxContainer" type="GridContainer" parent="."]
 margin_left = 196.0
 margin_top = 176.0
@@ -80,3 +85,4 @@ uniqueitem = ExtResource( 8 )
 amount1 = 20
 
 [connection signal="pressed" from="button2" to="." method="leaveshop"]
+[connection signal="pressed" from="button3" to="." method="givequest"]

@@ -1,4 +1,5 @@
 extends Node2D
+class_name shopspw
 onready var mainmap=get_parent().get_node("map")
 var positionn
 var positionnn
@@ -39,7 +40,7 @@ func loadpos(pos):
 	var rnd=rng.randi_range(0,27)
 	
 #			Global.debug.text=str((pos.x+x)*217+(pos.y+y)*16*random)+"---"+str(rng.state)+"++++"+str(rng.seed)
-	if rnd==12:
+	if rnd==11:
 		var canspawn=true
 		for e in shops:
 			if is_instance_valid(e) and e.pos==pos:

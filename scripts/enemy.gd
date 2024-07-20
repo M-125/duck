@@ -17,6 +17,7 @@ var attack=0
 var attacking=false
 var attackedplayer=null
 var Attackdelay=0.2
+export var Name="unnamed"
 export var max_hp=0
 export var flip_h=false
 const DEFAULT_SPEED=300
@@ -116,7 +117,9 @@ func damage(dmg,velocity=Vector2(0,0),stunn=0.2):
 		if hp<=0:
 			if not dropped:
 				drop()
+				death()
 				dropped=true
+			
 			rpc("die")
 			queue_free()
 	else:rpc("askdmg",dmg,velocity,stunn)
@@ -286,3 +289,7 @@ func detect(r):
 				
 				break
 		detected.append(e)
+
+
+func death():
+	Quests.emit_signal("enemykilled",Name)

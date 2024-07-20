@@ -102,6 +102,7 @@ z_index = 1
 collision_layer = 2
 collision_mask = 2
 script = ExtResource( 2 )
+Name = "chicken"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2( 3, 3 )

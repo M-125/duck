@@ -35,11 +35,11 @@ func loadmap():
 		for e in range(clamp((pos.x-Global.viewdistance)*(Global.chunksize/1.5),0,mapedge),clamp((pos.x+Global.viewdistance)*(Global.chunksize/1.5),0,mapedge)):
 			for i in range(clamp((pos.y-Global.viewdistance)*(Global.chunksize/1.5),0,mapedge),clamp((pos.y+Global.viewdistance)*(Global.chunksize/1.5),0,mapedge)):
 				rng.state=int(str(e)+str(i))*random*(e%8)
-				var rnd=rng.randi_range(0,19)
+				var rnd=rng.randi_range(0,50)
 #				Global.debug.text=str(int(str(e)+str(i))*random*(e%8))+"---"+str(rng.state)+"++++"+str(rng.Seed)
 				
 				
-				if round(rnd)==5 :
+				if round(rnd)==8 :
 					set_cell(e,i,0)
 					var map=Global.map1
 					
