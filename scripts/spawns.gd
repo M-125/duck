@@ -50,7 +50,7 @@ func loadmap():
 					
 					
 					
-					if round(rnd)==3:
+					if round(rnd)==2:
 						
 						spawn(e,i)
 						spawnwait=0.1

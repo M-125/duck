@@ -23,7 +23,13 @@ func randi_range(r1:int,r2:int):
 	if modulo %2==0: modulo-=1
 	var _Seed=int(str(Seed).rstrip("02468"))
 	var _state=int(str(state).rstrip("02468"))
-	var number=r1+int(round(fmod((r2*_Seed*_state*217)+_state/7,modulo)))
+	var _r2=int(str(r2).rstrip("02468"))
+	var _r1=int(str(r1).rstrip("02468"))
+	
+	if _r1==0:_r1=1
+	if _r2==0:_r2=1
+	
+	var number=r1+int(round(fmod((_r2*_Seed*_state*13*_r1)+_state/7,modulo)))
 	number*=abs(_Seed)
 	if number<r1:
 		number=r2-number

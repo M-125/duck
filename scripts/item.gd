@@ -67,6 +67,9 @@ func _ready():
 			
 	pass # Replace with function body.
 
+func is_in_hand():
+	return get_parent().name=="helditem"
+
 func reload():
 	rng.randomize()
 	if item=="random":
@@ -113,9 +116,7 @@ func process(delta):
 	pass
 func cancel():
 	pass
-func interact(player):
-	
-			
+func move_to_inventory(player):
 	for e in player.items:
 		var chcount=e.get_child_count()
 		if e.get_child_count()==0:
@@ -123,8 +124,11 @@ func interact(player):
 			e.add_child(self)
 			position=Vector2.ZERO
 			return true
-			
 	return false
+func interact(player):
+	
+			
+	return move_to_inventory(player)
 	pass # Replace with function body.
 
 func _on_item_body_exited(body):

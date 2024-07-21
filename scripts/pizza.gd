@@ -1,6 +1,7 @@
 extends Item
 var usetime=-1
 var interacting=false
+var count=1
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -16,8 +17,13 @@ func process(delta):
 	if interacting:
 		interacting=get_parent().name=="helditem"
 	if usetime<=0 and interacting:
-		queue_free()
+		count-=1
 		Global.player.hp+=15
+		interacting=false
+	if count<=0:
+		queue_free()
+	$Label.rect_rotation=-global_rotation_degrees
+	$Label.text=str(count)+"x"
 	
 
 func reload():
@@ -26,10 +32,11 @@ func reload():
 #func _process(delta):
 #	pass
 func ability():
-	var slices=round(rand_range(8,30))
+	var slices=round(rand_range(22,60))
 	var rot=0
-	var rounds=round(rand_range(1,3))
-	var damage=500/slices
+	var rounds=round(rand_range(1,floor(slices/20)))
+	var damage=1000/slices
+	
 	for e in range(slices):
 		var pizzaslice=preload("res://scenes/pizzaslice.tscn").instance()
 		pizzaslice.velocity=Vector2(50,0).rotated(deg2rad(rot))
@@ -37,8 +44,8 @@ func ability():
 		pizzaslice.global_position=global_position+Vector2(50,0).rotated(rot)
 		pizzaslice.damage=damage
 		rot+=360*rounds/slices
-	
-	queue_free()
+		if e %2==0:yield(get_tree(),"physics_frame")
+	count-=1
 
 func use():
 	interacting=true
@@ -48,3 +55,11 @@ func use():
 func cancel():
 	interacting=false
 
+func interact(player:Player):
+	for e in player.items:
+		var item=e.get_child(0)
+		if item!=null and item.filename==filename:
+			item.count+=1
+			queue_free()
+			return true
+	return move_to_inventory(player)
