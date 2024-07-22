@@ -26,7 +26,7 @@ func process(delta):
 				var bullet=load("res://enemies/dogbone.tscn").instance()
 				Global.scene.add_child(bullet)
 				bullet.global_position=global_position
-				bullet.velocity=velTo(findplayer())
+				bullet.velocity=(velTo(findplayer())+((Vector2(rand_range(-10,10),rand_range(-10,10)).normalized())/5)).normalized()
 				bullet.speed=1000
 				bone=bullet
 				throwcooldown=3

@@ -76,11 +76,12 @@ func _exit_tree():
 	save()
 
 func save():
-	if name=="map2" and not Server.isconnect():
+	if name=="map2":
 		Global.savemap=PackedScene.new()
 		Global.savemap.pack(self)
-		ResourceSaver.save("user://save.tscn",Global.savemap)
-	ResourceSaver.save("user://saveplayer.tscn",Global.playerpack)
-	Saver.save(Global.small_stuff,"user://coins.json")
+		if not Server.isconnect():
+			ResourceSaver.save("user://save.tscn",Global.savemap)
+			ResourceSaver.save("user://saveplayer.tscn",Global.playerpack)
+			Saver.save(Global.small_stuff,"user://coins.json")
 func ready():
 	pass
