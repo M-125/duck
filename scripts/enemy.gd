@@ -23,7 +23,7 @@ export var flip_h=false
 const DEFAULT_SPEED=300
 signal attacked
 var detected=[]
-var forgettime=10
+var forgettime=20
 var Players=[]
 # Declare member variables here. Examples:
 # var a = 2
@@ -170,6 +170,11 @@ func pathfind_velocity(velocity):
 	return velocity
 
 func movement():
+	
+	
+	return basic_movement()
+		
+func basic_movement():
 	$AnimationPlayer.play("walk")
 	
 		
@@ -205,8 +210,6 @@ func movement():
 	velocity=pathfind_velocity(velocity)
 	
 	return velocity
-		
-
 
 func findplayer():
 	var det=[]
@@ -214,9 +217,9 @@ func findplayer():
 	var players=[]
 	for i in get_parent().get_children():
 		
-		if i!=self and i.is_in_group("enemy") and i.position.distance_squared_to(position)<300000:
+		if i!=self and i.is_in_group("enemy") and i.position.distance_squared_to(position)<90000:
 			det.append_array(i.detected)
-			
+	for i in get_parent().get_children():
 		if i.is_in_group("player"):
 			for e in det:
 				if i==e["player"]:
@@ -293,3 +296,5 @@ func detect(r):
 
 func death():
 	Quests.emit_signal("enemykilled",Name)
+func p_in_area(area:Area2D):
+	return findplayer() in area.get_overlapping_bodies()

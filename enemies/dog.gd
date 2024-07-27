@@ -27,7 +27,7 @@ func process(delta):
 				Global.scene.add_child(bullet)
 				bullet.global_position=global_position
 				bullet.velocity=(velTo(findplayer())+((Vector2(rand_range(-10,10),rand_range(-10,10)).normalized())/5)).normalized()
-				bullet.speed=1000
+				bullet.speed=700
 				bone=bullet
 				throwcooldown=3
 				movewait=1

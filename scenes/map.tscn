@@ -247,7 +247,7 @@ points = PoolVector2Array( 16, 16, 13, 16, 13, 0, 16, 0 )
 script/source = "extends TileMap
 
 
-func _ready():
+func _exit_tree():
 	Global.gamefinished=true
 	pass
 "

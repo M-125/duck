@@ -106,5 +106,4 @@ one_shot = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="screenenter"]
-[connection signal="body_entered" from="throw" to="." method="_on_throw_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

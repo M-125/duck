@@ -5,6 +5,7 @@ var damage=3
 var decay=1
 var speed=100
 var stun=0
+
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -31,7 +32,7 @@ func setvalues():
 	pass
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	position+=velocity*delta*speed
+	global_position+=velocity*delta*speed
 #	$CollisionShape2D.shape.extents.x=delta*speed*10
 	process(delta)
 func process(delta):
@@ -55,3 +56,5 @@ func area(a):
 		parried()
 func parried():
 	pass
+func globalveloc():
+	return global_position+velocity

@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://tiles.tres" type="TileSet" id=1]
 [ext_resource path="res://scripts/map2.2.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://scripts/shops.gd" type="Script" id=7]
 [ext_resource path="res://scenes/water.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scripts/houses.gd" type="Script" id=9]
+[ext_resource path="res://scenes/minimap.tscn" type="PackedScene" id=10]
 [ext_resource path="res://house.png" type="Texture" id=11]
 [ext_resource path="res://scenes/chests.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scripts/maploader.gd" type="Script" id=13]
@@ -24,6 +25,9 @@
 [sub_resource type="GDScript" id=34]
 resource_name = "loading"
 script/source = "extends map
+onready var minimap = $minimap/map/minimap
+onready var minimap_pos = $minimap_pos
+
 func ready():
 	Global.playerposition=Vector2(0,0)
 	
@@ -1328,6 +1332,17 @@ position = Vector2( -48, 0 )
 
 [node name="Node2D" parent="Node2D2" instance=ExtResource( 20 )]
 position = Vector2( 0, 48 )
+
+[node name="minimap" type="CanvasLayer" parent="."]
+
+[node name="map" type="Viewport" parent="minimap"]
+size = Vector2( 300, 300 )
+transparent_bg = true
+
+[node name="minimap" parent="minimap/map" instance=ExtResource( 10 )]
+
+[node name="minimap_pos" type="Node2D" parent="."]
+scale = Vector2( 48, 48 )
 
 [connection signal="timeout" from="chests/Timer" to="chests" method="loadstuff"]
 [connection signal="timeout" from="loader/Timer" to="chests" method="_on_Timer_timeout"]

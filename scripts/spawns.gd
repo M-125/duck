@@ -25,7 +25,7 @@ func _process(delta):
 	for e in get_parent().get_children():
 		if e.is_in_group("enemy"):
 			enemies.append(e)
-	if enemies.size()>9:
+	if enemies.size()>6:
 		enemies.sort_custom(self,"sort")
 		for e in range(enemies.size()-1,20,-1):
 			enemies[e].queue_free()
@@ -82,10 +82,10 @@ func spawn(x,y):
 			return
 	var spwn=int(round(rand_range(3,5)))
 	var spawnwait=spwn*20
-	var random=int(round(rand_range(0,4)))
+	var random=int(round(rand_range(0,10)))
 	while spwn >0:
 		match random:
-			0,3,4:
+			0,3,4,5,6,9,10:
 				spwn-=1
 				var chicken=preload("res://scenes/enemychicken.tscn")
 				for i in range(rand_range(1,2)):
@@ -97,6 +97,12 @@ func spawn(x,y):
 			2:
 				spwn-=1
 				place(preload("res://enemies/cat.tscn").instance(),x,y)
+			7:
+				spwn-=1
+				place(preload("res://enemies/dog.tscn").instance(),x,y)
+			8:
+				spwn-=1
+				place(preload("res://enemies/idkyet.tscn").instance(),x,y)
 		random=int(round(rand_range(0,4)))
 		
 	chunk.append({"pos":Vector2(x,y),"time":spawnwait})
